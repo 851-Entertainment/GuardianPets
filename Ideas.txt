@@ -1,0 +1,14 @@
+Pets:
+Give them titles (ie. Darkness Demolisher) - this pet specializes in fear of darkness
+
+Upgrades:
+Make them look more like super heroes, purchase various scanner upgrades to have the scan happen faster
+
+Game:
+Change points to Energy, have Energy cap out at 20.
+Each action costs 1 energy
+
+Micro Transactions:
+Energy cap can be increased
+Refill energy
+Shields can be purchased
