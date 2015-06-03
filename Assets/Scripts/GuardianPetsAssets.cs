@@ -39,7 +39,7 @@ namespace Soomla.Store
 
         //Virtual Currencies
         public static VirtualCurrency SHIELD_CURRENCY = new VirtualCurrency(
-            "Muffins",                                                   //Name
+            "Shields",                                                   //Name
             "",                                                          //Description
             SHIELD_CURRENCY_ITEM_ID);                                    //Item ID
 
