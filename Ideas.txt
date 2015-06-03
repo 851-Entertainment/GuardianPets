@@ -12,3 +12,10 @@ Micro Transactions:
 Energy cap can be increased
 Refill energy
 Shields can be purchased
+
+
+****TO DO****
+Upgrades - Need all of them, should have visual aspect to them (eventually) - scanner should be an upgrade
+Scanner - Needs to have a prompt (at end of timer) saying that the coast is clear of monsters
+Micro-transactions - Needs to be implemented
+Animations - Needs to be implemented, no final art - use placeholder
