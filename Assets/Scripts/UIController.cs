@@ -22,11 +22,16 @@ public class UIController : MonoBehaviour
     public Text m_EnergyText; //Player's current points - UI element
     public Text m_ShieldsText; //Player's current shields = UI element
     public Text m_EnergyTimerText; //Text element for the Points - UI element
+    public Text m_ScannerCompletionText;    //when the scanner is about to close this will fill with text
     public Slider m_EnergySlider; //Slider element for the Energy UI
     public string m_SelectedPet;
+    public float m_TransitionVolume = 0.3f;
+
+    public AudioClip m_TransitionSound; 
 
     private GameObject currPet_;
     private GameController gc_; //Game Controller script for easier access
+    private AudioSource audio_;
 
     private bool isNewPlayer_;
     private bool scannerActive_;
@@ -37,6 +42,7 @@ public class UIController : MonoBehaviour
 
 	void Start () 
     {
+        audio_ = GetComponent<AudioSource>();
         gc_ = Camera.main.GetComponent<GameController>();
         isNewPlayer_ = gc_.m_FirstTimePlayer;
 
@@ -97,8 +103,17 @@ public class UIController : MonoBehaviour
         if(scannerActive_)
         {
             scannerTimer_ += Time.deltaTime;
+            if (scannerTimer_ >= Constants.MAX_SCANNER_TIME - 1.0f)
+            {
+                m_ScannerCompletionText.text = "Coast is clear!";
+                if (!audio_.isPlaying)
+                {
+                    audio_.PlayOneShot(m_TransitionSound, m_TransitionVolume);
+                }
+            }
             if(scannerTimer_ >= Constants.MAX_SCANNER_TIME)
             {
+                m_ScannerCompletionText.text = "";
                 CloseScanner();
             }
         }
