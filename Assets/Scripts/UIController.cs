@@ -4,6 +4,29 @@ using System.Collections;
 
 public class UIController : MonoBehaviour
 {
+    #region Upgrades
+    public Button m_BowTieButton;
+    public Button m_BallButton;
+    public Button m_HatButton;
+    public Button m_SunGlassesButton;
+    public Button m_GloveButton;
+    public Button m_TrophyButton;
+
+    public GameObject m_BowTie;
+    public GameObject m_Ball;
+    public GameObject m_Hat;
+    public GameObject m_SunGlasses;
+    public GameObject m_Glove;
+    public GameObject m_Trophy;
+
+    public int m_BowTieCost;
+    public int m_BallCost;
+    public int m_HatCost;
+    public int m_SunGlassesCost;
+    public int m_GloveCost;
+    public int m_TrophyCost;
+    #endregion
+
     public GameObject m_GameUI;
     public GameObject m_NewPlayerUI;
     public GameObject m_NicknamePanel; //Panel for nickname prompt
@@ -32,6 +55,7 @@ public class UIController : MonoBehaviour
     private GameObject currPet_;
     private GameController gc_; //Game Controller script for easier access
     private AudioSource audio_;
+    private PlayerData playerData_;
 
     private bool playCloseSound_ = true;
     private bool isNewPlayer_;
@@ -46,7 +70,7 @@ public class UIController : MonoBehaviour
         audio_ = GetComponent<AudioSource>();
         gc_ = Camera.main.GetComponent<GameController>();
         isNewPlayer_ = gc_.m_FirstTimePlayer;
-
+        playerData_ = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerData>();
         if (isNewPlayer_)
         {
             m_GameUI.SetActive(false);
@@ -268,6 +292,47 @@ public class UIController : MonoBehaviour
         currPet_.SetActive(true);
         m_CloseScannerButton.SetActive(false);
         playCloseSound_ = true;
-
     }
+
+    #region Upgrades
+    public void UnlockItem(string name)
+    {
+        if (name == "Ball" && playerData_.m_Shields >= m_BallCost)
+        {
+            playerData_.m_Shields -= m_BallCost;
+            m_Ball.SetActive(true);
+            m_BallButton.interactable = false;
+        }
+        else if (name == "BowTie" && playerData_.m_Shields >= m_BowTieCost)
+        {
+            playerData_.m_Shields -= m_BowTieCost;
+            m_BowTie.SetActive(true);
+            m_BowTieButton.interactable = false;
+        }
+        else if (name == "Hat" && playerData_.m_Shields >= m_HatCost)
+        {
+            playerData_.m_Shields -= m_HatCost;
+            m_Hat.SetActive(true);
+            m_HatButton.interactable = false;
+        }
+        else if (name == "SunGlasses" && playerData_.m_Shields >= m_SunGlassesCost)
+        {
+            playerData_.m_Shields -= m_SunGlassesCost;
+            m_SunGlasses.SetActive(true);
+            m_SunGlassesButton.interactable = false;
+        }
+        else if (name == "Glove" && playerData_.m_Shields >= m_GloveCost)
+        {
+            playerData_.m_Shields -= m_GloveCost;
+            m_Glove.SetActive(true);
+            m_GloveButton.interactable = false;
+        }
+        else if (name == "Trophy" && playerData_.m_Shields >= m_TrophyCost)
+        {
+            playerData_.m_Shields -= m_TrophyCost;
+            m_Trophy.SetActive(true);
+            m_TrophyButton.interactable = false;
+        }
+    }
+    #endregion
 }
