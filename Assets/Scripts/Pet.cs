@@ -11,19 +11,41 @@ public class Pet : MonoBehaviour
     public string m_FearOne; //The fear the player chose when they picked the pet
     public string m_FearTwo; //This fear is only used if the player pays for a second fear slot
 
+    public bool m_IsDancing;
+    public bool m_IsPlaying;
+    private float playingTimer_ = 0.0f;
+
     private GameController gc_;
+    private Animator animator_;
     private float statTimer_;
 
 	void Start ()
     {
         gc_ = Camera.main.GetComponent<GameController>();
         statTimer_ = Constants.STAT_TIMER;
+        animator_ = GetComponent<Animator>();
 	}
 	
 	void Update () 
     {
         UpdateStats();
+        UpdateAnim();
 	}
+
+    void UpdateAnim()
+    {
+        if(m_IsPlaying)
+        {
+            playingTimer_ += Time.deltaTime;
+        }
+        if(playingTimer_ >= 2.0f)
+        {
+            m_IsPlaying = !m_IsPlaying;
+            playingTimer_ = 0.0f;
+        }
+        animator_.SetBool("Playing", m_IsPlaying);
+        animator_.SetBool("Dancing ", m_IsDancing);
+    }
 
     //This function runs a timer, every minute a stat is increased at random
     void UpdateStats()

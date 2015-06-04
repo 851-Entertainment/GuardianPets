@@ -70,6 +70,7 @@ public class UIController : MonoBehaviour
     public AudioClip m_TransitionSound; 
 
     private GameObject currPet_;
+    private Pet petData_;
     private GameController gc_; //Game Controller script for easier access
     private AudioSource audio_;
     private PlayerData playerData_;
@@ -117,6 +118,7 @@ public class UIController : MonoBehaviour
             {
                 m_EnergySlider.fillRect.GetComponent<Image>().color = Color.black;
             }
+            petData_ = currPet_.GetComponent<Pet>();
             UpdateTimer();
         }
         m_CameraPlane.GetComponent<CameraAccess>().UpdateCamera();
@@ -205,9 +207,11 @@ public class UIController : MonoBehaviour
             currPet_.GetComponent<Pet>().m_Bored = Constants.DEFAULT_START_STATS;
             currPet_.GetComponent<Pet>().m_Cleanliness = Constants.DEFAULT_START_STATS;
             currPet_.GetComponent<Pet>().m_Hunger = Constants.DEFAULT_START_STATS;
+            petData_.m_IsDancing = false;
             gc_.Save();
             Destroy(m_NewPlayerUI);
             m_GameUI.SetActive(true);
+
         }
     }
 
@@ -224,6 +228,7 @@ public class UIController : MonoBehaviour
     {
         if (gc_.m_PlayerData.m_Energy >= Constants.ACTION_COST)
         {
+            petData_.m_IsPlaying = true;
             currPet_.GetComponent<Pet>().m_Hunger -= Constants.STAT_DECREASE_VAL;
             if (currPet_.GetComponent<Pet>().m_Hunger <= Constants.MIN_PET_STAT)
             {
@@ -244,6 +249,7 @@ public class UIController : MonoBehaviour
     {
         if (gc_.m_PlayerData.m_Energy >= Constants.ACTION_COST)
         {
+            petData_.m_IsPlaying = true;
             currPet_.GetComponent<Pet>().m_Bored -= Constants.STAT_DECREASE_VAL;
             if (currPet_.GetComponent<Pet>().m_Bored <= Constants.MIN_PET_STAT)
             {
@@ -263,6 +269,7 @@ public class UIController : MonoBehaviour
     {
         if (gc_.m_PlayerData.m_Energy >= Constants.ACTION_COST)
         {
+            petData_.m_IsPlaying = true;
             currPet_.GetComponent<Pet>().m_Cleanliness -= Constants.STAT_DECREASE_VAL;
             if (currPet_.GetComponent<Pet>().m_Cleanliness <= Constants.MIN_PET_STAT)
             {
