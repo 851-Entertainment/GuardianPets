@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using Soomla.Store;
 
 public class UIController : MonoBehaviour
 {
@@ -49,6 +50,9 @@ public class UIController : MonoBehaviour
     public GameObject m_CameraPlane; //Plane which is drawing the camera on it
     public GameObject m_RadarOverlay; //Image overlay which will have a radar with a rotating arm on it
     public GameObject m_BackgroundPlane; //Plane which is drawing the background on it
+    public GameObject m_StorePanel; //Panel for the market
+    public GameObject m_GoodsButtonPrefab; //Button prefab for the items sold in the store
+    public GameObject m_ButtonParent; //Parent game object for the button prefab
     public InputField m_NicknameIF; //Input field for the nickname prompt
     public InputField m_FearIF; //Input field for the fear prompt
     public PlayerData m_PlayerData; //Player data
@@ -277,7 +281,15 @@ public class UIController : MonoBehaviour
     //                -- As of right now it's only being used for the upgrade panel
     public void CloseMenu()
     {
-        m_UpgradePanel.SetActive(false);
+        if (m_UpgradePanel.activeSelf)
+        {
+            m_UpgradePanel.SetActive(false);
+        }
+        else if (m_StorePanel.activeSelf)
+        {
+            m_StorePanel.SetActive(false);
+            CleanUpMenu();
+        }
     }
 
     public void OpenScanner()
@@ -305,6 +317,66 @@ public class UIController : MonoBehaviour
         currPet_.SetActive(true);
         m_CloseScannerButton.SetActive(false);
         playCloseSound_ = true;
+    }
+
+    void CleanUpMenu()
+    {
+        foreach (Transform child in m_ButtonParent.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+    }
+
+    public void PopulateStore()
+    {
+        float buttonWidth = m_GoodsButtonPrefab.GetComponent<RectTransform>().sizeDelta.x * 4;
+        float buttonHeight = m_GoodsButtonPrefab.GetComponent<RectTransform>().sizeDelta.y;
+        float startXPos = -300.0f;
+        float startYPos = 0.0f;
+        int row = 0;
+        int col = 0;
+        int maxCol = 2;
+        int maxRow = 3;
+
+        m_StorePanel.SetActive(true);
+        Debug.Log(StoreInfo.Goods.Count);
+        foreach (VirtualCurrencyPack vcp in StoreInfo.CurrencyPacks)
+        {
+            GameObject go = (GameObject)Instantiate(m_GoodsButtonPrefab, new Vector3(startXPos, startYPos, 0.0f), Quaternion.identity);
+            go.gameObject.transform.SetParent(m_ButtonParent.transform, false);
+            go.GetComponentInChildren<Button>().onClick.AddListener(delegate { StoreInventory.BuyItem(vcp.ItemId); });
+
+            if (col < maxCol)
+            {
+                col++;
+                startXPos += buttonWidth;
+                if (col >= maxCol)
+                {
+                    if (row < maxRow)
+                    {
+                        col = 0;
+                        startXPos = -300.0f;
+                        row++;
+                        startYPos -= buttonHeight;
+                    }
+                }
+            }
+        }
+
+        Text[] buttonText = m_StorePanel.GetComponentsInChildren<Text>();
+
+        int i = 1;
+        foreach (VirtualCurrencyPack vcp in StoreInfo.CurrencyPacks)
+        {
+            buttonText[i].text = vcp.Name;
+            buttonText[i + 1].text = vcp.Description;
+            i += 2;
+        }
+    }
+
+    public void onMarketPurchaseStarted(PurchasableVirtualItem pvi)
+    {
+        //Implement stuff
     }
 
     #region Upgrades
