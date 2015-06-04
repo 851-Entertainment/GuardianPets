@@ -115,6 +115,7 @@ public class UIController : MonoBehaviour
             {
                 m_ScannerCompletionText.text = "";
                 CloseScanner();
+                scannerTimer_ = 0.0f;
             }
         }
     }
@@ -246,6 +247,7 @@ public class UIController : MonoBehaviour
         scannerActive_ = true;
         m_GameUI.SetActive(false);
         m_CameraPlane.SetActive(true);
+        m_CameraPlane.GetComponent<CameraAccess>().enabled = true;
         m_RadarOverlay.SetActive(true);
         m_BackgroundPlane.SetActive(false);
         currPet_.SetActive(false);
@@ -255,6 +257,7 @@ public class UIController : MonoBehaviour
     {
         scannerActive_ = false;
         m_GameUI.SetActive(true);
+        m_CameraPlane.GetComponent<CameraAccess>().enabled = false;
         m_CameraPlane.SetActive(false);
         m_RadarOverlay.SetActive(false);
         m_BackgroundPlane.SetActive(true);
