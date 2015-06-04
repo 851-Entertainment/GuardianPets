@@ -78,6 +78,7 @@ public class UIController : MonoBehaviour
             }
             UpdateTimer();
         }
+        m_CameraPlane.GetComponent<CameraAccess>().UpdateCamera();
 	}
 
     void UpdateTimer()
@@ -245,17 +246,20 @@ public class UIController : MonoBehaviour
     public void OpenScanner()
     {
         scannerActive_ = true;
+        m_CameraPlane.GetComponent<CameraAccess>().m_DisableWebCam = false;
         m_GameUI.SetActive(false);
         m_CameraPlane.SetActive(true);
         m_CameraPlane.GetComponent<CameraAccess>().enabled = true;
         m_RadarOverlay.SetActive(true);
         m_BackgroundPlane.SetActive(false);
         currPet_.SetActive(false);
+       
     }
 
     public void CloseScanner()
     {
         scannerActive_ = false;
+        m_CameraPlane.GetComponent<CameraAccess>().m_DisableWebCam = true;
         m_GameUI.SetActive(true);
         m_CameraPlane.GetComponent<CameraAccess>().enabled = false;
         m_CameraPlane.SetActive(false);
@@ -264,5 +268,6 @@ public class UIController : MonoBehaviour
         currPet_.SetActive(true);
         m_CloseScannerButton.SetActive(false);
         playCloseSound_ = true;
+
     }
 }
