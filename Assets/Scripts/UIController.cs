@@ -25,6 +25,13 @@ public class UIController : MonoBehaviour
     public int m_SunGlassesCost;
     public int m_GloveCost;
     public int m_TrophyCost;
+
+    public Text m_BowTieText;
+    public Text m_BallText;
+    public Text m_HatText;
+    public Text m_SunGlassesText;
+    public Text m_GloveText;
+    public Text m_TrophyText;
     #endregion
 
     public GameObject m_GameUI;
@@ -302,36 +309,42 @@ public class UIController : MonoBehaviour
             playerData_.m_Shields -= m_BallCost;
             m_Ball.SetActive(true);
             m_BallButton.interactable = false;
+            m_BallText.text = "";
         }
         else if (name == "BowTie" && playerData_.m_Shields >= m_BowTieCost)
         {
             playerData_.m_Shields -= m_BowTieCost;
             m_BowTie.SetActive(true);
             m_BowTieButton.interactable = false;
+            m_BowTieText.text = "";
         }
         else if (name == "Hat" && playerData_.m_Shields >= m_HatCost)
         {
             playerData_.m_Shields -= m_HatCost;
             m_Hat.SetActive(true);
             m_HatButton.interactable = false;
+            m_HatText.text = "";
         }
         else if (name == "SunGlasses" && playerData_.m_Shields >= m_SunGlassesCost)
         {
             playerData_.m_Shields -= m_SunGlassesCost;
             m_SunGlasses.SetActive(true);
             m_SunGlassesButton.interactable = false;
+            m_SunGlassesText.text = "";
         }
         else if (name == "Glove" && playerData_.m_Shields >= m_GloveCost)
         {
             playerData_.m_Shields -= m_GloveCost;
             m_Glove.SetActive(true);
             m_GloveButton.interactable = false;
+            m_GloveText.text = "";
         }
         else if (name == "Trophy" && playerData_.m_Shields >= m_TrophyCost)
         {
             playerData_.m_Shields -= m_TrophyCost;
             m_Trophy.SetActive(true);
             m_TrophyButton.interactable = false;
+            m_TrophyText.text = "";
         }
     }
     #endregion
