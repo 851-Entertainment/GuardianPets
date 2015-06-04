@@ -15,7 +15,5 @@ Shields can be purchased
 
 
 ****TO DO****
-Upgrades - Need all of them, should have visual aspect to them (eventually) - scanner should be an upgrade
 Micro-transactions - Needs to be implemented
 		   - Need the option to buy additional pet slots
-Animations - Needs to be implemented, no final art - use placeholder
