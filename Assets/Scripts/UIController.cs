@@ -22,8 +22,8 @@ public class UIController : MonoBehaviour
     public Text m_EnergyText; //Player's current points - UI element
     public Text m_ShieldsText; //Player's current shields = UI element
     public Text m_EnergyTimerText; //Text element for the Points - UI element
-    public Text m_ScannerCompletionText;    //when the scanner is about to close this will fill with text
     public Slider m_EnergySlider; //Slider element for the Energy UI
+    public GameObject m_CloseScannerButton;
     public string m_SelectedPet;
     public float m_TransitionVolume = 0.3f;
 
@@ -33,6 +33,7 @@ public class UIController : MonoBehaviour
     private GameController gc_; //Game Controller script for easier access
     private AudioSource audio_;
 
+    private bool playCloseSound_ = true;
     private bool isNewPlayer_;
     private bool scannerActive_;
     private float energyTimer_; //Timer until the player receives their next set of points, starts at 300 because the interval is 5 minutes, and there are 300 seconds in 5 minutes
@@ -104,17 +105,16 @@ public class UIController : MonoBehaviour
         {
             scannerTimer_ += Time.deltaTime;
             if (scannerTimer_ >= Constants.MAX_SCANNER_TIME - 1.0f)
-            {
-                m_ScannerCompletionText.text = "Coast is clear!";
-                if (!audio_.isPlaying)
+            {              
+                if (!audio_.isPlaying && playCloseSound_)
                 {
+                    playCloseSound_ = false;
+                    m_CloseScannerButton.SetActive(true);
                     audio_.PlayOneShot(m_TransitionSound, m_TransitionVolume);
                 }
             }
             if(scannerTimer_ >= Constants.MAX_SCANNER_TIME)
             {
-                m_ScannerCompletionText.text = "";
-                CloseScanner();
                 scannerTimer_ = 0.0f;
             }
         }
@@ -262,5 +262,7 @@ public class UIController : MonoBehaviour
         m_RadarOverlay.SetActive(false);
         m_BackgroundPlane.SetActive(true);
         currPet_.SetActive(true);
+        m_CloseScannerButton.SetActive(false);
+        playCloseSound_ = true;
     }
 }
