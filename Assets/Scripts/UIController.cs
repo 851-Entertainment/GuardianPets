@@ -32,6 +32,8 @@ public class UIController : MonoBehaviour
     public Text m_SunGlassesText;
     public Text m_GloveText;
     public Text m_TrophyText;
+
+    public AudioClip m_UpgradeClip;
     #endregion
 
     public GameObject m_GameUI;
@@ -306,6 +308,7 @@ public class UIController : MonoBehaviour
     {
         if (name == "Ball" && playerData_.m_Shields >= m_BallCost)
         {
+            AudioSource.PlayClipAtPoint(m_UpgradeClip, transform.position);
             playerData_.m_Shields -= m_BallCost;
             m_Ball.SetActive(true);
             m_BallButton.interactable = false;
@@ -313,6 +316,7 @@ public class UIController : MonoBehaviour
         }
         else if (name == "BowTie" && playerData_.m_Shields >= m_BowTieCost)
         {
+            AudioSource.PlayClipAtPoint(m_UpgradeClip, transform.position);
             playerData_.m_Shields -= m_BowTieCost;
             m_BowTie.SetActive(true);
             m_BowTieButton.interactable = false;
@@ -320,6 +324,7 @@ public class UIController : MonoBehaviour
         }
         else if (name == "Hat" && playerData_.m_Shields >= m_HatCost)
         {
+            AudioSource.PlayClipAtPoint(m_UpgradeClip, transform.position);
             playerData_.m_Shields -= m_HatCost;
             m_Hat.SetActive(true);
             m_HatButton.interactable = false;
@@ -327,6 +332,7 @@ public class UIController : MonoBehaviour
         }
         else if (name == "SunGlasses" && playerData_.m_Shields >= m_SunGlassesCost)
         {
+            AudioSource.PlayClipAtPoint(m_UpgradeClip, transform.position);
             playerData_.m_Shields -= m_SunGlassesCost;
             m_SunGlasses.SetActive(true);
             m_SunGlassesButton.interactable = false;
@@ -334,6 +340,7 @@ public class UIController : MonoBehaviour
         }
         else if (name == "Glove" && playerData_.m_Shields >= m_GloveCost)
         {
+            AudioSource.PlayClipAtPoint(m_UpgradeClip, transform.position);
             playerData_.m_Shields -= m_GloveCost;
             m_Glove.SetActive(true);
             m_GloveButton.interactable = false;
@@ -341,6 +348,7 @@ public class UIController : MonoBehaviour
         }
         else if (name == "Trophy" && playerData_.m_Shields >= m_TrophyCost)
         {
+            AudioSource.PlayClipAtPoint(m_UpgradeClip, transform.position);
             playerData_.m_Shields -= m_TrophyCost;
             m_Trophy.SetActive(true);
             m_TrophyButton.interactable = false;
