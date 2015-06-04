@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     public bool m_FirstTimePlayer = false; //Bool to determine whether or not we need to run the initial play segment
     public List<GameObject> m_PetChoices = new List<GameObject>(); //List of possible pets -- this needs to stay here in case they decide to buy more pets
     public PlayerData m_PlayerData; //The player data
+    public List<GameObject> m_AnimalButtons;
 
     private string currPetName_; //Name of the current pet, used to find the right pet in the list
     private float saveTimer_; //Timer between autosaves
@@ -62,6 +63,7 @@ public class GameController : MonoBehaviour
                 pet_ = (GameObject)Instantiate(m_PetChoices[i]);
                 pet_.name = m_PetChoices[i].name;
             }
+            m_AnimalButtons[i].SetActive(false);
         }
     }
 
