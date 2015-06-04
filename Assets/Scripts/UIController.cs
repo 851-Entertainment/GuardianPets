@@ -11,7 +11,9 @@ public class UIController : MonoBehaviour
     public Button m_SunGlassesButton;
     public Button m_GloveButton;
     public Button m_TrophyButton;
+    public Button m_ScannerButton;
 
+    public GameObject m_Scanner;
     public GameObject m_BowTie;
     public GameObject m_Ball;
     public GameObject m_Hat;
@@ -25,6 +27,7 @@ public class UIController : MonoBehaviour
     public int m_SunGlassesCost;
     public int m_GloveCost;
     public int m_TrophyCost;
+    public int m_ScannerCost;
 
     public Text m_BowTieText;
     public Text m_BallText;
@@ -32,6 +35,7 @@ public class UIController : MonoBehaviour
     public Text m_SunGlassesText;
     public Text m_GloveText;
     public Text m_TrophyText;
+    public Text m_ScannerText;
 
     public AudioClip m_UpgradeClip;
     #endregion
@@ -306,6 +310,7 @@ public class UIController : MonoBehaviour
     #region Upgrades
     public void UnlockItem(string name)
     {
+        //check what upgrade to apply, if the player has enough money then disable and enable all the proper components 
         if (name == "Ball" && playerData_.m_Shields >= m_BallCost)
         {
             AudioSource.PlayClipAtPoint(m_UpgradeClip, transform.position);
@@ -353,6 +358,15 @@ public class UIController : MonoBehaviour
             m_Trophy.SetActive(true);
             m_TrophyButton.interactable = false;
             m_TrophyText.text = "";
+        }
+        else if(name == "Scanner")
+        {
+            m_Scanner.SetActive(true);  //enable the scanner
+            AudioSource.PlayClipAtPoint(m_UpgradeClip, transform.position);
+            playerData_.m_Shields -= m_TrophyCost;
+            m_Scanner.SetActive(true);
+            m_ScannerButton.interactable = false;
+            m_ScannerText.text = "";
         }
     }
     #endregion
