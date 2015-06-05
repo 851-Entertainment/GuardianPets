@@ -382,7 +382,7 @@ public class UIController : MonoBehaviour
     {
         for(int i = 0; i < gc_.m_Items.Count; ++i)
         {
-            if(gc_.m_Items[i].m_Name == go.name)
+            if (gc_.m_Items[i].m_ItemName == go.name)
             {
                 if (playerData_.m_Shields >= gc_.m_Items[i].m_Cost)
                 {
