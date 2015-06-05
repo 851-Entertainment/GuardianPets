@@ -66,7 +66,11 @@ public class GameController : MonoBehaviour
             }
             m_AnimalButtons[i].SetActive(false);
         }
-        pet_.GetComponent<Pet>().m_IsDancing = true;
+        if (m_FirstTimePlayer)
+        {
+            pet_.GetComponent<Pet>().m_IsDancing = true;
+        }
+           
     }
 
     //When this Save function is called, all other save functions get called. No where else should save.
