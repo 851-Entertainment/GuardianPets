@@ -10,7 +10,7 @@ public class Constants : MonoBehaviour
     public const int MAX_PETS = 6; //Maximum amount of pets you can own
     public const int MAX_PET_STAT = 100; //Highest any of the pet stats - hunger, boredom, cleanliness - can go
     public const int MIN_PET_STAT = 0; //Lowest any of the pet stats - hunger, boredom, cleanliness - can go
-    public const int STAT_INCREASE_VAL = 10; //Amount a stat increases by when the stat timer elapses
+    public const int STAT_INCREASE_VAL = 5; //Amount a stat increases by when the stat timer elapses
     public const int STAT_DECREASE_VAL = 10; //Amount a stat decreases when the player does an action
     public const int DEFAULT_START_ENERGY = 20; //Amount of energy a new player will start with
     public const int DEFAULT_START_SHIELDS = 100; //Amount of shields a new player will start with

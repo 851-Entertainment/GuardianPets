@@ -12,6 +12,8 @@ public class MainMenuScript : MonoBehaviour
     {
         SoomlaHighway.Initialize();
         SoomlaStore.Initialize(new GuardianPetsAssets());
+        SoomlaStore.StartIabServiceInBg();
+        SoomlaStore.StopIabServiceInBg();
         SoomlaProfile.Initialize();
         Screen.orientation = ScreenOrientation.Landscape;
 	}

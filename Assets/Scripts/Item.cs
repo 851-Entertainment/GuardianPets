@@ -4,15 +4,7 @@ using System.Collections;
 public class Item : MonoBehaviour
 {
     public string m_ItemName;
+    public string m_Description;
     public int m_Cost;
-
-	void Start () 
-    {
-	
-	}
-	
-	void Update () 
-    {
-	
-	}
+    public int m_Quantity = 1;
 }

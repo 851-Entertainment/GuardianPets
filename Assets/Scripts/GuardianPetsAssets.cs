@@ -74,7 +74,7 @@ namespace Soomla.Store
 
         public static VirtualCurrencyPack THOUSANDSHIELD_PACK = new VirtualCurrencyPack(
             "1000 Shields",                                                //Name
-            "$8.99",                                                       //Description
+            "1000 Shields!\nThis costs $8.99",                                                       //Description
             "shields_1000",                                                //Item ID
             1000,
             SHIELD_CURRENCY_ITEM_ID,                                       //The currency associated with this pack

@@ -5,34 +5,6 @@ using Soomla.Store;
 
 public class UIController : MonoBehaviour
 {
-    #region Upgrades
-    public Button m_BowTieButton;
-    public Button m_BallButton;
-    public Button m_HatButton;
-    public Button m_SunGlassesButton;
-    public Button m_GloveButton;
-    public Button m_TrophyButton;
-    public Button m_ScannerButton;
-
-    public GameObject m_Scanner;
-    public GameObject m_BowTie;
-    public GameObject m_Ball;
-    public GameObject m_Hat;
-    public GameObject m_SunGlasses;
-    public GameObject m_Glove;
-    public GameObject m_Trophy;
-
-    public Text m_BowTieText;
-    public Text m_BallText;
-    public Text m_HatText;
-    public Text m_SunGlassesText;
-    public Text m_GloveText;
-    public Text m_TrophyText;
-    public Text m_ScannerText;
-
-    public AudioClip m_UpgradeClip;
-    #endregion
-
     public GameObject m_GameUI;
     public GameObject m_NewPlayerUI;
     public GameObject m_NicknamePanel; //Panel for nickname prompt
@@ -48,6 +20,7 @@ public class UIController : MonoBehaviour
     public InputField m_NicknameIF; //Input field for the nickname prompt
     public InputField m_FearIF; //Input field for the fear prompt
     public PlayerData m_PlayerData; //Player data
+    public Sprite m_ShieldSprite; //Shield sprite for upgrades panel
 
     public Text m_NicknameText; //Text element for the pet's nickname;
     public Text m_TitleText; //Text element for the pet's current title
@@ -59,7 +32,8 @@ public class UIController : MonoBehaviour
     public string m_SelectedPet;
     public float m_TransitionVolume = 0.3f;
 
-    public AudioClip m_TransitionSound; 
+    public AudioClip m_TransitionSound;
+    public AudioClip m_UpgradeClip;
 
     private GameObject currPet_;
     private Pet petData_;
@@ -283,10 +257,6 @@ public class UIController : MonoBehaviour
         if (m_UpgradePanel.activeSelf)
         {
             m_UpgradePanel.SetActive(false);
-        }
-        else if (m_StorePanel.activeSelf)
-        {
-            m_StorePanel.SetActive(false);
             CleanUpMenu();
         }
     }
@@ -330,20 +300,25 @@ public class UIController : MonoBehaviour
     {
         float buttonWidth = m_GoodsButtonPrefab.GetComponent<RectTransform>().sizeDelta.x * 4;
         float buttonHeight = m_GoodsButtonPrefab.GetComponent<RectTransform>().sizeDelta.y;
-        float startXPos = 0.0f - (buttonWidth / 1.5f);
-        float startYPos = 0.0f + (buttonHeight);
+        float startXPos = 0.0f - (buttonWidth * 1.25f);
+        float startYPos = 0.0f + (buttonHeight * 1.25f);
         int row = 0;
         int col = 0;
-        int maxCol = 2;
-        int maxRow = 3;
+        int maxCol = 3;
+        int maxRow = 100;
+        Text[] text;
 
-        m_StorePanel.SetActive(true);
-        foreach (VirtualCurrencyPack vcp in StoreInfo.CurrencyPacks)
+        m_UpgradePanel.SetActive(true);
+
+        foreach(Item item in gc_.m_Items)
         {
             GameObject go = (GameObject)Instantiate(m_GoodsButtonPrefab, new Vector3(startXPos, startYPos, 0.0f), Quaternion.identity);
-            go.gameObject.transform.SetParent(m_ButtonParent.transform, false);
-            go.GetComponentInChildren<Button>().onClick.AddListener(delegate { StoreInventory.BuyItem(vcp.ItemId); });
-            Debug.Log(Screen.width + " " + Screen.height);
+            go.gameObject.transform.SetParent(m_UpgradePanel.transform, false);
+            go.name = item.m_ItemName;
+            go.GetComponentInChildren<Image>().sprite = item.gameObject.GetComponent<Image>().sprite;
+            go.GetComponentInChildren<Button>().onClick.AddListener(delegate { UnlockItem(go); });
+            go.GetComponentInChildren<Text>().text = item.m_Description + " This costs " + item.m_Cost + " shields.";
+
             if (col < maxCol)
             {
                 col++;
@@ -353,7 +328,7 @@ public class UIController : MonoBehaviour
                     if (row < maxRow)
                     {
                         col = 0;
-                        startXPos = 0.0f - (buttonWidth / 1.5f);
+                        startXPos = 0.0f - (buttonWidth * 1.25f);
                         row++;
                         startYPos -= buttonHeight;
                     }
@@ -361,14 +336,29 @@ public class UIController : MonoBehaviour
             }
         }
 
-        Text[] buttonText = m_StorePanel.GetComponentsInChildren<Text>();
-
-        int i = 1;
         foreach (VirtualCurrencyPack vcp in StoreInfo.CurrencyPacks)
         {
-            buttonText[i].text = vcp.Name;
-            buttonText[i + 1].text = vcp.Description;
-            i += 2;
+            GameObject go = (GameObject)Instantiate(m_GoodsButtonPrefab, new Vector3(startXPos, startYPos, 0.0f), Quaternion.identity);
+            go.gameObject.transform.SetParent(m_UpgradePanel.transform, false);
+            go.GetComponentInChildren<Image>().sprite = m_ShieldSprite;
+            go.GetComponentInChildren<Button>().onClick.AddListener(delegate { StoreInventory.BuyItem(vcp.ItemId); });
+            go.GetComponentInChildren<Text>().text = vcp.Description;
+
+            if (col < maxCol)
+            {
+                col++;
+                startXPos += buttonWidth;
+                if (col >= maxCol)
+                {
+                    if (row < maxRow)
+                    {
+                        col = 0;
+                        startXPos = 0.0f - (buttonWidth * 1.25f);
+                        row++;
+                        startYPos -= buttonHeight;
+                    }
+                }
+            }
         }
     }
 
@@ -394,64 +384,6 @@ public class UIController : MonoBehaviour
                 }
             }
         }
-        //check what upgrade to apply, if the player has enough money then disable and enable all the proper components 
-        /*if (name == "Ball" && playerData_.m_Shields >= m_BallCost)
-        {
-            AudioSource.PlayClipAtPoint(m_UpgradeClip, transform.position);
-            playerData_.RemoveShields(m_Ball.GetComponent<Item>().m_Cost);
-            m_Ball.SetActive(true);
-            m_BallButton.interactable = false;
-            m_BallText.text = "";
-        }
-        else if (name == "BowTie" && playerData_.m_Shields >= m_BowTieCost)
-        {
-            AudioSource.PlayClipAtPoint(m_UpgradeClip, transform.position);
-            playerData_.RemoveShields(m_BowTie.GetComponent<Item>().m_Cost);
-            m_BowTie.SetActive(true);
-            m_BowTieButton.interactable = false;
-            m_BowTieText.text = "";
-        }
-        else if (name == "Hat" && playerData_.m_Shields >= m_HatCost)
-        {
-            AudioSource.PlayClipAtPoint(m_UpgradeClip, transform.position);
-            playerData_.RemoveShields(m_Hat.GetComponent<Item>().m_Cost);
-            m_Hat.SetActive(true);
-            m_HatButton.interactable = false;
-            m_HatText.text = "";
-        }
-        else if (name == "SunGlasses" && playerData_.m_Shields >= m_SunGlassesCost)
-        {
-            AudioSource.PlayClipAtPoint(m_UpgradeClip, transform.position);
-            playerData_.RemoveShields(m_SunGlasses.GetComponent<Item>().m_Cost);
-            m_SunGlasses.SetActive(true);
-            m_SunGlassesButton.interactable = false;
-            m_SunGlassesText.text = "";
-        }
-        else if (name == "Glove" && playerData_.m_Shields >= m_GloveCost)
-        {
-            AudioSource.PlayClipAtPoint(m_UpgradeClip, transform.position);
-            playerData_.RemoveShields(m_Glove.GetComponent<Item>().m_Cost);
-            m_Glove.SetActive(true);
-            m_GloveButton.interactable = false;
-            m_GloveText.text = "";
-        }
-        else if (name == "Trophy" && playerData_.m_Shields >= m_TrophyCost)
-        {
-            AudioSource.PlayClipAtPoint(m_UpgradeClip, transform.position);
-            playerData_.RemoveShields(m_Trophy.GetComponent<Item>().m_Cost);
-            m_Trophy.SetActive(true);
-            m_TrophyButton.interactable = false;
-            m_TrophyText.text = "";
-        }
-        else if(name == "Scanner")
-        {
-            m_Scanner.SetActive(true);  //enable the scanner
-            AudioSource.PlayClipAtPoint(m_UpgradeClip, transform.position);
-            playerData_.RemoveShields(m_Trophy.GetComponent<Item>().m_Cost);
-            m_Scanner.SetActive(true);
-            m_ScannerButton.interactable = false;
-            m_ScannerText.text = "";
-        }*/
     }
     #endregion
 }
