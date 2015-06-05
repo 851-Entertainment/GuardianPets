@@ -15,14 +15,17 @@ public class CameraAccess : MonoBehaviour
 	}
     public void UpdateCamera()
     {
-        if (m_DisableWebCam)
+        if(cam_ != null)
         {
-            cam_.Stop();
-        }
-        else
-        {
-            cam_.Play();
-        }
+            if (m_DisableWebCam)
+            {
+                cam_.Stop();
+            }
+            else
+            {
+                cam_.Play();
+            }
+        }  
     }
     void Update()
     {
