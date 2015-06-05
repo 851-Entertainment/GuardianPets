@@ -337,7 +337,6 @@ public class UIController : MonoBehaviour
         int col = 0;
         int maxCol = 3;
         int maxRow = 100;
-        Text[] text;
 
         m_UpgradePanel.SetActive(true);
 
