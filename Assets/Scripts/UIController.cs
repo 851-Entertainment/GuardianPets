@@ -62,11 +62,14 @@ public class UIController : MonoBehaviour
     public AudioClip m_TransitionSound; 
 
     private GameObject currPet_;
+    private GameObject checkMark_;
     private Pet petData_;
     private GameController gc_; //Game Controller script for easier access
     private AudioSource audio_;
     private PlayerData playerData_;
 
+    private string bttnName_;
+    private int clickCounter_ = 0;
     private bool playCloseSound_ = true;
     private bool isNewPlayer_;
     private bool scannerActive_;
@@ -77,6 +80,8 @@ public class UIController : MonoBehaviour
 
 	void Start () 
     {
+        checkMark_ = GameObject.Find("Check");
+        checkMark_.SetActive(false);
         audio_ = GetComponent<AudioSource>();
         gc_ = Camera.main.GetComponent<GameController>();
         isNewPlayer_ = gc_.m_FirstTimePlayer;
@@ -109,6 +114,10 @@ public class UIController : MonoBehaviour
             if(m_PlayerData.m_Energy == 0)
             {
                 m_EnergySlider.fillRect.GetComponent<Image>().color = Color.black;
+            }
+            else
+            {
+                m_EnergySlider.fillRect.GetComponent<Image>().color = Color.yellow;
             }
             petData_ = currPet_.GetComponent<Pet>();
             UpdateTimer();
@@ -165,11 +174,33 @@ public class UIController : MonoBehaviour
     //                -- After the player has selected their pet, it will prompt to give them a nickname
     public void SelectPet(GameObject btn)
     {
-        m_SelectedPet = btn.name;
-        gc_.CurrentPet = m_SelectedPet;
-        gc_.m_PlayerData.AddPet(m_SelectedPet);
-        m_NicknamePanel.SetActive(true);
-        gc_.SetUpGame();
+        Transform tempPos;
+        if (clickCounter_ == 0)
+        {
+            bttnName_ = btn.name;
+            tempPos = btn.GetComponentInChildren<Transform>();
+            checkMark_.transform.position = tempPos.transform.position;
+            checkMark_.SetActive(true);
+            clickCounter_++;
+        }
+        else if(clickCounter_ >= 1 && bttnName_ == btn.name)
+        {
+            checkMark_.SetActive(false);
+            m_SelectedPet = btn.name;
+            gc_.CurrentPet = m_SelectedPet;
+            gc_.m_PlayerData.AddPet(m_SelectedPet);
+            m_NicknamePanel.SetActive(true);
+            gc_.SetUpGame();
+            clickCounter_ = 0;
+        }
+        else
+        {
+            bttnName_ = btn.name;
+            tempPos = btn.GetComponentInChildren<Transform>();
+            checkMark_.transform.position = tempPos.transform.position;
+            checkMark_.SetActive(true);
+            clickCounter_++;
+        }
     }
 
     //Button function -- When the player presses the "Done" button after typing in a nickname, this function fires
