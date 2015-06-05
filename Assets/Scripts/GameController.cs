@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour
     public List<GameObject> m_PetChoices = new List<GameObject>(); //List of possible pets -- this needs to stay here in case they decide to buy more pets
     public PlayerData m_PlayerData; //The player data
     public List<GameObject> m_AnimalButtons;
+    public List<Item> m_Items = new List<Item>(); //List of available items to purchase
 
     private string currPetName_; //Name of the current pet, used to find the right pet in the list
     private float saveTimer_; //Timer between autosaves

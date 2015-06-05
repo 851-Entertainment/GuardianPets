@@ -40,4 +40,9 @@ public class PlayerData : MonoBehaviour
     {
         m_Energy -= Constants.ACTION_COST;
     }
+
+    public void RemoveShields(int amt)
+    {
+        m_Shields -= amt;
+    }
 }

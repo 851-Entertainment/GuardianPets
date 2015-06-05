@@ -22,14 +22,6 @@ public class UIController : MonoBehaviour
     public GameObject m_Glove;
     public GameObject m_Trophy;
 
-    public int m_BowTieCost;
-    public int m_BallCost;
-    public int m_HatCost;
-    public int m_SunGlassesCost;
-    public int m_GloveCost;
-    public int m_TrophyCost;
-    public int m_ScannerCost;
-
     public Text m_BowTieText;
     public Text m_BallText;
     public Text m_HatText;
@@ -338,21 +330,20 @@ public class UIController : MonoBehaviour
     {
         float buttonWidth = m_GoodsButtonPrefab.GetComponent<RectTransform>().sizeDelta.x * 4;
         float buttonHeight = m_GoodsButtonPrefab.GetComponent<RectTransform>().sizeDelta.y;
-        float startXPos = -300.0f;
-        float startYPos = 0.0f;
+        float startXPos = 0.0f - (buttonWidth / 1.5f);
+        float startYPos = 0.0f + (buttonHeight);
         int row = 0;
         int col = 0;
         int maxCol = 2;
         int maxRow = 3;
 
         m_StorePanel.SetActive(true);
-        Debug.Log(StoreInfo.Goods.Count);
         foreach (VirtualCurrencyPack vcp in StoreInfo.CurrencyPacks)
         {
             GameObject go = (GameObject)Instantiate(m_GoodsButtonPrefab, new Vector3(startXPos, startYPos, 0.0f), Quaternion.identity);
             go.gameObject.transform.SetParent(m_ButtonParent.transform, false);
             go.GetComponentInChildren<Button>().onClick.AddListener(delegate { StoreInventory.BuyItem(vcp.ItemId); });
-
+            Debug.Log(Screen.width + " " + Screen.height);
             if (col < maxCol)
             {
                 col++;
@@ -362,7 +353,7 @@ public class UIController : MonoBehaviour
                     if (row < maxRow)
                     {
                         col = 0;
-                        startXPos = -300.0f;
+                        startXPos = 0.0f - (buttonWidth / 1.5f);
                         row++;
                         startYPos -= buttonHeight;
                     }
@@ -387,13 +378,27 @@ public class UIController : MonoBehaviour
     }
 
     #region Upgrades
-    public void UnlockItem(string name)
+    public void UnlockItem(GameObject go)
     {
+        for(int i = 0; i < gc_.m_Items.Count; ++i)
+        {
+            if(gc_.m_Items[i].m_Name == go.name)
+            {
+                if (playerData_.m_Shields >= gc_.m_Items[i].m_Cost)
+                {
+                    AudioSource.PlayClipAtPoint(m_UpgradeClip, transform.position);
+                    playerData_.RemoveShields(gc_.m_Items[i].m_Cost);
+                    gc_.m_Items[i].gameObject.SetActive(true);
+                    go.GetComponent<Button>().interactable = false;
+                    go.GetComponentInChildren<Text>().text = "";
+                }
+            }
+        }
         //check what upgrade to apply, if the player has enough money then disable and enable all the proper components 
-        if (name == "Ball" && playerData_.m_Shields >= m_BallCost)
+        /*if (name == "Ball" && playerData_.m_Shields >= m_BallCost)
         {
             AudioSource.PlayClipAtPoint(m_UpgradeClip, transform.position);
-            playerData_.m_Shields -= m_BallCost;
+            playerData_.RemoveShields(m_Ball.GetComponent<Item>().m_Cost);
             m_Ball.SetActive(true);
             m_BallButton.interactable = false;
             m_BallText.text = "";
@@ -401,7 +406,7 @@ public class UIController : MonoBehaviour
         else if (name == "BowTie" && playerData_.m_Shields >= m_BowTieCost)
         {
             AudioSource.PlayClipAtPoint(m_UpgradeClip, transform.position);
-            playerData_.m_Shields -= m_BowTieCost;
+            playerData_.RemoveShields(m_BowTie.GetComponent<Item>().m_Cost);
             m_BowTie.SetActive(true);
             m_BowTieButton.interactable = false;
             m_BowTieText.text = "";
@@ -409,7 +414,7 @@ public class UIController : MonoBehaviour
         else if (name == "Hat" && playerData_.m_Shields >= m_HatCost)
         {
             AudioSource.PlayClipAtPoint(m_UpgradeClip, transform.position);
-            playerData_.m_Shields -= m_HatCost;
+            playerData_.RemoveShields(m_Hat.GetComponent<Item>().m_Cost);
             m_Hat.SetActive(true);
             m_HatButton.interactable = false;
             m_HatText.text = "";
@@ -417,7 +422,7 @@ public class UIController : MonoBehaviour
         else if (name == "SunGlasses" && playerData_.m_Shields >= m_SunGlassesCost)
         {
             AudioSource.PlayClipAtPoint(m_UpgradeClip, transform.position);
-            playerData_.m_Shields -= m_SunGlassesCost;
+            playerData_.RemoveShields(m_SunGlasses.GetComponent<Item>().m_Cost);
             m_SunGlasses.SetActive(true);
             m_SunGlassesButton.interactable = false;
             m_SunGlassesText.text = "";
@@ -425,7 +430,7 @@ public class UIController : MonoBehaviour
         else if (name == "Glove" && playerData_.m_Shields >= m_GloveCost)
         {
             AudioSource.PlayClipAtPoint(m_UpgradeClip, transform.position);
-            playerData_.m_Shields -= m_GloveCost;
+            playerData_.RemoveShields(m_Glove.GetComponent<Item>().m_Cost);
             m_Glove.SetActive(true);
             m_GloveButton.interactable = false;
             m_GloveText.text = "";
@@ -433,7 +438,7 @@ public class UIController : MonoBehaviour
         else if (name == "Trophy" && playerData_.m_Shields >= m_TrophyCost)
         {
             AudioSource.PlayClipAtPoint(m_UpgradeClip, transform.position);
-            playerData_.m_Shields -= m_TrophyCost;
+            playerData_.RemoveShields(m_Trophy.GetComponent<Item>().m_Cost);
             m_Trophy.SetActive(true);
             m_TrophyButton.interactable = false;
             m_TrophyText.text = "";
@@ -442,11 +447,11 @@ public class UIController : MonoBehaviour
         {
             m_Scanner.SetActive(true);  //enable the scanner
             AudioSource.PlayClipAtPoint(m_UpgradeClip, transform.position);
-            playerData_.m_Shields -= m_TrophyCost;
+            playerData_.RemoveShields(m_Trophy.GetComponent<Item>().m_Cost);
             m_Scanner.SetActive(true);
             m_ScannerButton.interactable = false;
             m_ScannerText.text = "";
-        }
+        }*/
     }
     #endregion
 }
