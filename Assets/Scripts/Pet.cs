@@ -34,13 +34,13 @@ public class Pet : MonoBehaviour
 
     void UpdateAnim()
     {
-        if(m_IsPlaying)
+        if (m_IsDancing)
         {
             playingTimer_ += Time.deltaTime;
         }
         if(playingTimer_ >= 2.0f)
         {
-            m_IsPlaying = !m_IsPlaying;
+            m_IsDancing = !m_IsDancing;
             playingTimer_ = 0.0f;
         }
         animator_.SetBool("Playing", m_IsPlaying);

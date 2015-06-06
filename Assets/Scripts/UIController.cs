@@ -225,7 +225,7 @@ public class UIController : MonoBehaviour
     {
         if (gc_.m_PlayerData.m_Energy >= Constants.ACTION_COST)
         {
-            petData_.m_IsPlaying = true;
+            petData_.m_IsDancing = true;
             currPet_.GetComponent<Pet>().m_Hunger -= Constants.STAT_DECREASE_VAL;
             if (currPet_.GetComponent<Pet>().m_Hunger <= Constants.MIN_PET_STAT)
             {
@@ -246,7 +246,7 @@ public class UIController : MonoBehaviour
     {
         if (gc_.m_PlayerData.m_Energy >= Constants.ACTION_COST)
         {
-            petData_.m_IsPlaying = true;
+            petData_.m_IsDancing = true;
             currPet_.GetComponent<Pet>().m_Bored -= Constants.STAT_DECREASE_VAL;
             if (currPet_.GetComponent<Pet>().m_Bored <= Constants.MIN_PET_STAT)
             {
@@ -266,7 +266,7 @@ public class UIController : MonoBehaviour
     {
         if (gc_.m_PlayerData.m_Energy >= Constants.ACTION_COST)
         {
-            petData_.m_IsPlaying = true;
+            petData_.m_IsDancing = true;
             currPet_.GetComponent<Pet>().m_Cleanliness -= Constants.STAT_DECREASE_VAL;
             if (currPet_.GetComponent<Pet>().m_Cleanliness <= Constants.MIN_PET_STAT)
             {
