@@ -17,25 +17,32 @@ Shields can be purchased
 ****TO DO****
 Micro-transactions - Needs to be implemented
 		   - Need the option to buy additional pet slots
-		   
+		
+*****Fears*****	
 *****Names*****
 Destroyer 
+	- Darkness
+	- Storms 
+	
 Eradicator 
-Exterminator 
-Wrecker 
-Demolisher 
-Conquer
-Vanquisher 
-Controller 
-Blaster
-Abolisher 
+	- Monster
+	- Ghost 
+	
+Vanquisher
+	- Noise
+	- Stranger 
+	
+Exterminator
+	- Animal 
+	- Insect
+	- Snake
+	- Spider
+	
 Terminator 
-Reducer
-Thrasher 
-Smasher
-Whipper 
-Slammer 
-Striker 
-Crusher
-Pusher
-Objector
+	- Separation
+	- Failure
+	
+Abolisher 
+	- Teachers 
+	- Injury
+ 
