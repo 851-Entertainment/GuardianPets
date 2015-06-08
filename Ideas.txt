@@ -17,3 +17,25 @@ Shields can be purchased
 ****TO DO****
 Micro-transactions - Needs to be implemented
 		   - Need the option to buy additional pet slots
+		   
+*****Names*****
+Destroyer 
+Eradicator 
+Exterminator 
+Wrecker 
+Demolisher 
+Conquer
+Vanquisher 
+Controller 
+Blaster
+Abolisher 
+Terminator 
+Reducer
+Thrasher 
+Smasher
+Whipper 
+Slammer 
+Striker 
+Crusher
+Pusher
+Objector
