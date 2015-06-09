@@ -141,7 +141,7 @@ public class Pet : MonoBehaviour
     void UpdateSpeechBubble()
     {
         ranNumTimer_ += Time.deltaTime;
-        if (ranNumTimer_ >= 100.0f)
+        if (ranNumTimer_ >= 45.0f)
         {
             ranNumTimer_ = 0.0f;
             int randNum = Random.Range(0, 3);

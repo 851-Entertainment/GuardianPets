@@ -227,7 +227,7 @@ public class UIController : MonoBehaviour
             gc_.Save();
             Destroy(m_NewPlayerUI);
             m_GameUI.SetActive(true);
-
+            SetFearTitle();
         }
     }
 
@@ -504,25 +504,28 @@ public class UIController : MonoBehaviour
 
     void UpdateSpeech()
     {
-        if (currPet_.GetComponent<Pet>().m_IsHungry)
+        if (currPet_ != null)
         {
-            m_SpeechBubble.SetActive(true);
-            m_SpeechText.text = feedMessage_;
-        }
-        else if (currPet_.GetComponent<Pet>().m_IsBored)
-        {
-            m_SpeechBubble.SetActive(true);
-            m_SpeechText.text = playMessage_;
-        }
-        else if (currPet_.GetComponent<Pet>().m_NeedsCleaning)
-        {
-            m_SpeechBubble.SetActive(true);
-            m_SpeechText.text = cleanMessage_;
-        }
-        else
-        {
-            m_SpeechBubble.SetActive(false);
-            m_SpeechText.text = "";
+            if (currPet_.GetComponent<Pet>().m_IsHungry)
+            {
+                m_SpeechBubble.SetActive(true);
+                m_SpeechText.text = feedMessage_;
+            }
+            else if (currPet_.GetComponent<Pet>().m_IsBored)
+            {
+                m_SpeechBubble.SetActive(true);
+                m_SpeechText.text = playMessage_;
+            }
+            else if (currPet_.GetComponent<Pet>().m_NeedsCleaning)
+            {
+                m_SpeechBubble.SetActive(true);
+                m_SpeechText.text = cleanMessage_;
+            }
+            else
+            {
+                m_SpeechBubble.SetActive(false);
+                m_SpeechText.text = "";
+            }
         }
     }
 
