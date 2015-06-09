@@ -3,6 +3,9 @@ using System.Collections;
 
 public class Pet : MonoBehaviour
 {
+    public bool m_IsHungry;
+    public bool m_NeedsCleaning;
+    public bool m_IsBored;
     public string m_PetName; //The name of the pet
     public string m_Nickname; //Nickname of the pet -- created by the player
     public int m_Hunger; //The pet's hunger level -- 100 is max, 0 is min. Max is starving, min is full. Max = bad, Min = good.
@@ -18,18 +21,24 @@ public class Pet : MonoBehaviour
     private GameController gc_;
     private Animator animator_;
     private float statTimer_;
+    private float ranNumTimer_ = 0.0f;
+    private float bubbleTimer_ = 0.0f;
+    private bool updateSpeech_ = false;
 
 	void Start ()
     {
         gc_ = Camera.main.GetComponent<GameController>();
         statTimer_ = Constants.STAT_TIMER;
         animator_ = GetComponent<Animator>();
+      
 	}
 	
 	void Update () 
     {
         UpdateStats();
         UpdateAnim();
+        UpdateSpeechBubble();
+        SpeechBubbleTimer();
 	}
 
     void UpdateAnim()
@@ -127,5 +136,50 @@ public class Pet : MonoBehaviour
             retVal = false;
         }
         return retVal;
+    }
+
+    void UpdateSpeechBubble()
+    {
+        ranNumTimer_ += Time.deltaTime;
+        if (ranNumTimer_ >= 10.0f)
+        {
+            ranNumTimer_ = 0.0f;
+            int randNum = Random.Range(0, 3);
+            if (randNum == 0)
+            {
+                m_IsHungry = true;
+            }
+            else if (randNum == 1)
+            {
+                m_IsBored = true;
+            }
+            else if (randNum == 2)
+            {
+                m_NeedsCleaning = true;
+            }
+        }
+      
+    }
+
+    void SpeechBubbleTimer()
+    {
+        if(m_NeedsCleaning || m_IsBored || m_IsHungry)
+        {
+            updateSpeech_ = true;
+        }
+
+        if(updateSpeech_)
+        {
+            bubbleTimer_ += Time.deltaTime;
+        }
+
+        if(bubbleTimer_ >= 4.0f)
+        {
+            m_NeedsCleaning = false;
+            m_IsBored = false;
+            m_IsHungry = false;
+            updateSpeech_ = false;
+            bubbleTimer_ = 0.0f;
+        }
     }
 }
