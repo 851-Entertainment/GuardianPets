@@ -52,11 +52,15 @@ public class UIController : MonoBehaviour
     private bool playCloseSound_ = true;
     private bool isNewPlayer_;
     private bool scannerActive_;
+    private float setSpeechTimer_;
     private float energyTimer_; //Timer until the player receives their next set of points, starts at 300 because the interval is 5 minutes, and there are 300 seconds in 5 minutes
     private float scannerTimer_; //This is the timer that once it reaches the max, will turn off the camera access and return to the normal screen
     private string minutes_;
     private string seconds_;
-    private string fearTitle_; 
+    private string fearTitle_;
+    private string feedMessage_ = "I'm hungry!!!";
+    private string playMessage_ = "Play with me!";
+    private string cleanMessage_ = "I need a bath";
 
 	void Start () 
     {
@@ -476,22 +480,44 @@ public class UIController : MonoBehaviour
         }     
     }
 
+    void SetSpeechText()
+    {
+        setSpeechTimer_ += Time.deltaTime;
+        if (setSpeechTimer_ >= 60.0f)
+        {
+            setSpeechTimer_ = 0.0f;
+            int randNum = Random.Range(0, 2);
+            if (randNum == 0)
+            {
+                feedMessage_ = "I'm hungry!!!";
+                playMessage_ = "Play with me!";
+                cleanMessage_ = "I need a bath";
+            }
+            else if (randNum == 1)
+            {
+                feedMessage_ = "Feed me!!!";
+                playMessage_ = "Let's Play!";
+                cleanMessage_ = "Bath time!";
+            }
+        }
+    }
+
     void UpdateSpeech()
     {
-        if(currPet_.GetComponent<Pet>().m_IsHungry)
+        if (currPet_.GetComponent<Pet>().m_IsHungry)
         {
             m_SpeechBubble.SetActive(true);
-            m_SpeechText.text = "I'm hungry!!!";
+            m_SpeechText.text = feedMessage_;
         }
-        else if(currPet_.GetComponent<Pet>().m_IsBored)
+        else if (currPet_.GetComponent<Pet>().m_IsBored)
         {
             m_SpeechBubble.SetActive(true);
-            m_SpeechText.text = "Play with me!";
+            m_SpeechText.text = playMessage_;
         }
-        else if(currPet_.GetComponent<Pet>().m_NeedsCleaning)
+        else if (currPet_.GetComponent<Pet>().m_NeedsCleaning)
         {
             m_SpeechBubble.SetActive(true);
-            m_SpeechText.text = "I need a bath";
+            m_SpeechText.text = cleanMessage_;
         }
         else
         {
