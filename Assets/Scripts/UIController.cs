@@ -6,9 +6,6 @@ using Soomla.Store;
 public class UIController : MonoBehaviour
 {
     public GameObject m_GameUI;
-    public GameObject m_SpeechBubble;
-    public GameObject m_ButtonPage1;
-    public GameObject m_ButtonPage2;
     public GameObject m_NewPlayerUI;
     public GameObject m_NicknamePanel; //Panel for nickname prompt
     public GameObject m_FearPanel; //Panel for the fear prompt
@@ -25,7 +22,6 @@ public class UIController : MonoBehaviour
     public PlayerData m_PlayerData; //Player data
     public Sprite m_ShieldSprite; //Shield sprite for upgrades panel
 
-    public Text m_SpeechText;
     public Text m_NicknameText; //Text element for the pet's nickname;
     public Text m_TitleText; //Text element for the pet's current title
     public Text m_EnergyText; //Player's current points - UI element
@@ -48,7 +44,6 @@ public class UIController : MonoBehaviour
 
     private string bttnName_;
     private int clickCounter_ = 0;
-    private bool setFearString_ = true;
     private bool playCloseSound_ = true;
     private bool isNewPlayer_;
     private bool scannerActive_;
@@ -56,7 +51,6 @@ public class UIController : MonoBehaviour
     private float scannerTimer_; //This is the timer that once it reaches the max, will turn off the camera access and return to the normal screen
     private string minutes_;
     private string seconds_;
-    private string fearTitle_; 
 
 	void Start () 
     {
@@ -79,8 +73,6 @@ public class UIController : MonoBehaviour
         energyTimer_ = Constants.ENERGY_TIMER;
         m_EnergySlider.minValue = 0;
         m_EnergySlider.maxValue = Constants.DEFAULT_MAX_ENERGY;
-        setFearString_ = true;
-        m_SpeechBubble.SetActive(false);
 	}
 	
 	void Update ()
@@ -88,14 +80,8 @@ public class UIController : MonoBehaviour
         currPet_ = gc_.ActivePet;
         if (currPet_ != null)
         {
-            //set the fear string once at the start of the game
-            if (setFearString_)
-            {
-                setFearString_ = !setFearString_;
-                m_FearIF.text = currPet_.GetComponent<Pet>().m_FearOne.ToString();
-                SetFearTitle();
-            }
             m_NicknameText.text = currPet_.GetComponent<Pet>().m_Nickname;
+            m_TitleText.text = "The " + currPet_.GetComponent<Pet>().m_FearOne + " Destroyer";
             m_EnergyText.text = "Energy: " + m_PlayerData.m_Energy.ToString() + "/" + Constants.DEFAULT_MAX_ENERGY;
             m_ShieldsText.text = m_PlayerData.m_Shields.ToString();
             m_EnergySlider.value = m_PlayerData.m_Energy;
@@ -111,7 +97,6 @@ public class UIController : MonoBehaviour
             UpdateTimer();
         }
         m_CameraPlane.GetComponent<CameraAccess>().UpdateCamera();
-        UpdateSpeech();
 	}
 
     void UpdateTimer()
@@ -410,94 +395,6 @@ public class UIController : MonoBehaviour
     public void onMarketPurchaseStarted(PurchasableVirtualItem pvi)
     {
         //Implement stuff
-    }
-
-    public void SwitchPage(bool page1)
-    {
-        if(page1)
-        {
-            m_ButtonPage1.SetActive(false);
-            m_ButtonPage2.SetActive(true);    
-        }
-        else
-        {
-            m_ButtonPage1.SetActive(true);
-            m_ButtonPage2.SetActive(false);  
-        } 
-    }
-
-    public void SetFearByName(string name)
-    {
-        m_FearIF.text = name;
-        if (!string.IsNullOrEmpty(m_FearIF.text) && currPet_ != null)
-        {
-            currPet_.GetComponent<Pet>().m_FearOne = m_FearIF.text;
-            currPet_.GetComponent<Pet>().m_Bored = Constants.DEFAULT_START_STATS;
-            currPet_.GetComponent<Pet>().m_Cleanliness = Constants.DEFAULT_START_STATS;
-            currPet_.GetComponent<Pet>().m_Hunger = Constants.DEFAULT_START_STATS;
-            petData_.m_IsDancing = false;
-            gc_.Save();
-            Destroy(m_NewPlayerUI);
-            m_GameUI.SetActive(true);
-        }
-        SetFearTitle();
-    }
-
-    void SetFearTitle()
-    {   
-        //checks what the fear is and make a fear title
-        if (m_FearIF.text == "Noises" || m_FearIF.text == "Strangers")
-        {
-            m_TitleText.text = "The " + currPet_.GetComponent<Pet>().m_FearOne + " Vanquisher";
-        }
-        else if (m_FearIF.text == "Monsters" || m_FearIF.text == "Ghosts")
-        {
-            m_TitleText.text = "The " + currPet_.GetComponent<Pet>().m_FearOne + " Eradicator";
-        }
-        else if (m_FearIF.text == "Darkness" || m_FearIF.text == "Storms")
-        {
-            m_TitleText.text = "The " + currPet_.GetComponent<Pet>().m_FearOne + " Destroyer";
-        }
-        else if (m_FearIF.text == "Animals" || m_FearIF.text == "Insects" || m_FearIF.text == "Snakes" || m_FearIF.text == "Spiders")
-        {
-            m_TitleText.text = "The " + currPet_.GetComponent<Pet>().m_FearOne + " Exterminator";
-        }
-        else if (m_FearIF.text == "Separation" || m_FearIF.text == "Failure")
-        {
-            m_TitleText.text = "The " + currPet_.GetComponent<Pet>().m_FearOne + " Terminator";
-        }
-        else if (m_FearIF.text == "Teachers" || m_FearIF.text == "Injury")
-        {
-            m_TitleText.text = "The " + currPet_.GetComponent<Pet>().m_FearOne + " Abolisher";
-        }
-        else
-        {
-            m_TitleText.text = "The " + currPet_.GetComponent<Pet>().m_FearOne + " Master";
-        }     
-    }
-
-    void UpdateSpeech()
-    {
-        if(currPet_.GetComponent<Pet>().m_IsHungry)
-        {
-            m_SpeechBubble.SetActive(true);
-            m_SpeechText.text = "I'm hungry!!!";
-        }
-        else if(currPet_.GetComponent<Pet>().m_IsBored)
-        {
-            m_SpeechBubble.SetActive(true);
-            m_SpeechText.text = "Play with me!";
-        }
-        else if(currPet_.GetComponent<Pet>().m_NeedsCleaning)
-        {
-            m_SpeechBubble.SetActive(true);
-            m_SpeechText.text = "I need a bath";
-        }
-        else
-        {
-            m_SpeechBubble.SetActive(false);
-            m_SpeechText.text = "";
-        }
     }
 
     #region Upgrades
