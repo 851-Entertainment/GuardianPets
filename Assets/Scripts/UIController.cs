@@ -6,6 +6,7 @@ using Soomla.Store;
 public class UIController : MonoBehaviour
 {
     public GameObject m_GameUI;
+    public GameObject m_SpeechBubble;
     public GameObject m_ButtonPage1;
     public GameObject m_ButtonPage2;
     public GameObject m_NewPlayerUI;
@@ -24,6 +25,7 @@ public class UIController : MonoBehaviour
     public PlayerData m_PlayerData; //Player data
     public Sprite m_ShieldSprite; //Shield sprite for upgrades panel
 
+    public Text m_SpeechText;
     public Text m_NicknameText; //Text element for the pet's nickname;
     public Text m_TitleText; //Text element for the pet's current title
     public Text m_EnergyText; //Player's current points - UI element
@@ -78,6 +80,7 @@ public class UIController : MonoBehaviour
         m_EnergySlider.minValue = 0;
         m_EnergySlider.maxValue = Constants.DEFAULT_MAX_ENERGY;
         setFearString_ = true;
+        m_SpeechBubble.SetActive(false);
 	}
 	
 	void Update ()
@@ -108,6 +111,7 @@ public class UIController : MonoBehaviour
             UpdateTimer();
         }
         m_CameraPlane.GetComponent<CameraAccess>().UpdateCamera();
+        UpdateSpeech();
 	}
 
     void UpdateTimer()
@@ -470,6 +474,30 @@ public class UIController : MonoBehaviour
         {
             m_TitleText.text = "The " + currPet_.GetComponent<Pet>().m_FearOne + " Master";
         }     
+    }
+
+    void UpdateSpeech()
+    {
+        if(currPet_.GetComponent<Pet>().m_IsHungry)
+        {
+            m_SpeechBubble.SetActive(true);
+            m_SpeechText.text = "I'm hungry!!!";
+        }
+        else if(currPet_.GetComponent<Pet>().m_IsBored)
+        {
+            m_SpeechBubble.SetActive(true);
+            m_SpeechText.text = "Play with me!";
+        }
+        else if(currPet_.GetComponent<Pet>().m_NeedsCleaning)
+        {
+            m_SpeechBubble.SetActive(true);
+            m_SpeechText.text = "I need a bath";
+        }
+        else
+        {
+            m_SpeechBubble.SetActive(false);
+            m_SpeechText.text = "";
+        }
     }
 
     #region Upgrades
