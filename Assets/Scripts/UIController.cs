@@ -346,6 +346,7 @@ public class UIController : MonoBehaviour
         }
     }
 
+    #region Store/Micro transaction stuff
     public void PopulateStore()
     {
         float buttonWidth = m_GoodsButtonPrefab.GetComponent<RectTransform>().sizeDelta.x * 3;
@@ -385,7 +386,7 @@ public class UIController : MonoBehaviour
             }
         }
 
-        /*foreach (VirtualCurrencyPack vcp in StoreInfo.CurrencyPacks)
+        foreach (VirtualCurrencyPack vcp in StoreInfo.CurrencyPacks)
         {
             GameObject go = (GameObject)Instantiate(m_GoodsButtonPrefab, new Vector3(startXPos, startYPos, 0.0f), Quaternion.identity);
             go.gameObject.transform.SetParent(m_UpgradePanel.transform, false);
@@ -408,13 +409,14 @@ public class UIController : MonoBehaviour
                     }
                 }
             }
-        }*/
+        }
     }
 
     public void onMarketPurchaseStarted(PurchasableVirtualItem pvi)
     {
         //Implement stuff
     }
+    #endregion
 
     public void SwitchPage(bool page1)
     {

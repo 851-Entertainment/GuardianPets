@@ -21,10 +21,17 @@ namespace Soomla.Store
             return new VirtualGood[] { };
         }
 
+        //Test version
         public VirtualCurrencyPack[] GetCurrencyPacks()
         {
-            return new VirtualCurrencyPack[] { HUNDREDEIGHTY_PACK, FIVEHUNDRED_PACK, TWELVEHUNDRED_PACK, THIRTYONEHUNDRED_PACK, SIXTYFIVEHUNDRED_PACK, FOURTEENTHOUSANDSHIELD_PACK };
+            return new VirtualCurrencyPack[] { TENSHIELD_PACK, FIFTYSHIELD_PACK, FOURHUNDSHIELD_PACK, THOUSANDSHIELD_PACK };
         }
+
+        //Live version
+        /*public VirtualCurrencyPack[] GetCurrencyPacks()
+        {
+            return new VirtualCurrencyPack[] { HUNDREDEIGHTY_PACK, FIVEHUNDRED_PACK, TWELVEHUNDRED_PACK, THIRTYONEHUNDRED_PACK, SIXTYFIVEHUNDRED_PACK, FOURTEENTHOUSANDSHIELD_PACK };
+        }*/
 
         public VirtualCategory[] GetCategories()
         {
@@ -52,7 +59,7 @@ namespace Soomla.Store
 
 
         //Virtual Currency Packs
-        /*public static VirtualCurrencyPack TENSHIELD_PACK = new VirtualCurrencyPack(
+        public static VirtualCurrencyPack TENSHIELD_PACK = new VirtualCurrencyPack(
             "10 Shields",                                                //Name
             "Test refund of an item",                                    //Description
             "shields_10",                                                //Item ID
@@ -86,7 +93,7 @@ namespace Soomla.Store
             1000,
             SHIELD_CURRENCY_ITEM_ID,                                       //The currency associated with this pack
             new PurchaseWithMarket(THOUSANDSHIELD_PACK_PRODUCT_ID, 8.99)
-            );*/
+            );
 
 
 /*        ACTUAL VALUES                                                                          */
