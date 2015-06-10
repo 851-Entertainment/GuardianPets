@@ -38,6 +38,10 @@ public class UIController : MonoBehaviour
 
     public AudioClip m_TransitionSound;
     public AudioClip m_UpgradeClip;
+    public AudioClip m_FeedClip;
+    public AudioClip[] m_PlayClip;
+    public AudioClip m_CleanClip;
+    public AudioClip m_ClickClip;
 
     private GameObject currPet_;
     private GameObject checkMark_;
@@ -228,6 +232,7 @@ public class UIController : MonoBehaviour
             Destroy(m_NewPlayerUI);
             m_GameUI.SetActive(true);
             SetFearTitle();
+            AudioSource.PlayClipAtPoint(m_ClickClip, transform.position);
         }
     }
 
@@ -256,6 +261,7 @@ public class UIController : MonoBehaviour
                 
             }
             gc_.m_PlayerData.RemoveEnergy();
+            AudioSource.PlayClipAtPoint(m_FeedClip, transform.position);
         }
     }
 
@@ -276,6 +282,19 @@ public class UIController : MonoBehaviour
                 }
             }
             gc_.m_PlayerData.RemoveEnergy();
+            int randNum = Random.Range(0, 3);
+            if (randNum == 0)
+            {
+                AudioSource.PlayClipAtPoint(m_PlayClip[0], transform.position);
+            }
+            else if (randNum == 1)
+            {
+                AudioSource.PlayClipAtPoint(m_PlayClip[1], transform.position);
+            }
+            else 
+            {
+                AudioSource.PlayClipAtPoint(m_PlayClip[2], transform.position);
+            }
         }
     }
 
@@ -296,6 +315,7 @@ public class UIController : MonoBehaviour
                 }
             }
             gc_.m_PlayerData.RemoveEnergy();
+            AudioSource.PlayClipAtPoint(m_CleanClip, transform.position);
         }
     }
 
@@ -308,6 +328,7 @@ public class UIController : MonoBehaviour
         {
             m_UpgradePanel.SetActive(false);
             CleanUpMenu();
+            AudioSource.PlayClipAtPoint(m_ClickClip, transform.position);
         }
     }
 
@@ -429,7 +450,8 @@ public class UIController : MonoBehaviour
         {
             m_ButtonPage1.SetActive(true);
             m_ButtonPage2.SetActive(false);  
-        } 
+        }
+        AudioSource.PlayClipAtPoint(m_ClickClip, transform.position);
     }
 
     public void SetFearByName(string name)
@@ -447,6 +469,7 @@ public class UIController : MonoBehaviour
             m_GameUI.SetActive(true);
         }
         SetFearTitle();
+        AudioSource.PlayClipAtPoint(m_ClickClip, transform.position);
     }
 
     void SetFearTitle()
