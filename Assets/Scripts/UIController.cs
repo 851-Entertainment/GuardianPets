@@ -105,7 +105,7 @@ public class UIController : MonoBehaviour
             }
             m_NicknameText.text = currPet_.GetComponent<Pet>().m_Nickname;
             m_EnergyText.text = "Energy: " + m_PlayerData.m_Energy.ToString() + "/" + Constants.DEFAULT_MAX_ENERGY;
-            m_ShieldsText.text = m_PlayerData.m_Shields.ToString();
+            m_ShieldsText.text = GuardianPetsAssets.SHIELD_CURRENCY.GetBalance().ToString();
             m_EnergySlider.value = m_PlayerData.m_Energy;
             if(m_PlayerData.m_Energy == 0)
             {
