@@ -256,7 +256,7 @@ public class UIController : MonoBehaviour
                 currPet_.GetComponent<Pet>().m_Hunger = Constants.MIN_PET_STAT;
                 if(currPet_.GetComponent<Pet>().CheckShieldConditions())
                 {
-                    gc_.m_PlayerData.m_Shields += Constants.SHIELDS_REWARDED;
+                    GuardianPetsAssets.SHIELD_CURRENCY.Give(Constants.SHIELDS_REWARDED, false);
                 }
                 
             }
@@ -278,7 +278,7 @@ public class UIController : MonoBehaviour
                 currPet_.GetComponent<Pet>().m_Bored = Constants.MIN_PET_STAT;
                 if (currPet_.GetComponent<Pet>().CheckShieldConditions())
                 {
-                    gc_.m_PlayerData.m_Shields += Constants.SHIELDS_REWARDED;
+                    GuardianPetsAssets.SHIELD_CURRENCY.Give(Constants.SHIELDS_REWARDED, false);
                 }
             }
             gc_.m_PlayerData.RemoveEnergy();
@@ -299,7 +299,7 @@ public class UIController : MonoBehaviour
                 currPet_.GetComponent<Pet>().m_Cleanliness = Constants.MIN_PET_STAT;
                 if (currPet_.GetComponent<Pet>().CheckShieldConditions())
                 {
-                    gc_.m_PlayerData.m_Shields += Constants.SHIELDS_REWARDED;
+                    GuardianPetsAssets.SHIELD_CURRENCY.Give(Constants.SHIELDS_REWARDED, false);
                 }
             }
             gc_.m_PlayerData.RemoveEnergy();
@@ -555,10 +555,10 @@ public class UIController : MonoBehaviour
         {
             if (gc_.m_Items[i].m_ItemName == go.name)
             {
-                if (playerData_.m_Shields >= gc_.m_Items[i].m_Cost)
+                if (GuardianPetsAssets.SHIELD_CURRENCY.GetBalance() >= gc_.m_Items[i].m_Cost)
                 {
                     AudioSource.PlayClipAtPoint(m_UpgradeClip, transform.position);
-                    playerData_.RemoveShields(gc_.m_Items[i].m_Cost);
+                    GuardianPetsAssets.SHIELD_CURRENCY.Take(gc_.m_Items[i].m_Cost);
                     gc_.m_Items[i].gameObject.SetActive(true);
                     go.GetComponent<Button>().interactable = false;
                     go.GetComponentInChildren<Text>().text = "";
