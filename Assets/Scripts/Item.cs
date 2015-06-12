@@ -18,7 +18,7 @@ public class Item : MonoBehaviour
     {
         if (this.transform.parent != null && m_IsPlayerItem)
         {
-            transform.position = new Vector3(transform.parent.position.x, transform.parent.position.y, transform.parent.position.z);
+            transform.position = new Vector3(transform.parent.position.x, transform.parent.position.y, -5.5f);
         }
     }
 }

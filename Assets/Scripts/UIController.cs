@@ -374,7 +374,7 @@ public class UIController : MonoBehaviour
             GameObject go = (GameObject)Instantiate(m_GoodsButtonPrefab, new Vector3(startXPos, startYPos, 0.0f), Quaternion.identity);
             go.gameObject.transform.SetParent(m_UpgradePanel.transform, false);
             go.name = item.m_ItemName;
-            go.GetComponentInChildren<Image>().sprite = item.gameObject.GetComponent<Image>().sprite;
+            go.GetComponentInChildren<Image>().sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
             go.GetComponentInChildren<Button>().onClick.AddListener(delegate { UnlockItem(go); });
             go.GetComponentInChildren<Text>().text = item.m_Description + " This costs " + item.m_Cost + " shields.";
 
@@ -563,7 +563,7 @@ public class UIController : MonoBehaviour
                     if (gc_.m_Items[i].m_IsPlayerItem)
                     {
                         GameObject obj = GameObject.Find(gc_.m_Items[i].m_Names[gc_.m_Items[i].m_ItemSpot]);    //get the waypoint the item will be at
-                        go.transform.SetParent(obj.transform);
+                        gc_.m_Items[i].gameObject.transform.SetParent(obj.transform);
                     }
                     go.GetComponent<Button>().interactable = false;
                     go.GetComponentInChildren<Text>().text = "";
