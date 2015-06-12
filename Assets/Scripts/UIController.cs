@@ -560,8 +560,14 @@ public class UIController : MonoBehaviour
                     AudioSource.PlayClipAtPoint(m_UpgradeClip, transform.position);
                     GuardianPetsAssets.SHIELD_CURRENCY.Take(gc_.m_Items[i].m_Cost);
                     gc_.m_Items[i].gameObject.SetActive(true);
+                    if (gc_.m_Items[i].m_IsPlayerItem)
+                    {
+                        GameObject obj = GameObject.Find(gc_.m_Items[i].m_Names[gc_.m_Items[i].m_ItemSpot]);    //get the waypoint the item will be at
+                        go.transform.SetParent(obj.transform);
+                    }
                     go.GetComponent<Button>().interactable = false;
                     go.GetComponentInChildren<Text>().text = "";
+                   
                 }
             }
         }
