@@ -1,0 +1,319 @@
+fileFormatVersion: 2
+guid: 8a433b67aaa5ffd49b23afc530273da9
+timeCreated: 1434392054
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: apeAnim_0
+    21300002: apeAnim_1
+    21300004: apeAnim_2
+    21300006: apeAnim_3
+    21300008: apeAnim_4
+    21300010: apeAnim_5
+    21300012: apeAnim_6
+    21300014: apeAnim_7
+    21300016: apeAnim_8
+    21300018: apeAnim_9
+    21300020: apeAnim_10
+    21300022: apeAnim_11
+    21300024: apeAnim_12
+    21300026: apeAnim_13
+    21300028: apeAnim_14
+    21300030: apeAnim_15
+    21300032: apeAnim_16
+    21300034: apeAnim_17
+    21300036: apeAnim_18
+    21300038: apeAnim_19
+    21300040: apeAnim_20
+    21300042: apeAnim_21
+    21300044: apeAnim_22
+    21300046: apeAnim_23
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: apeAnim_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 5
+        width: 162
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: apeAnim_1
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 8
+        width: 145
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: apeAnim_2
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 2
+        width: 144
+        height: 198
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: apeAnim_3
+      rect:
+        serializedVersion: 2
+        x: 530
+        y: 1
+        width: 150
+        height: 199
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: apeAnim_4
+      rect:
+        serializedVersion: 2
+        x: 723
+        y: 1
+        width: 136
+        height: 199
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: apeAnim_5
+      rect:
+        serializedVersion: 2
+        x: 887
+        y: 2
+        width: 162
+        height: 198
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: apeAnim_6
+      rect:
+        serializedVersion: 2
+        x: 1066
+        y: 0
+        width: 126
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: apeAnim_7
+      rect:
+        serializedVersion: 2
+        x: 1153
+        y: 195
+        width: 7
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: apeAnim_8
+      rect:
+        serializedVersion: 2
+        x: 1222
+        y: 1
+        width: 153
+        height: 199
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: apeAnim_9
+      rect:
+        serializedVersion: 2
+        x: 1415
+        y: 6
+        width: 131
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: apeAnim_10
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 170
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: apeAnim_11
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 170
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: apeAnim_12
+      rect:
+        serializedVersion: 2
+        x: 714
+        y: 170
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: apeAnim_13
+      rect:
+        serializedVersion: 2
+        x: 1233
+        y: 170
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: apeAnim_14
+      rect:
+        serializedVersion: 2
+        x: 1406
+        y: 170
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: apeAnim_15
+      rect:
+        serializedVersion: 2
+        x: 1065
+        y: 155
+        width: 4
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: apeAnim_16
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 111
+        width: 18
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: apeAnim_17
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 132
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: apeAnim_18
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 94
+        width: 15
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: apeAnim_19
+      rect:
+        serializedVersion: 2
+        x: 842
+        y: 109
+        width: 17
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: apeAnim_20
+      rect:
+        serializedVersion: 2
+        x: 1188
+        y: 104
+        width: 10
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: apeAnim_21
+      rect:
+        serializedVersion: 2
+        x: 1367
+        y: 114
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: apeAnim_22
+      rect:
+        serializedVersion: 2
+        x: 1367
+        y: 100
+        width: 7
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: apeAnim_23
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 2
+        width: 16
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

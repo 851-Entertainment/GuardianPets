@@ -1,0 +1,154 @@
+fileFormatVersion: 2
+guid: c897f328b1267e14f873fed60e5c8c06
+timeCreated: 1434391841
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: bearAnim_0
+    21300002: bearAnim_1
+    21300004: bearAnim_2
+    21300006: bearAnim_3
+    21300008: bearAnim_4
+    21300010: bearAnim_5
+    21300012: bearAnim_6
+    21300014: bearAnim_7
+    21300016: bearAnim_8
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: bearAnim_0
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 12
+        width: 125
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bearAnim_1
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 13
+        width: 121
+        height: 191
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bearAnim_2
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 5
+        width: 117
+        height: 199
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bearAnim_3
+      rect:
+        serializedVersion: 2
+        x: 547
+        y: 5
+        width: 117
+        height: 199
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bearAnim_4
+      rect:
+        serializedVersion: 2
+        x: 722
+        y: 7
+        width: 115
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bearAnim_5
+      rect:
+        serializedVersion: 2
+        x: 889
+        y: 13
+        width: 121
+        height: 191
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bearAnim_6
+      rect:
+        serializedVersion: 2
+        x: 1065
+        y: 5
+        width: 117
+        height: 199
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bearAnim_7
+      rect:
+        serializedVersion: 2
+        x: 1237
+        y: 5
+        width: 117
+        height: 199
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bearAnim_8
+      rect:
+        serializedVersion: 2
+        x: 1410
+        y: 8
+        width: 117
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
