@@ -22,16 +22,16 @@ namespace Soomla.Store
         }
 
         //Test version
-        public VirtualCurrencyPack[] GetCurrencyPacks()
-        {
-            return new VirtualCurrencyPack[] { TENSHIELD_PACK, FIFTYSHIELD_PACK, FOURHUNDSHIELD_PACK, THOUSANDSHIELD_PACK };
-        }
-
-        //Live version
         /*public VirtualCurrencyPack[] GetCurrencyPacks()
         {
-            return new VirtualCurrencyPack[] { HUNDREDEIGHTY_PACK, FIVEHUNDRED_PACK, TWELVEHUNDRED_PACK, THIRTYONEHUNDRED_PACK, SIXTYFIVEHUNDRED_PACK, FOURTEENTHOUSANDSHIELD_PACK };
+            return new VirtualCurrencyPack[] { TENSHIELD_PACK, FIFTYSHIELD_PACK, FOURHUNDSHIELD_PACK, THOUSANDSHIELD_PACK };
         }*/
+
+        //Live version
+        public VirtualCurrencyPack[] GetCurrencyPacks()
+        {
+            return new VirtualCurrencyPack[] { HUNDREDEIGHTY_PACK, FIVEHUNDRED_PACK, TWELVEHUNDRED_PACK, THIRTYONEHUNDRED_PACK, SIXTYFIVEHUNDRED_PACK, FOURTEENTHOUSANDSHIELD_PACK };
+        }
 
         public VirtualCategory[] GetCategories()
         {
