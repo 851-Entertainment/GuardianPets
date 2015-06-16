@@ -360,7 +360,7 @@ public class UIController : MonoBehaviour
     public void PopulateStore()
     {
         float buttonWidth = m_GoodsButtonPrefab.GetComponent<RectTransform>().sizeDelta.x * 3;
-        float buttonHeight = m_GoodsButtonPrefab.GetComponent<RectTransform>().sizeDelta.y;
+        float buttonHeight = m_GoodsButtonPrefab.GetComponent<RectTransform>().sizeDelta.y * 1.25f;
         float startXPos = 0.0f - (buttonWidth * 1.25f);
         float startYPos = 0.0f + (buttonHeight * 1.25f);
         int row = 0;
