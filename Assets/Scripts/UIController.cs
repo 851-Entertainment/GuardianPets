@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using Soomla.Store;
@@ -176,7 +177,7 @@ public class UIController : MonoBehaviour
         {
             bttnName_ = btn.name;
             tempPos = btn.GetComponentInChildren<Transform>();
-            checkMark_.transform.position = tempPos.transform.position;
+            checkMark_.transform.position = new Vector3(tempPos.transform.position.x, tempPos.transform.position.y + 100.0f, tempPos.transform.position.z);
             checkMark_.SetActive(true);
             clickCounter_++;
         }
@@ -194,7 +195,7 @@ public class UIController : MonoBehaviour
         {
             bttnName_ = btn.name;
             tempPos = btn.GetComponentInChildren<Transform>();
-            checkMark_.transform.position = tempPos.transform.position;
+            checkMark_.transform.position = new Vector3(tempPos.transform.position.x, tempPos.transform.position.y + 110.0f, tempPos.transform.position.z);
             checkMark_.SetActive(true);
             clickCounter_++;
         }
