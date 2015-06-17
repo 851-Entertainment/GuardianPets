@@ -90,8 +90,8 @@ public class UIController : MonoBehaviour
         energyTimer_ = Constants.ENERGY_TIMER;
         m_EnergySlider.minValue = 0;
         m_EnergySlider.maxValue = Constants.DEFAULT_MAX_ENERGY;
-        m_LoveSlider.minValue = Constants.DEFAULT_MIN_LOVE;
-        m_LoveSlider.maxValue = 0;
+        m_LoveSlider.minValue = 0;
+        m_LoveSlider.maxValue = Constants.DEFAULT_MAX_LOVE;
         setFearString_ = true;
         m_SpeechBubble.SetActive(false);
 	}
@@ -124,7 +124,7 @@ public class UIController : MonoBehaviour
             petData_ = currPet_.GetComponent<Pet>();
 
             m_LoveSlider.value = petData_.m_Love;
-            if (petData_.m_Hunger == 0 && petData_.m_Cleanliness == 0 && petData_.m_Bored == 0)
+            if (petData_.m_Love == 300)
             {
                 m_LoveSlider.fillRect.GetComponent<Image>().color = Color.red;
             }
