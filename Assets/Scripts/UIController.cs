@@ -271,6 +271,7 @@ public class UIController : MonoBehaviour
         if (gc_.m_PlayerData.m_Energy >= Constants.ACTION_COST)
         {
             petData_.m_IsDancing = true;
+            HealPet();
             currPet_.GetComponent<Pet>().m_Hunger -= Constants.STAT_DECREASE_VAL;
             if (currPet_.GetComponent<Pet>().m_Hunger <= Constants.MIN_PET_STAT)
             {
@@ -283,6 +284,14 @@ public class UIController : MonoBehaviour
             }
             gc_.m_PlayerData.RemoveEnergy();
             RandomSound(1, m_FeedClip);
+        }
+    }
+
+    public void HealPet()
+    {
+        if(petData_.m_IsSick)
+        {
+            petData_.m_IsSick = false;
         }
     }
 
