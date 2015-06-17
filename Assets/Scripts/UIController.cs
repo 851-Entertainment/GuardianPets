@@ -55,6 +55,9 @@ public class UIController : MonoBehaviour
 
     private string bttnName_;
     private int clickCounter_ = 0;
+    private int energySliderIncrease_ = 0;
+    private int maxEnergy_;
+    private bool upgradeEnergy_ = false;
     private bool setFearString_ = true;
     private bool playCloseSound_ = true;
     private bool isNewPlayer_;
@@ -92,6 +95,7 @@ public class UIController : MonoBehaviour
         m_EnergySlider.maxValue = Constants.DEFAULT_MAX_ENERGY;
         m_LoveSlider.minValue = 0;
         m_LoveSlider.maxValue = Constants.DEFAULT_MAX_LOVE;
+        maxEnergy_ = Constants.DEFAULT_MAX_ENERGY;
         setFearString_ = true;
         m_SpeechBubble.SetActive(false);
 	}
@@ -109,9 +113,9 @@ public class UIController : MonoBehaviour
                 SetFearTitle();
             }
             m_NicknameText.text = currPet_.GetComponent<Pet>().m_Nickname;
-            m_EnergyText.text = "Energy: " + m_PlayerData.m_Energy.ToString() + "/" + Constants.DEFAULT_MAX_ENERGY;
+            m_EnergyText.text = "Energy: " + m_PlayerData.m_Energy.ToString() + "/" + maxEnergy_;
             m_ShieldsText.text = GuardianPetsAssets.SHIELD_CURRENCY.GetBalance().ToString();
-            m_EnergySlider.value = m_PlayerData.m_Energy;
+            m_EnergySlider.value = m_PlayerData.m_Energy + energySliderIncrease_;
 
             if(m_PlayerData.m_Energy == 0)
             {
@@ -457,6 +461,26 @@ public class UIController : MonoBehaviour
             m_ButtonPage2.SetActive(false);  
         }
         AudioSource.PlayClipAtPoint(m_ClickClip, transform.position);
+    }
+
+    public void Exercise(int upgradeAmount)
+    {
+        if (gc_.m_PlayerData.m_Energy >= Constants.ACTION_COST)
+        {
+            petData_.m_Exercise++;
+            currPet_.GetComponent<Pet>().m_Bored -= Constants.STAT_DECREASE_VAL;
+            if (currPet_.GetComponent<Pet>().m_Bored <= Constants.MIN_PET_STAT)
+            {
+                currPet_.GetComponent<Pet>().m_Bored = Constants.MIN_PET_STAT;
+                if (petData_.m_Exercise >= upgradeAmount)
+                {
+                    petData_.m_Exercise = 0;
+                    energySliderIncrease_++;
+                    maxEnergy_ += energySliderIncrease_;    //var used to display how much energy the player has
+                }
+            }
+            gc_.m_PlayerData.RemoveEnergy();
+        }
     }
 
     public void SetFearByName(string name)
