@@ -33,6 +33,7 @@ public class UIController : MonoBehaviour
     public Text m_ShieldsText; //Player's current shields = UI element
     public Text m_EnergyTimerText; //Text element for the Points - UI element
     public Slider m_EnergySlider; //Slider element for the Energy UI
+    public Slider m_LoveSlider;
     public GameObject m_CloseScannerButton;
     public string m_SelectedPet;
     public float m_TransitionVolume = 0.3f;
@@ -89,6 +90,8 @@ public class UIController : MonoBehaviour
         energyTimer_ = Constants.ENERGY_TIMER;
         m_EnergySlider.minValue = 0;
         m_EnergySlider.maxValue = Constants.DEFAULT_MAX_ENERGY;
+        m_LoveSlider.minValue = Constants.DEFAULT_MIN_LOVE;
+        m_LoveSlider.maxValue = 0;
         setFearString_ = true;
         m_SpeechBubble.SetActive(false);
 	}
@@ -109,6 +112,7 @@ public class UIController : MonoBehaviour
             m_EnergyText.text = "Energy: " + m_PlayerData.m_Energy.ToString() + "/" + Constants.DEFAULT_MAX_ENERGY;
             m_ShieldsText.text = GuardianPetsAssets.SHIELD_CURRENCY.GetBalance().ToString();
             m_EnergySlider.value = m_PlayerData.m_Energy;
+
             if(m_PlayerData.m_Energy == 0)
             {
                 m_EnergySlider.fillRect.GetComponent<Image>().color = Color.black;
@@ -118,6 +122,17 @@ public class UIController : MonoBehaviour
                 m_EnergySlider.fillRect.GetComponent<Image>().color = Color.yellow;
             }
             petData_ = currPet_.GetComponent<Pet>();
+
+            m_LoveSlider.value = petData_.m_Love;
+            if (petData_.m_Hunger == 0 && petData_.m_Cleanliness == 0 && petData_.m_Bored == 0)
+            {
+                m_LoveSlider.fillRect.GetComponent<Image>().color = Color.red;
+            }
+            else
+            {
+                m_LoveSlider.fillRect.GetComponent<Image>().color = Color.black;
+            }
+
             UpdateTimer();
         }
         m_CameraPlane.GetComponent<CameraAccess>().UpdateCamera();
