@@ -36,6 +36,7 @@ public class UIController : MonoBehaviour
     public GameObject m_CloseScannerButton;
     public string m_SelectedPet;
     public float m_TransitionVolume = 0.3f;
+    public float m_CheckMarkOffset = 150.0f;
 
     public AudioClip m_TransitionSound;
     public AudioClip m_UpgradeClip;
@@ -177,7 +178,7 @@ public class UIController : MonoBehaviour
         {
             bttnName_ = btn.name;
             tempPos = btn.GetComponentInChildren<Transform>();
-            checkMark_.transform.position = new Vector3(tempPos.transform.position.x, tempPos.transform.position.y + 100.0f, tempPos.transform.position.z);
+            checkMark_.transform.position = new Vector3(tempPos.transform.position.x, tempPos.transform.position.y + m_CheckMarkOffset, tempPos.transform.position.z);
             checkMark_.SetActive(true);
             clickCounter_++;
         }
@@ -195,7 +196,7 @@ public class UIController : MonoBehaviour
         {
             bttnName_ = btn.name;
             tempPos = btn.GetComponentInChildren<Transform>();
-            checkMark_.transform.position = new Vector3(tempPos.transform.position.x, tempPos.transform.position.y + 110.0f, tempPos.transform.position.z);
+            checkMark_.transform.position = new Vector3(tempPos.transform.position.x, tempPos.transform.position.y + m_CheckMarkOffset, tempPos.transform.position.z);
             checkMark_.SetActive(true);
             clickCounter_++;
         }
