@@ -271,7 +271,7 @@ public class UIController : MonoBehaviour
             if (currPet_.GetComponent<Pet>().m_Hunger <= Constants.MIN_PET_STAT)
             {
                 currPet_.GetComponent<Pet>().m_Hunger = Constants.MIN_PET_STAT;
-                if(currPet_.GetComponent<Pet>().CheckShieldConditions())
+                if (/*currPet_.GetComponent<Pet>().CheckShieldConditions()*/ petData_.m_Love == 0)
                 {
                     GuardianPetsAssets.SHIELD_CURRENCY.Give(Constants.SHIELDS_REWARDED, false);
                 }
@@ -293,7 +293,7 @@ public class UIController : MonoBehaviour
             if (currPet_.GetComponent<Pet>().m_Bored <= Constants.MIN_PET_STAT)
             {
                 currPet_.GetComponent<Pet>().m_Bored = Constants.MIN_PET_STAT;
-                if (currPet_.GetComponent<Pet>().CheckShieldConditions())
+                if (/*currPet_.GetComponent<Pet>().CheckShieldConditions()*/ petData_.m_Love == 0)
                 {
                     GuardianPetsAssets.SHIELD_CURRENCY.Give(Constants.SHIELDS_REWARDED, false);
                 }
@@ -314,7 +314,7 @@ public class UIController : MonoBehaviour
             if (currPet_.GetComponent<Pet>().m_Cleanliness <= Constants.MIN_PET_STAT)
             {
                 currPet_.GetComponent<Pet>().m_Cleanliness = Constants.MIN_PET_STAT;
-                if (currPet_.GetComponent<Pet>().CheckShieldConditions())
+                if (/*currPet_.GetComponent<Pet>().CheckShieldConditions()*/ petData_.m_Love == 0)
                 {
                     GuardianPetsAssets.SHIELD_CURRENCY.Give(Constants.SHIELDS_REWARDED, false);
                 }
