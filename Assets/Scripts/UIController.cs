@@ -45,6 +45,7 @@ public class UIController : MonoBehaviour
     public AudioClip[] m_PlayClip;
     public AudioClip[] m_CleanClip;
     public AudioClip m_ClickClip;
+    public AudioClip m_ExerciseClip;
 
     private GameObject currPet_;
     private GameObject checkMark_;
@@ -476,6 +477,7 @@ public class UIController : MonoBehaviour
     {
         if (gc_.m_PlayerData.m_Energy >= Constants.ACTION_COST)
         {
+            AudioSource.PlayClipAtPoint(m_ExerciseClip, transform.position);
             petData_.m_Exercise++;
             currPet_.GetComponent<Pet>().m_Bored -= Constants.STAT_DECREASE_VAL;
             if (currPet_.GetComponent<Pet>().m_Bored <= Constants.MIN_PET_STAT)
@@ -485,7 +487,7 @@ public class UIController : MonoBehaviour
                 {
                     petData_.m_Exercise = 0;
                     energySliderIncrease_++;
-                    maxEnergy_ += energySliderIncrease_;    //var used to display how much energy the player has
+                    maxEnergy_ += energySliderIncrease_;    //var used to display how much energy the player has        
                 }
             }
             gc_.m_PlayerData.RemoveEnergy();
