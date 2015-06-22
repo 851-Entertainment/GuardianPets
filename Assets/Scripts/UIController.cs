@@ -1,7 +1,7 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 using Soomla.Store;
 
 public class UIController : MonoBehaviour
@@ -47,12 +47,20 @@ public class UIController : MonoBehaviour
     public AudioClip m_ClickClip;
     public AudioClip m_ExerciseClip;
 
+    public List<GameObject> pets_; //all the pets the player has
     private GameObject currPet_;
     private GameObject checkMark_;
     private Pet petData_;
     private GameController gc_; //Game Controller script for easier access
     private AudioSource audio_;
     private PlayerData playerData_;
+
+    private GameObject lion_;
+    private GameObject hippo;
+    private GameObject elephant_;
+    private GameObject bear_;
+    private GameObject alligator_;
+    private GameObject monkey_;
 
     private string bttnName_;
     private int clickCounter_ = 0;
@@ -72,6 +80,14 @@ public class UIController : MonoBehaviour
     private string feedMessage_ = "I'm hungry!!!";
     private string playMessage_ = "Play with me!";
     private string cleanMessage_ = "I need a bath";
+    private List<string> petsOwned_;    //list of names of the players pet 
+
+    private int timesPlayed_;
+    private int timesFed_;
+    private int timesWashed_;
+    public int TimesPlayed { get { return timesPlayed_; } }
+    public int TimesFed { get { return timesFed_; } }
+    public int TimesWashed { get { return timesWashed_; } }
 
 	void Start () 
     {
@@ -186,7 +202,8 @@ public class UIController : MonoBehaviour
 
     void RemoveUI()
     {
-        Destroy(m_NewPlayerUI);
+        m_NewPlayerUI.SetActive(false);
+        //Destroy(m_NewPlayerUI);
     }
 
     //Button function -- If the player is new, this button will be used to select their first pet
@@ -198,19 +215,20 @@ public class UIController : MonoBehaviour
         {
             bttnName_ = btn.name;
             tempPos = btn.GetComponentInChildren<Transform>();
-            checkMark_.transform.position = new Vector3(tempPos.transform.position.x, tempPos.transform.position.y + m_CheckMarkOffset, tempPos.transform.position.z);
+            checkMark_.transform.position = new Vector3(tempPos.transform.position.x, tempPos.transform.position.y + m_CheckMarkOffset, tempPos.transform.position.z);       
             checkMark_.SetActive(true);
             clickCounter_++;
         }
         else if(clickCounter_ >= 1 && bttnName_ == btn.name)
         {
             checkMark_.SetActive(false);
-            m_SelectedPet = btn.name;
+            m_SelectedPet = btn.name; 
             gc_.CurrentPet = m_SelectedPet;
             gc_.m_PlayerData.AddPet(m_SelectedPet);
             m_NicknamePanel.SetActive(true);
             gc_.SetUpGame();
             clickCounter_ = 0;
+            petsOwned_.Add(bttnName_);
         }
         else
         {
@@ -251,10 +269,12 @@ public class UIController : MonoBehaviour
             currPet_.GetComponent<Pet>().m_Hunger = Constants.DEFAULT_START_STATS;
             petData_.m_IsDancing = false;
             gc_.Save();
-            Destroy(m_NewPlayerUI);
+            m_NewPlayerUI.SetActive(false);
+            //Destroy(m_NewPlayerUI);
             m_GameUI.SetActive(true);
             SetFearTitle();
             AudioSource.PlayClipAtPoint(m_ClickClip, transform.position);
+            pets_.Add(currPet_);
         }
     }
 
@@ -274,6 +294,7 @@ public class UIController : MonoBehaviour
             petData_.m_IsDancing = true;
             HealPet();
             currPet_.GetComponent<Pet>().m_Hunger -= Constants.STAT_DECREASE_VAL;
+            timesFed_++;
             if (currPet_.GetComponent<Pet>().m_Hunger <= Constants.MIN_PET_STAT)
             {
                 currPet_.GetComponent<Pet>().m_Hunger = Constants.MIN_PET_STAT;
@@ -304,6 +325,7 @@ public class UIController : MonoBehaviour
         {
             petData_.m_IsDancing = true;
             currPet_.GetComponent<Pet>().m_Bored -= Constants.STAT_DECREASE_VAL;
+            timesPlayed_++;
             if (currPet_.GetComponent<Pet>().m_Bored <= Constants.MIN_PET_STAT)
             {
                 currPet_.GetComponent<Pet>().m_Bored = Constants.MIN_PET_STAT;
@@ -325,6 +347,7 @@ public class UIController : MonoBehaviour
         {
             petData_.m_IsDancing = true;
             currPet_.GetComponent<Pet>().m_Cleanliness -= Constants.STAT_DECREASE_VAL;
+            timesWashed_++;
             if (currPet_.GetComponent<Pet>().m_Cleanliness <= Constants.MIN_PET_STAT)
             {
                 currPet_.GetComponent<Pet>().m_Cleanliness = Constants.MIN_PET_STAT;
@@ -505,11 +528,15 @@ public class UIController : MonoBehaviour
             currPet_.GetComponent<Pet>().m_Hunger = Constants.DEFAULT_START_STATS;
             petData_.m_IsDancing = false;
             gc_.Save();
-            Destroy(m_NewPlayerUI);
+            m_NewPlayerUI.SetActive(false);
+           // Destroy(m_NewPlayerUI);
             m_GameUI.SetActive(true);
         }
         SetFearTitle();
+        pets_.Add(currPet_);
+        AssignPet(currPet_.name);
         AudioSource.PlayClipAtPoint(m_ClickClip, transform.position);
+       
     }
 
     void SetFearTitle()
@@ -625,4 +652,70 @@ public class UIController : MonoBehaviour
         }
     }
     #endregion
+
+    public void ChangePet(string name)
+    {
+        //set all pets off 
+        if (pets_ != null)
+        {
+            for (int i = 0; i < pets_.Count; ++i)
+            {
+                pets_[i].SetActive(false);
+            }
+        }
+        #region Set up pet
+        if (name == "Lion")
+        {
+            lion_.SetActive(true);
+        }
+        else if (name == "Elephant")
+        {
+            elephant_.SetActive(true);
+        }
+        else if (name == "Hippo")
+        {
+            hippo.SetActive(true);
+        }
+        else if (name == "Bear")
+        {
+            bear_.SetActive(true);
+        }
+        else if (name == "Alligator")
+        {
+            alligator_.SetActive(true);
+        }
+        else if (name == "Monkey")
+        {
+            monkey_.SetActive(true);
+        }
+        #endregion
+    }
+
+    void AssignPet(string name)
+    {
+        if (name == "Lion")
+        {
+            lion_ = currPet_;
+        }
+        else if (name == "Elephant")
+        {
+            elephant_ = currPet_;
+        }
+        else if (name == "Hippo")
+        {
+            hippo = currPet_;
+        }
+        else if (name == "Bear")
+        {
+            bear_ = currPet_;  
+        }
+        else if (name == "Alligator")
+        {
+            alligator_ = currPet_;
+        }
+        else if (name == "Monkey")
+        {
+            monkey_ = currPet_;
+        }
+    }
 }
