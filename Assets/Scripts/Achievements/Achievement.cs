@@ -69,10 +69,10 @@ public class Achievement
     /// <summary>
     /// Adds a dependency to the achievement
     /// </summary>
-    /// <param name="dependendency"></param>
-    public void AddDependency(Achievement dependendency)
+    /// <param name="dependency"></param>
+    public void AddDependency(Achievement dependency)
     {
-        dependencies_.Add(dependendency);
+        dependencies_.Add(dependency);
     }
 
     /// <summary>
