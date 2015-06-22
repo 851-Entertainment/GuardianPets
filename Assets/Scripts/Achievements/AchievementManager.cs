@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using Soomla.Store;
 
 public class AchievementManager : MonoBehaviour 
 {
@@ -9,6 +10,10 @@ public class AchievementManager : MonoBehaviour
     /// A prefab used for creating a new achievement
     /// </summary>
     public GameObject m_AchievementPrefab;
+
+
+    /// <summary>The UI controller script</summary>
+    public UIController m_UIController;
 
     /// <summary>
     /// An array containing the icons used for the achievements
@@ -79,23 +84,56 @@ public class AchievementManager : MonoBehaviour
     {
         //Sets the active button to as the general button, so that we have something to show the first time we open the inventory
         activeButton_ = GameObject.Find("GeneralBtn").GetComponent<AchievementButton>();
-        
-        //Creates the general achievements
-        CreateAchievement("General", "Press W", "Press W to unlock this achievement", 5, 0);
-        CreateAchievement("General", "Press A", "Press A to unlock this achievement", 5, 0);
-        CreateAchievement("General", "Press S", "Press S to unlock this achievement", 5, 0);
-        CreateAchievement("General", "Press D", "Press D to unlock this achievement", 5, 0);
-        CreateAchievement("General", "All keys", "Press all keys to unlock", 10, 1, new string[] { "Press W", "Press A", "Press S", "Press D" });
 
-        //Creates the other achievements
-        CreateAchievement("Other", "I love strawberries", "Press the strawberry to unlock this achievement", 5, 7);
-        CreateAchievement("Other", "I love apple", "Press the apple to unlock this achievement", 5, 2);
-        CreateAchievement("Other", "I love banana", "Press the banana to unlock this achievement", 5, 3);
-        CreateAchievement("Other", "I love grapefruit", "Press the grapefruit to unlock this achievement", 5, 4);
-        CreateAchievement("Other", "I love kiwi", "Press the kiwi to unlock this achievement", 5, 5);
-        CreateAchievement("Other", "I love pineapple", "Press the pineapple to unlock this achievement", 5, 6);
-        CreateAchievement("Other", "Fruit Salad", "Press all the fruits to unlock this achievement", 10, 8, new string[] { "I love apple", "I love banana", "I love grapefruit", "I love kiwi", "I love pineapple", "I love strawberries" });
-        
+        #region Creating Achievements
+        //Creates the general achievements
+        CreateAchievement("General", "Feed I", "Feed your pet 25 times.", 1, 0);
+        CreateAchievement("General", "Feed II", "Feed your pet 50 times.", 1, 0);
+        CreateAchievement("General", "Feed III", "Feed your pet 75 times.", 2, 0);
+        CreateAchievement("General", "Feed IV", "Feed your pet 100 times.", 3, 0);
+        CreateAchievement("General", "Feed V", "Feed your pet 250 times.", 4, 0);
+        CreateAchievement("General", "Feed VI", "Feed your pet 500 times.", 5, 0);
+        CreateAchievement("General", "Feed VII", "Feed your pet 750 times.", 7, 0);
+        CreateAchievement("General", "Feed VIII", "Feed your pet 1000 times.", 10, 0);
+
+        CreateAchievement("General", "Play I", "Play with your pet 25 times.", 1, 0);
+        CreateAchievement("General", "Play II", "Play with your pet 50 times.", 1, 0);
+        CreateAchievement("General", "Play III", "Play with your pet 75 times.", 2, 0);
+        CreateAchievement("General", "Play IV", "Play with your pet 100 times.", 3, 0);
+        CreateAchievement("General", "Play V", "Play with your pet 250 times.", 4, 0);
+        CreateAchievement("General", "Play VI", "Play with your pet 500 times.", 5, 0);
+        CreateAchievement("General", "Play VII", "Play with your pet 750 times.", 7, 0);
+        CreateAchievement("General", "Play VIII", "Play with your pet 1000 times.", 10, 0);
+
+        CreateAchievement("General", "Wash I", "Wash your pet 25 times.", 1, 0);
+        CreateAchievement("General", "Wash II", "Wash your pet 50 times.", 1, 0);
+        CreateAchievement("General", "Wash III", "Wash your pet 75 times.", 2, 0);
+        CreateAchievement("General", "Wash IV", "Wash your pet 100 times.", 3, 0);
+        CreateAchievement("General", "Wash V", "Wash your pet 250 times.", 4, 0);
+        CreateAchievement("General", "Wash VI", "Wash your pet 500 times.", 5, 0);
+        CreateAchievement("General", "Wash VII", "Wash your pet 750 times.", 7, 0);
+        CreateAchievement("General", "Wash VIII", "Wash your pet 1000 times.", 10, 0);
+
+        CreateAchievement("General", "Exercise I", "Exercise your pet 25 times.", 1, 0);
+        CreateAchievement("General", "Exercise II", "Exercise your pet 50 times.", 1, 0);
+        CreateAchievement("General", "Exercise III", "Exercise your pet 75 times.", 2, 0);
+        CreateAchievement("General", "Exercise IV", "Exercise your pet 100 times.", 3, 0);
+        CreateAchievement("General", "Exercise V", "Exercise your pet 250 times.", 4, 0);
+        CreateAchievement("General", "Exercise VI", "Exercise your pet 500 times.", 5, 0);
+        CreateAchievement("General", "Exercise VII", "Exercise your pet 750 times.", 7, 0);
+        CreateAchievement("General", "Exercise VIII", "Exercise your pet 1000 times.", 10, 0);
+
+        CreateAchievement("General", "Fill Love I", "Fill the love meter once.", 1, 0);
+        CreateAchievement("General", "Fill Love II", "Fill the love mever 25 times.", 2, 0);
+        CreateAchievement("General", "Fill Love III", "Fill the love meter 50 times.", 3, 0);
+        CreateAchievement("General", "Fill Love IV", "Fill the love meter 75 times.", 4, 0);
+        CreateAchievement("General", "Fill Love V", "Fill the love meter 100 times.", 5, 0);
+
+        CreateAchievement("General", "Unlock Item I", "Unlock your first item.", 1, 0);
+        CreateAchievement("General", "Unlock Item II", "Unlock five items.", 2, 0);
+        CreateAchievement("General", "Unlock Item III", "Unlock 10 items.", 3, 0);
+        #endregion
+
         //Makes sure that the achievements are disabled when we start        
         foreach (GameObject achievementList in GameObject.FindGameObjectsWithTag("AchievementList"))
         {
@@ -110,32 +148,116 @@ public class AchievementManager : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {   
-       
         if (Input.GetKeyDown(KeyCode.I))
         {
             m_AchievementMenu.SetActive(!m_AchievementMenu.activeSelf);
         }
-        if (Input.GetKeyDown(KeyCode.W))
+
+        #region Check Times Played
+        if (m_UIController.TimesPlayed == 25)
         {
-            EarnAchievement("Press W");
+            EarnAchievement("Play I");
         }
-        if (Input.GetKeyDown(KeyCode.A))
+        else if(m_UIController.TimesPlayed == 50)
         {
-            EarnAchievement("Press A");
+            EarnAchievement("Play II");
         }
-        if (Input.GetKeyDown(KeyCode.S))
+        else if (m_UIController.TimesPlayed == 75)
         {
-            EarnAchievement("Press S");
+            EarnAchievement("Play III");
         }
-        if (Input.GetKeyDown(KeyCode.D))
+        else if (m_UIController.TimesPlayed == 100)
         {
-            EarnAchievement("Press D");
+            EarnAchievement("Play IV");
         }
-        if (Input.GetKeyDown(KeyCode.C))
+        else if (m_UIController.TimesPlayed == 250)
         {
-            PlayerPrefs.DeleteAll();
+            EarnAchievement("Play V");
         }
-	}
+        else if (m_UIController.TimesPlayed == 500)
+        {
+            EarnAchievement("Play VI");
+        }
+        else if (m_UIController.TimesPlayed == 750)
+        {
+            EarnAchievement("Play VII");
+        }
+        else if (m_UIController.TimesPlayed == 1000)
+        {
+            EarnAchievement("Play VIII");
+        }
+        #endregion
+
+        #region Check Times Fed
+        if (m_UIController.TimesFed == 25)
+        {
+            EarnAchievement("Feed I");
+        }
+        else if (m_UIController.TimesFed == 50)
+        {
+            EarnAchievement("Feed II");
+        }
+        else if (m_UIController.TimesFed == 75)
+        {
+            EarnAchievement("Feed III");
+        }
+        else if (m_UIController.TimesFed == 100)
+        {
+            EarnAchievement("Feed IV");
+        }
+        else if (m_UIController.TimesFed == 250)
+        {
+            EarnAchievement("Feed V");
+        }
+        else if (m_UIController.TimesFed == 500)
+        {
+            EarnAchievement("Feed VI");
+        }
+        else if (m_UIController.TimesFed == 750)
+        {
+            EarnAchievement("Feed VII");
+        }
+        else if (m_UIController.TimesFed == 1000)
+        {
+            EarnAchievement("Feed VIII");
+        }
+        #endregion
+
+        #region Check Times Washed
+        if (m_UIController.TimesWashed == 25)
+        {
+            EarnAchievement("Wash I");
+        }
+        else if (m_UIController.TimesWashed == 50)
+        {
+            EarnAchievement("Wash II");
+        }
+        else if (m_UIController.TimesWashed == 75)
+        {
+            EarnAchievement("Wash III");
+        }
+        else if (m_UIController.TimesWashed == 100)
+        {
+            EarnAchievement("Wash IV");
+        }
+        else if (m_UIController.TimesWashed == 250)
+        {
+            EarnAchievement("Wash V");
+        }
+        else if (m_UIController.TimesWashed == 500)
+        {
+            EarnAchievement("Wash VI");
+        }
+        else if (m_UIController.TimesWashed == 750)
+        {
+            EarnAchievement("Wash VII");
+        }
+        else if (m_UIController.TimesWashed == 1000)
+        {
+            EarnAchievement("Wash VIII");
+        }
+        #endregion
+    }
 
     /// <summary>
     /// Attempts to earn an achievement
@@ -146,6 +268,9 @@ public class AchievementManager : MonoBehaviour
         //Checks if its the first time we try to unlock the achievement
         if (m_Achievements[title].EarnAchievement())
         {
+            //Give player shields equal to the number of points the achievement is worth
+            GuardianPetsAssets.SHIELD_CURRENCY.Give(m_Achievements[title].Points);
+
             //Instantiates the visual achievement on the screen, so that the user can see what he/she just earned
             GameObject achievement = (GameObject)Instantiate(m_VisualAchievement);
 
@@ -154,7 +279,7 @@ public class AchievementManager : MonoBehaviour
 
             //Updates the points in the top left corner of the menu
             m_TextPoints.text = "Points: " + PlayerPrefs.GetInt("Points");
-
+            
             //Makes the achievement fad in and out of the screen
             StartCoroutine(FadeAchievement(achievement));
         }
