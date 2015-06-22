@@ -1,0 +1,52 @@
+Achievements 
+- Play with your Pet:
+		- 25 times - 1 Shield 
+		- 50 times - 1 Shield 
+		- 75 times - 2 Shields 
+		- 100 times - 3 shields 
+		- 250 times - 4 Shields 
+		- 500 times - 5 Shields 
+		- 750 times - 7 Shields 
+		- 1000 times - 10 Shields 
+		
+- Clean your Pet:
+		- 25 times - 1 Shield 
+		- 50 times - 1 Shield 
+		- 75 times - 2 Shields 
+		- 100 times - 3 shields 
+		- 250 times - 4 Shields 
+		- 500 times - 5 Shields 
+		- 750 times - 7 Shields 
+		- 1000 times - 10 Shields 
+		
+- Feed your Pet:
+		- 25 times - 1 Shield 
+		- 50 times - 1 Shield 
+		- 75 times - 2 Shields 
+		- 100 times - 3 shields 
+		- 250 times - 4 Shields 
+		- 500 times - 5 Shields 
+		- 750 times - 7 Shields 
+		- 1000 times - 10 Shields 
+		
+- Exercise with your Pet:
+		- 25 times - 1 Shield 
+		- 50 times - 1 Shield 
+		- 75 times - 2 Shields 
+		- 100 times - 3 shields 
+		- 250 times - 4 Shields 
+		- 500 times - 5 Shields 
+		- 750 times - 7 Shields 
+		- 1000 times - 10 Shields 
+
+- Fill the love meter fully:
+		- First time - 1 Shield 
+		- 25 times - 2 Shields 
+		- 50 times - 3 Shields 
+		- 75 times - 4 Shields 
+		- 100 times - 5 Shields 
+		
+- Unlock:
+		- First item - 1 Shield 
+		- 5 Items - 2 Shields 
+		- 10 items - 3 Shields 
