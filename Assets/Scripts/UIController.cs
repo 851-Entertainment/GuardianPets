@@ -668,7 +668,7 @@ public class UIController : MonoBehaviour
                 pets_[i].SetActive(false);
             }
         }
-        #region Set up pet
+        #region Activate Pet
         if (name == "Lion" && lion_ != null)
         {
             lion_.SetActive(true);
