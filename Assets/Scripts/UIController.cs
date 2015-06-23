@@ -6,6 +6,7 @@ using Soomla.Store;
 
 public class UIController : MonoBehaviour
 {
+    public GameObject m_ChangePetPanel;
     public GameObject m_GameUI;
     public GameObject m_SpeechBubble;
     public GameObject m_ButtonPage1;
@@ -48,7 +49,7 @@ public class UIController : MonoBehaviour
     public AudioClip m_ExerciseClip;
 
     public List<GameObject> pets_; //all the pets the player has
-    private GameObject currPet_;
+    public GameObject currPet_;
     private GameObject checkMark_;
     private Pet petData_;
     private GameController gc_; //Game Controller script for easier access
@@ -228,7 +229,7 @@ public class UIController : MonoBehaviour
             m_NicknamePanel.SetActive(true);
             gc_.SetUpGame();
             clickCounter_ = 0;
-            petsOwned_.Add(bttnName_);
+           // petsOwned_.Add(bttnName_);
         }
         else
         {
@@ -664,29 +665,35 @@ public class UIController : MonoBehaviour
             }
         }
         #region Set up pet
-        if (name == "Lion")
+        if (name == "Lion" && lion_ != null)
         {
             lion_.SetActive(true);
+            currPet_ = lion_;
         }
-        else if (name == "Elephant")
+        else if (name == "Elephant" && elephant_ != null)
         {
             elephant_.SetActive(true);
+            currPet_ = elephant_;
         }
-        else if (name == "Hippo")
+        else if (name == "Hippo" && hippo != null)
         {
             hippo.SetActive(true);
+            currPet_ = hippo;
         }
-        else if (name == "Bear")
+        else if (name == "Bear" && bear_ != null)
         {
             bear_.SetActive(true);
+            currPet_ = bear_;
         }
-        else if (name == "Alligator")
+        else if (name == "Alligator" && alligator_ != null)
         {
             alligator_.SetActive(true);
+            currPet_ = alligator_;
         }
-        else if (name == "Monkey")
+        else if (name == "Monkey" && monkey_ != null)
         {
             monkey_.SetActive(true);
+            currPet_ = monkey_;
         }
         #endregion
     }
@@ -695,27 +702,59 @@ public class UIController : MonoBehaviour
     {
         if (name == "Lion")
         {
+           // currPet_ = lion_;
             lion_ = currPet_;
         }
         else if (name == "Elephant")
         {
+            //currPet_ = elephant_;
             elephant_ = currPet_;
         }
         else if (name == "Hippo")
         {
+          //  currPet_ = hippo;
             hippo = currPet_;
         }
         else if (name == "Bear")
         {
-            bear_ = currPet_;  
+           // currPet_ = bear_;
+           bear_ = currPet_;  
         }
         else if (name == "Alligator")
         {
+         //   currPet_ = alligator_;
             alligator_ = currPet_;
         }
         else if (name == "Monkey")
         {
-            monkey_ = currPet_;
+         //   currPet_ = monkey_;
+           monkey_ = currPet_;
         }
+    }
+
+    public void ChangePetMenu(bool open)
+    {
+        if(open)
+        {
+            m_ChangePetPanel.SetActive(true);
+        }
+        else
+        {
+            m_ChangePetPanel.SetActive(false);
+        }
+    }
+
+    public void PickNewPet()
+    {
+        m_GameUI.SetActive(false);
+        currPet_.SetActive(false);
+        m_NewPlayerUI.SetActive(true);
+        foreach (Transform child in m_NewPlayerUI.transform)
+        {
+            child.gameObject.SetActive(true);
+        }
+        checkMark_.SetActive(false);
+        m_FearPanel.SetActive(false);
+        m_NicknamePanel.SetActive(false);
     }
 }
