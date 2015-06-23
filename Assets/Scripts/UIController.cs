@@ -276,6 +276,8 @@ public class UIController : MonoBehaviour
             SetFearTitle();
             AudioSource.PlayClipAtPoint(m_ClickClip, transform.position);
             pets_.Add(currPet_);
+            SetPet(currPet_.name);
+            AssignPet(currPet_.name);
         }
     }
 
@@ -535,7 +537,8 @@ public class UIController : MonoBehaviour
         }
         SetFearTitle();
         pets_.Add(currPet_);
-        //AssignPet(currPet_.name);
+        SetPet(currPet_.name);
+        AssignPet(currPet_.name);
         AudioSource.PlayClipAtPoint(m_ClickClip, transform.position);
        
     }
@@ -654,6 +657,7 @@ public class UIController : MonoBehaviour
     }
     #endregion
 
+    #region Multiple Pets
     public void ChangePet(string name)
     {
         //set all pets off 
@@ -668,32 +672,26 @@ public class UIController : MonoBehaviour
         if (name == "Lion" && lion_ != null)
         {
             lion_.SetActive(true);
-           // currPet_ = lion_;
         }
         else if (name == "Elephant" && elephant_ != null)
         {
             elephant_.SetActive(true);
-           // currPet_ = elephant_;
         }
         else if (name == "Hippo" && hippo != null)
         {
             hippo.SetActive(true);
-           // currPet_ = hippo;
         }
         else if (name == "Bear" && bear_ != null)
         {
             bear_.SetActive(true);
-          //  currPet_ = bear_;
         }
         else if (name == "Alligator" && alligator_ != null)
         {
             alligator_.SetActive(true);
-           // currPet_ = alligator_;
         }
         else if (name == "Monkey" && monkey_ != null)
         {
             monkey_.SetActive(true);
-           // currPet_ = monkey_;
         }
         AssignPet(name);
         #endregion
@@ -704,38 +702,55 @@ public class UIController : MonoBehaviour
         if (name == "Lion")
         {
             gc_.CurrentPet = lion_.name;
-           // currPet_ = lion_;
-           // lion_ = currPet_;
         }
         else if (name == "Elephant")
         {
             gc_.CurrentPet = elephant_.name;
-            //currPet_ = elephant_;
-           // elephant_ = currPet_;
         }
         else if (name == "Hippo")
         {
             gc_.CurrentPet = hippo.name;
-          //  currPet_ = hippo;
-            //hippo = currPet_;
         }
         else if (name == "Bear")
         {
             gc_.CurrentPet = bear_.name;
-           // currPet_ = bear_;
-          // bear_ = currPet_;  
         }
         else if (name == "Alligator")
         {
             gc_.CurrentPet = alligator_.name;
-         //   currPet_ = alligator_;
-           // alligator_ = currPet_;
         }
         else if (name == "Monkey")
         {
             gc_.CurrentPet = monkey_.name;
-         //   currPet_ = monkey_;
-         //  monkey_ = currPet_;
+        }
+    }
+
+    //set the pet up once to their variables for easy access for switching the curr pet 
+    void SetPet(string name)
+    {
+        if (name == "Lion")
+        {
+            lion_ = currPet_;
+        }
+        else if (name == "Elephant")
+        {
+            elephant_ = currPet_; 
+        }
+        else if (name == "Hippo")
+        {
+            hippo = currPet_;
+        }
+        else if (name == "Bear")
+        {
+            bear_ = currPet_;
+        }
+        else if (name == "Alligator")
+        {
+            alligator_ = currPet_;
+        }
+        else if (name == "Monkey")
+        {
+            monkey_ = currPet_;
         }
     }
 
@@ -765,4 +780,5 @@ public class UIController : MonoBehaviour
         m_FearPanel.SetActive(false);
         m_NicknamePanel.SetActive(false);
     }
+    #endregion 
 }
