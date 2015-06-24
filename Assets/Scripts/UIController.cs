@@ -119,6 +119,7 @@ public class UIController : MonoBehaviour
         setFearString_ = true;
         m_SpeechBubble.SetActive(false);
         LoadPets();
+        //Loaditems();
 	}
 	
 	void Update ()
@@ -632,6 +633,23 @@ public class UIController : MonoBehaviour
     {
         int randNum = Random.Range(0, numSounds + 1);
         AudioSource.PlayClipAtPoint(clips[randNum], transform.position);
+    }
+
+    /// <param name="Load Player Items">
+    /// Unlock the items the player has bought
+    /// </param>
+    public void Loaditems()
+    {
+        for(int i = 0; i < m_PlayerItems.Count; ++i)
+        {
+            for(int j = 0; j < gc_.m_Items.Count; ++j)
+            {
+                if(m_PlayerItems[i].name == gc_.m_Items[j].name)
+                {
+                    UnlockItem(m_PlayerItems[i]);
+                }
+            }
+        }
     }
 
     #region Upgrades
