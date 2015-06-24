@@ -6,6 +6,7 @@ using Soomla.Store;
 
 public class UIController : MonoBehaviour
 {
+    public List<GameObject> m_PlayerItems;
     public GameObject[] m_AnimalButtons;
     public GameObject m_ChangePetPanel;
     public GameObject m_GameUI;
@@ -652,7 +653,8 @@ public class UIController : MonoBehaviour
                     }
                     go.GetComponent<Button>().interactable = false;
                     go.GetComponentInChildren<Text>().text = "";
-                   
+
+                    m_PlayerItems.Add(go);
                 }
             }
         }

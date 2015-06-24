@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
     public List<GameObject> m_AnimalButtons;
     public List<Item> m_Items = new List<Item>(); //List of available items to purchase
 
+    private UIController ui_;
     private string currPetName_; //Name of the current pet, used to find the right pet in the list
     private float saveTimer_; //Timer between autosaves
     private float maxSaveTime_; //Max time between autosaves
@@ -36,6 +37,7 @@ public class GameController : MonoBehaviour
 	void Awake ()
     {
         Load();
+        ui_ = Camera.main.GetComponent<UIController>();
 	}
 	
 	void Update ()
@@ -114,6 +116,9 @@ public class GameController : MonoBehaviour
             sData.m_CloseDate = DateTime.Now;
             sData.m_CurrPet = pet_.name;
             sData.m_CurrPetNickname = pet.m_Nickname;
+            sData.m_TimesCleaned = ui_.TimesWashed;
+            sData.m_TimesPlayed = ui_.TimesPlayed;
+            sData.m_TimesFed = ui_.TimesFed;
 
             bf.Serialize(file, sData);
             file.Close();
@@ -146,6 +151,9 @@ public class GameController : MonoBehaviour
             sData.m_CloseDate = DateTime.Now;
             sData.m_CurrPet = pet_.name;
             sData.m_CurrPetNickname = pet.m_Nickname;
+            sData.m_TimesCleaned = ui_.TimesWashed;
+            sData.m_TimesPlayed = ui_.TimesPlayed;
+            sData.m_TimesFed = ui_.TimesFed;
 
             bf.Serialize(file, sData);
             file.Close();
@@ -243,6 +251,9 @@ class SaveData
     /// <summary>List of the pets the player owns</summary>
     public List<PetData> m_Pets = new List<PetData>();
 
+    /// <summary>List of the items the player owns</summary>
+    public List<GameObject> m_PlayerItems = new List<GameObject>();
+
     /// <summary>Player's currently active pet</summary>
     public string m_CurrPet; //Player's currently active pet
 
@@ -257,6 +268,15 @@ class SaveData
 
     /// <summary>Date the player stopped playing </summary>
     public DateTime m_CloseDate; //Date the player stopped playing
+
+    /// <summary>Amount of times the player has fed their pet</summary>
+    public int m_TimesFed;
+
+    /// <summary>Amount of times the player has played with their pet</summary>
+    public int m_TimesPlayed;
+
+    /// <summary>Amount of times the player has washed their pet</summary>
+    public int m_TimesCleaned;
 }
 
 [Serializable]
