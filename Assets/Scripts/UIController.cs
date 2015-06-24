@@ -50,20 +50,20 @@ public class UIController : MonoBehaviour
     public AudioClip m_ClickClip;
     public AudioClip m_ExerciseClip;
 
-    public List<GameObject> pets_; //all the pets the player has
-    public GameObject currPet_;
+    private List<GameObject> pets_; //all the pets the player has
+    private GameObject currPet_;
     private GameObject checkMark_;
     private Pet petData_;
     private GameController gc_; //Game Controller script for easier access
     private AudioSource audio_;
     private PlayerData playerData_;
 
-    public GameObject lion_;
-    public GameObject hippo;
-    public GameObject elephant_;
-    public GameObject bear_;
-    public GameObject alligator_;
-    public GameObject monkey_;
+    private GameObject lion_;
+    private GameObject hippo;
+    private GameObject elephant_;
+    private GameObject bear_;
+    private GameObject alligator_;
+    private GameObject monkey_;
 
     private string bttnName_;
     private int clickCounter_ = 0;
