@@ -6,6 +6,7 @@ using Soomla.Store;
 
 public class UIController : MonoBehaviour
 {
+    public GameObject[] m_AnimalButtons;
     public GameObject m_ChangePetPanel;
     public GameObject m_GameUI;
     public GameObject m_SpeechBubble;
@@ -659,6 +660,20 @@ public class UIController : MonoBehaviour
     #endregion
 
     #region Multiple Pets
+    void DisablePetButton()
+    {
+        for (int i = 0; i < m_AnimalButtons.Length; ++i)
+        {
+            for (int j = 0; j < pets_.Count; ++j)
+            {
+                if (m_AnimalButtons[i].name == pets_[j].name)
+                {
+                    m_AnimalButtons[i].SetActive(false);
+                }
+            }
+        }
+    }
+
     public void ChangePet(string name)
     {
         //set all pets off 
@@ -772,26 +787,32 @@ public class UIController : MonoBehaviour
         if (go.name == "Lion")
         {    
             lion_ = go;
+            pets_.Add(lion_);
         }
         else if (go.name == "Elephant")
         {   
             elephant_ = go;
+            pets_.Add(elephant_);
         }
         else if (go.name == "Hippo")
         {  
             hippo = go;
+            pets_.Add(hippo);
         }
         else if (go.name == "Bear")
         {  
             bear_ = go;
+            pets_.Add(bear_);
         }
         else if (go.name == "Alligator")
         {    
             alligator_ = go;
+            pets_.Add(alligator_);
         }
         else if (go.name == "Monkey")
         {
             monkey_ = go;
+            pets_.Add(monkey_);
         }
     }
 
@@ -820,6 +841,7 @@ public class UIController : MonoBehaviour
         checkMark_.SetActive(false);
         m_FearPanel.SetActive(false);
         m_NicknamePanel.SetActive(false);
+        DisablePetButton();
     }
     #endregion 
 }
