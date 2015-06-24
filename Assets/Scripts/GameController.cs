@@ -174,12 +174,12 @@ public class GameController : MonoBehaviour
 
                             Pet pData = pet_.GetComponent<Pet>();
                             pData.name = m_PetChoices[i].name;
-                            pData.m_FearOne = sData.m_CurrPetFearOne;
-                            pData.m_FearTwo = sData.m_CurrPetFearTwo;
-                            pData.m_Hunger = sData.m_CurrPetHunger;
-                            pData.m_Cleanliness = sData.m_CurrPetCleanliness;
-                            pData.m_Bored = sData.m_CurrPetBored;
-                            pData.m_Nickname = sData.m_CurrPetNickname;
+                            pData.m_FearOne = sData.m_Pets[j].m_FearOne;
+                            pData.m_FearTwo = sData.m_Pets[j].m_FearTwo;
+                            pData.m_Hunger = sData.m_Pets[j].m_Hunger;
+                            pData.m_Cleanliness = sData.m_Pets[j].m_Cleanliness;
+                            pData.m_Bored = sData.m_Pets[j].m_Boredom;
+                            pData.m_Nickname = sData.m_Pets[j].m_Nickname;
 
                             m_PlayerData.m_Pets.Add(pet_);
                         }
@@ -218,9 +218,6 @@ public class GameController : MonoBehaviour
                 m_PlayerData.m_Energy = Constants.DEFAULT_MAX_ENERGY;
             }
 
-            //Pet load data
-            
-
             if (minutesElapsed >= 1)
             {
                 pet_.GetComponent<Pet>().AddStats((int)minutesElapsed);
@@ -243,30 +240,46 @@ public class GameController : MonoBehaviour
 [Serializable]
 class SaveData
 {
-    //Player's save data
-    public List<PetData> m_Pets = new List<PetData>(); //List of pets the player owns
-    public string m_CurrPet; //Player's currently active pet
-    public string m_CurrPetNickname; //Player's currently active pet's nickname
-    public int m_Shields; //Player's current shields
-    public int m_Energy; //Player's points at the time of the save
-    public DateTime m_CloseDate; //Date the player stopped playing
+    /// <summary>List of the pets the player owns</summary>
+    public List<PetData> m_Pets = new List<PetData>();
 
-    //Save data for currPet
-    public string m_CurrPetFearOne;
-    public string m_CurrPetFearTwo;
-    public int m_CurrPetHunger;
-    public int m_CurrPetCleanliness;
-    public int m_CurrPetBored;
+    /// <summary>Player's currently active pet</summary>
+    public string m_CurrPet; //Player's currently active pet
+
+    /// <summary>Player's currently active pet's nickname</summary>
+    public string m_CurrPetNickname;
+
+    /// <summary>Player's current shields</summary>
+    public int m_Shields;
+
+    /// <summary>Player's energy at the time of the save</summary>
+    public int m_Energy;
+
+    /// <summary>Date the player stopped playing </summary>
+    public DateTime m_CloseDate; //Date the player stopped playing
 }
 
 [Serializable]
 class PetData
 {
+    /// <summary>Pet's name</summary>
     public string m_PetName;
+
+    /// <summary>Pet's nickname</summary>
     public string m_Nickname;
+
+    /// <summary>Pet's first fear</summary>
     public string m_FearOne;
+
+    /// <summary>Pet's second fear</summary>
     public string m_FearTwo;
+
+    /// <summary>Pet's hunger value</summary>
     public int m_Hunger;
+
+    /// <summary>Pet's cleanliness value</summary>
     public int m_Cleanliness;
+
+    /// <summary>Pet's boredom value</summary>
     public int m_Boredom;
 }
