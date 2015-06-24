@@ -110,8 +110,8 @@ public class Pet : MonoBehaviour
         }
     }
 
-    //This function is only called from places where stats need to be added off of the timer, such as when the game loads again after being closed
-    //numStats is the number of times a stat needs to be added - to clarify, NOT the amount of stats to be added(30) but the amount of times a stat is to be added(3)
+    /// <summary>Adds to the pet's current stat values</summary>
+    /// <param name="numStats">Number of times to add to the pet's current stat values</param>
     public void AddStats(int numStats)
     {
         int counter = 1;
