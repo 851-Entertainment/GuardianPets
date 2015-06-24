@@ -119,6 +119,7 @@ public class GameController : MonoBehaviour
             sData.m_TimesCleaned = ui_.TimesWashed;
             sData.m_TimesPlayed = ui_.TimesPlayed;
             sData.m_TimesFed = ui_.TimesFed;
+            sData.m_PlayerItems = ui_.m_PlayerItems;
 
             bf.Serialize(file, sData);
             file.Close();
@@ -154,6 +155,7 @@ public class GameController : MonoBehaviour
             sData.m_TimesCleaned = ui_.TimesWashed;
             sData.m_TimesPlayed = ui_.TimesPlayed;
             sData.m_TimesFed = ui_.TimesFed;
+            sData.m_PlayerItems = ui_.m_PlayerItems;
 
             bf.Serialize(file, sData);
             file.Close();
@@ -206,6 +208,10 @@ public class GameController : MonoBehaviour
                     }
                 }
             }
+            ui_.TimesFed = sData.m_TimesFed;
+            ui_.TimesPlayed = sData.m_TimesPlayed;
+            ui_.TimesWashed = sData.m_TimesPlayed;
+            ui_.m_PlayerItems = sData.m_PlayerItems;
             m_PlayerData.m_Shields = sData.m_Shields;
             DateTime now = DateTime.Now;
             TimeSpan ts = now - Convert.ToDateTime(sData.m_CloseDate);
