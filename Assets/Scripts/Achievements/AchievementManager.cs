@@ -152,6 +152,10 @@ public class AchievementManager : MonoBehaviour
         {
             m_AchievementMenu.SetActive(!m_AchievementMenu.activeSelf);
         }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            PlayerPrefs.DeleteAll();
+        }
 
         #region Check Times Played
         if (m_UIController.TimesPlayed == 25)
@@ -268,9 +272,6 @@ public class AchievementManager : MonoBehaviour
         //Checks if its the first time we try to unlock the achievement
         if (m_Achievements[title].EarnAchievement())
         {
-            //Give player shields equal to the number of points the achievement is worth
-            GuardianPetsAssets.SHIELD_CURRENCY.Give(m_Achievements[title].Points);
-
             //Instantiates the visual achievement on the screen, so that the user can see what he/she just earned
             GameObject achievement = (GameObject)Instantiate(m_VisualAchievement);
 
@@ -282,6 +283,9 @@ public class AchievementManager : MonoBehaviour
             
             //Makes the achievement fad in and out of the screen
             StartCoroutine(FadeAchievement(achievement));
+
+            //Give player shields equal to the number of points the achievement is worth
+            GuardianPetsAssets.SHIELD_CURRENCY.Give(m_Achievements[title].Points);
         }
     }
 
