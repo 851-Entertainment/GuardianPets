@@ -23,6 +23,11 @@ public class GameController : MonoBehaviour
         set { currPetName_ = value; }
     }
 
+    public void SetPet(GameObject value)
+    {
+        pet_ = value;
+    }
+
     public GameObject ActivePet
     {
         get { return pet_; }

@@ -48,20 +48,20 @@ public class UIController : MonoBehaviour
     public AudioClip m_ClickClip;
     public AudioClip m_ExerciseClip;
 
-    private List<GameObject> pets_; //all the pets the player has
-    private GameObject currPet_;
+    public List<GameObject> pets_; //all the pets the player has
+    public GameObject currPet_;
     private GameObject checkMark_;
     private Pet petData_;
     private GameController gc_; //Game Controller script for easier access
     private AudioSource audio_;
     private PlayerData playerData_;
 
-    private GameObject lion_;
-    private GameObject hippo;
-    private GameObject elephant_;
-    private GameObject bear_;
-    private GameObject alligator_;
-    private GameObject monkey_;
+    public GameObject lion_;
+    public GameObject hippo;
+    public GameObject elephant_;
+    public GameObject bear_;
+    public GameObject alligator_;
+    public GameObject monkey_;
 
     private string bttnName_;
     private int clickCounter_ = 0;
@@ -707,7 +707,7 @@ public class UIController : MonoBehaviour
             {
                 lion_ = currPet_;
             }
-            gc_.CurrentPet = lion_.name;
+            gc_.SetPet(lion_);
         }
         else if (name == "Elephant")
         {
@@ -715,7 +715,7 @@ public class UIController : MonoBehaviour
             {
                 elephant_ = currPet_; 
             }
-            gc_.CurrentPet = elephant_.name;
+            gc_.SetPet(elephant_);
         }
         else if (name == "Hippo")
         {    
@@ -723,7 +723,7 @@ public class UIController : MonoBehaviour
             {
                 hippo = currPet_;
             }
-            gc_.CurrentPet = hippo.name;
+            gc_.SetPet(hippo);
         }
         else if (name == "Bear")
         {  
@@ -731,7 +731,7 @@ public class UIController : MonoBehaviour
             {
                 bear_ = currPet_;
             }
-            gc_.CurrentPet = bear_.name;
+            gc_.SetPet(bear_);
         }
         else if (name == "Alligator")
         {        
@@ -739,7 +739,7 @@ public class UIController : MonoBehaviour
             {
                 alligator_ = currPet_;
             }
-            gc_.CurrentPet = alligator_.name;
+            gc_.SetPet(alligator_);
         }
         else if (name == "Monkey")
         {  
@@ -747,7 +747,7 @@ public class UIController : MonoBehaviour
             {
                 monkey_ = currPet_;
             }
-            gc_.CurrentPet = monkey_.name;
+            gc_.SetPet(monkey_);
         }
     }
 
