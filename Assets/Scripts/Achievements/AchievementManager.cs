@@ -6,68 +6,44 @@ using Soomla.Store;
 
 public class AchievementManager : MonoBehaviour 
 {
-    /// <summary>
-    /// A prefab used for creating a new achievement
-    /// </summary>
+    /// <summary>A prefab used for creating a new achievement</summary>
     public GameObject m_AchievementPrefab;
 
 
     /// <summary>The UI controller script</summary>
     public UIController m_UIController;
 
-    /// <summary>
-    /// An array containing the icons used for the achievements
-    /// </summary>
+    /// <summary> An array containing the icons used for the achievements</summary>
     public Sprite[] m_Sprites;
 
-    /// <summary>
-    /// A reference to the active button(category)
-    /// </summary>
+    /// <summary>A reference to the active button(category)</summary>
     private AchievementButton activeButton_;
 
-    /// <summary>
-    /// A reference to the scrollrect that controls the achievements in the menu
-    /// </summary>
+    /// <summary>A reference to the scrollrect that controls the achievements in the menu</summary>
     public ScrollRect m_ScrollRect;
 
-    /// <summary>
-    /// A reference to the achievement menu, this is used for hiding and showing the menu
-    /// </summary>
+    /// <summary>A reference to the achievement menu, this is used for hiding and showing the menu</summary>
     public GameObject m_AchievementMenu;
 
-    /// <summary>
-    /// This is a prefab for the achievement that we are showing when an achievement has been earned
-    /// </summary>
+    /// <summary>This is a prefab for the achievement that we are showing when an achievement has been earned</summary>
     public GameObject m_VisualAchievement;
 
-    /// <summary>
-    /// This dictionary contains all achievements
-    /// </summary>
+    /// <summary>This dictionary contains all achievements</summary>
     public Dictionary<string, Achievement> m_Achievements = new Dictionary<string, Achievement>();
 
-    /// <summary>
-    /// This sprite is used for indicating if an achievement is unlocked
-    /// </summary>
+    /// <summary>This sprite is used for indicating if an achievement is unlocked</summary>
     public Sprite m_UnlockedSprite;
 
-    /// <summary>
-    /// A reference to the text that shows the points inside the menu
-    /// </summary>
+    /// <summary>A reference to the text that shows the points inside the menu</summary>
     public Text m_TextPoints;
 
-    /// <summary>
-    /// The time it takes for the inventory to fade in and out in seconds
-    /// </summary>
+    /// <summary>The time it takes for the inventory to fade in and out in seconds</summary>
     private int fadeTime_ = 2;
 
-    /// <summary>
-    /// An instance for the AchievementManager, this is used for the singleton pattern
-    /// </summary>
+    /// <summary>An instance for the AchievementManager, this is used for the singleton pattern</summary>
     private static AchievementManager instance_;
 
-    /// <summary>
-    /// A property for accesing the singleton
-    /// </summary>
+    /// <summary>A property for accesing the singleton</summary>
     public static AchievementManager Instance
     {
         get 
@@ -263,9 +239,7 @@ public class AchievementManager : MonoBehaviour
         #endregion
     }
 
-    /// <summary>
-    /// Attempts to earn an achievement
-    /// </summary>
+    /// <summary>Attempts to earn an achievement</summary>
     /// <param name="title">The name of the achievement</param>
     public void EarnAchievement(string title)
     {   
@@ -289,9 +263,7 @@ public class AchievementManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Creates an achievement
-    /// </summary>
+    /// <summary>Creates an achievement</summary>
     /// <param name="parent">The achievement's parent</param>
     /// <param name="title">The title of the achievement</param>
     /// <param name="description">The achievement's description</param>
@@ -323,9 +295,7 @@ public class AchievementManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Filles the onscreen achievement with information
-    /// </summary>
+    /// <summary>Fills the onscreen achievement with information</summary>
     /// <param name="parent">The achievement's parent</param>
     /// <param name="achievement">The achievement to set the information for</param>
     /// <param name="title">The achievement's title</param>
@@ -344,9 +314,7 @@ public class AchievementManager : MonoBehaviour
         achievement.transform.GetChild(3).GetComponent<Image>().sprite = m_Sprites[m_Achievements[title].SpriteIndex];
     }
 
-    /// <summary>
-    /// Changes the category
-    /// </summary>
+    /// <summary>Changes the category</summary>
     /// <param name="button">The button we just clicked</param>
     public void ChangeCategory(GameObject button)
     {
@@ -366,9 +334,7 @@ public class AchievementManager : MonoBehaviour
         activeButton_ = achievementButton;
     }
 
-    /// <summary>
-    /// Fades the achievement in and out
-    /// </summary>
+    /// <summary>Fades the achievement in and out</summary>
     /// <param name="achievement">The achievement to fade</param>
     /// <returns></returns>
     private IEnumerator FadeAchievement(GameObject achievement)
@@ -376,7 +342,7 @@ public class AchievementManager : MonoBehaviour
         //Creates a reference to the CanvasGroup Script
         CanvasGroup canvasGroup = achievement.GetComponent<CanvasGroup>();
 
-        //Calculats the fade rate
+        //Calculates the fade rate
         float rate = 1.0f / fadeTime_;
 
         //Sets the starting value
@@ -402,10 +368,7 @@ public class AchievementManager : MonoBehaviour
             endAlpha = 0;
         }
 
-        //Destroyes the visual object
+        //Destroys the visual object
         Destroy(achievement);
-
-
     }
-
 }

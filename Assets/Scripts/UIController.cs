@@ -87,9 +87,9 @@ public class UIController : MonoBehaviour
     private int timesPlayed_;
     private int timesFed_;
     private int timesWashed_;
-    public int TimesPlayed { get { return timesPlayed_; } }
-    public int TimesFed { get { return timesFed_; } }
-    public int TimesWashed { get { return timesWashed_; } }
+    public int TimesPlayed { get { return timesPlayed_; } set { timesPlayed_ = value; } }
+    public int TimesFed { get { return timesFed_; } set { timesFed_ = value; } }
+    public int TimesWashed { get { return timesWashed_; } set { timesWashed_ = value; } }
 
 	void Start () 
     {

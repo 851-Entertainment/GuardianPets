@@ -5,16 +5,31 @@ using System.Collections.Generic;
 
 public class Achievement
 {
-    private string name_; //Name of the achievement
-    private string description_; //Description of the achievement
-    private bool unlocked_; //Flag indicating whether the achievement is unlocked
-    private int points_; //Amount of shields the achievement is worth
-    private int spriteIndex_; //Index of the icon in the sprite array
-    private GameObject achievementRef_; //Reference to the achievement object
-    private List<Achievement> dependencies_ = new List<Achievement>(); //List of achievements this achievement is dependent on
-    private string child; //Achievement that is dependent on this achievement
+    /// <summary>Name of the achievement</summary>
+    private string name_;
 
-    #region properties
+    /// <summary>Description of the achievement</summary>
+    private string description_;
+
+    /// <summary>Flag indicating whether the achievement is unlocked</summary>
+    private bool unlocked_;
+
+    /// <summary>Amount of shields the achievement is worth</summary>
+    private int points_;
+
+    /// <summary>Index of the icon in the sprite array</summary>
+    private int spriteIndex_;
+
+    /// <summary>Reference to the achievement object</summary>
+    private GameObject achievementRef_;
+
+    /// <summary>List of achievements this achievement is dependent on</summary>
+    private List<Achievement> dependencies_ = new List<Achievement>();
+
+    /// <summary>Achievement that is dependent on this achievement</summary>
+    private string child;
+
+    #region Properties
 
     public string Name
     {
@@ -63,21 +78,16 @@ public class Achievement
         
         //Loads the achievement so that we have the correct information
         Loadachievement();
-        
     }
 
-    /// <summary>
-    /// Adds a dependency to the achievement
-    /// </summary>
+    /// <summary>Adds a dependency to the achievement</summary>
     /// <param name="dependency"></param>
     public void AddDependency(Achievement dependency)
     {
         dependencies_.Add(dependency);
     }
 
-    /// <summary>
-    /// Earns the achievements
-    /// </summary>
+    /// <summary>Earns the achievements</summary>
     /// <returns>True if the achievement was earned</returns>
     public bool EarnAchievement()
     {   
@@ -100,9 +110,7 @@ public class Achievement
         return false;
     }
 
-    /// <summary>
-    /// Saves the achievement
-    /// </summary>
+    /// <summary>Saves the achievement</summary>
     /// <param name="value">If the achievement is earned</param>
     public void SaveAchievement(bool value)
     {
@@ -121,9 +129,7 @@ public class Achievement
         PlayerPrefs.Save();
     }
 
-    /// <summary>
-    /// Loads the achievement
-    /// </summary>
+    /// <summary>Loads the achievement</summary>
     public void Loadachievement()
     {
         //Loads the status
@@ -133,7 +139,6 @@ public class Achievement
         {
             AchievementManager.Instance.m_TextPoints.text = "Points: " + PlayerPrefs.GetInt("Points");
             achievementRef_.GetComponent<Image>().sprite = AchievementManager.Instance.m_UnlockedSprite;
-
         }
     }
 }
