@@ -276,7 +276,7 @@ public class UIController : MonoBehaviour
             SetFearTitle();
             AudioSource.PlayClipAtPoint(m_ClickClip, transform.position);
             pets_.Add(currPet_);
-            SetPet(currPet_.name);
+            AssignPet(currPet_.name);
             AssignPet(currPet_.name);
         }
     }
@@ -537,7 +537,7 @@ public class UIController : MonoBehaviour
         }
         SetFearTitle();
         pets_.Add(currPet_);
-        SetPet(currPet_.name);
+        AssignPet(currPet_.name);
         AssignPet(currPet_.name);
         AudioSource.PlayClipAtPoint(m_ClickClip, transform.position);
        
@@ -668,6 +668,7 @@ public class UIController : MonoBehaviour
                 pets_[i].SetActive(false);
             }
         }
+        //turn on the proper one based on the name passed in
         #region Activate Pet
         if (name == "Lion" && lion_ != null)
         {
@@ -699,58 +700,54 @@ public class UIController : MonoBehaviour
 
     void AssignPet(string name)
     {
+        //check the name passed in, check if the animal game object is empty, if yes assign it, then always set the current pet to the one passed into the function
         if (name == "Lion")
-        {
+        {      
+            if(lion_ == null)
+            {
+                lion_ = currPet_;
+            }
             gc_.CurrentPet = lion_.name;
         }
         else if (name == "Elephant")
         {
+            if (elephant_ == null)
+            {
+                elephant_ = currPet_; 
+            }
             gc_.CurrentPet = elephant_.name;
         }
         else if (name == "Hippo")
-        {
+        {    
+            if (hippo == null)
+            {
+                hippo = currPet_;
+            }
             gc_.CurrentPet = hippo.name;
         }
         else if (name == "Bear")
-        {
+        {  
+            if (bear_ == null)
+            {
+                bear_ = currPet_;
+            }
             gc_.CurrentPet = bear_.name;
         }
         else if (name == "Alligator")
-        {
+        {        
+            if (alligator_ == null)
+            {
+                alligator_ = currPet_;
+            }
             gc_.CurrentPet = alligator_.name;
         }
         else if (name == "Monkey")
-        {
+        {  
+            if (monkey_ == null)
+            {
+                monkey_ = currPet_;
+            }
             gc_.CurrentPet = monkey_.name;
-        }
-    }
-
-    //set the pet up once to their variables for easy access for switching the curr pet 
-    void SetPet(string name)
-    {
-        if (name == "Lion")
-        {
-            lion_ = currPet_;
-        }
-        else if (name == "Elephant")
-        {
-            elephant_ = currPet_; 
-        }
-        else if (name == "Hippo")
-        {
-            hippo = currPet_;
-        }
-        else if (name == "Bear")
-        {
-            bear_ = currPet_;
-        }
-        else if (name == "Alligator")
-        {
-            alligator_ = currPet_;
-        }
-        else if (name == "Monkey")
-        {
-            monkey_ = currPet_;
         }
     }
 
