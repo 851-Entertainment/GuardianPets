@@ -75,7 +75,12 @@ public class GameController : MonoBehaviour
         {
             pet_.GetComponent<Pet>().m_IsDancing = true;
         }
-           
+    }
+
+    void OnApplicationQuit()
+    {
+        PlayerPrefs.Save();
+        Save();
     }
 
     //When this Save function is called, all other save functions get called. No where else should save.
