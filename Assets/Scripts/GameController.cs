@@ -92,25 +92,28 @@ public class GameController : MonoBehaviour
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Create(Application.persistentDataPath + Path.DirectorySeparatorChar + "gpSaveData.dat");
             SaveData sData = new SaveData();
+            PetData pData = new PetData();
             Pet pet = pet_.GetComponent<Pet>();
 
             //Player save data
             for (int i = 0; i < m_PlayerData.m_Pets.Count; ++i)
             {
-                sData.m_Pets.Add(m_PlayerData.m_Pets[i].GetComponent<Pet>().m_PetName);
+                pData.m_PetName = m_PlayerData.m_Pets[i].GetComponent<Pet>().m_PetName;
+                pData.m_Nickname = m_PlayerData.m_Pets[i].GetComponent<Pet>().m_Nickname;
+                pData.m_FearOne = m_PlayerData.m_Pets[i].GetComponent<Pet>().m_FearOne;
+                pData.m_FearTwo = m_PlayerData.m_Pets[i].GetComponent<Pet>().m_FearTwo;
+                pData.m_Hunger = m_PlayerData.m_Pets[i].GetComponent<Pet>().m_Hunger;
+                pData.m_Cleanliness = m_PlayerData.m_Pets[i].GetComponent<Pet>().m_Cleanliness;
+                pData.m_Boredom = m_PlayerData.m_Pets[i].GetComponent<Pet>().m_Bored;
+
+                sData.m_Pets.Add(pData);
             }
+
             sData.m_Energy = m_PlayerData.m_Energy;
             sData.m_Shields = m_PlayerData.m_Shields;
             sData.m_CloseDate = DateTime.Now;
             sData.m_CurrPet = pet_.name;
             sData.m_CurrPetNickname = pet.m_Nickname;
-
-            //Pet save data
-            sData.m_CurrPetFearOne = pet.m_FearOne;
-            sData.m_CurrPetFearTwo = pet.m_FearTwo;
-            sData.m_CurrPetBored = pet.m_Bored;
-            sData.m_CurrPetCleanliness = pet.m_Cleanliness;
-            sData.m_CurrPetHunger = pet.m_Hunger;
 
             bf.Serialize(file, sData);
             file.Close();
@@ -121,25 +124,28 @@ public class GameController : MonoBehaviour
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + Path.DirectorySeparatorChar + "gpSaveData.dat", FileMode.Open);
             SaveData sData = new SaveData();
+            PetData pData = new PetData();
             Pet pet = pet_.GetComponent<Pet>();
 
             //Player save data
             for (int i = 0; i < m_PlayerData.m_Pets.Count; ++i)
             {
-                sData.m_Pets.Add(m_PlayerData.m_Pets[i].GetComponent<Pet>().m_PetName);
+                pData.m_PetName = m_PlayerData.m_Pets[i].GetComponent<Pet>().m_PetName;
+                pData.m_Nickname = m_PlayerData.m_Pets[i].GetComponent<Pet>().m_Nickname;
+                pData.m_FearOne = m_PlayerData.m_Pets[i].GetComponent<Pet>().m_FearOne;
+                pData.m_FearTwo = m_PlayerData.m_Pets[i].GetComponent<Pet>().m_FearTwo;
+                pData.m_Hunger = m_PlayerData.m_Pets[i].GetComponent<Pet>().m_Hunger;
+                pData.m_Cleanliness = m_PlayerData.m_Pets[i].GetComponent<Pet>().m_Cleanliness;
+                pData.m_Boredom = m_PlayerData.m_Pets[i].GetComponent<Pet>().m_Bored;
+
+                sData.m_Pets.Add(pData);
             }
+
             sData.m_Energy = m_PlayerData.m_Energy;
             sData.m_Shields = m_PlayerData.m_Shields;
             sData.m_CloseDate = DateTime.Now;
             sData.m_CurrPet = pet_.name;
             sData.m_CurrPetNickname = pet.m_Nickname;
-
-            //Pet save data
-            sData.m_CurrPetFearOne = pet.m_FearOne;
-            sData.m_CurrPetFearTwo = pet.m_FearTwo;
-            sData.m_CurrPetBored = pet.m_Bored;
-            sData.m_CurrPetCleanliness = pet.m_Cleanliness;
-            sData.m_CurrPetHunger = pet.m_Hunger;
 
             bf.Serialize(file, sData);
             file.Close();
@@ -160,16 +166,33 @@ public class GameController : MonoBehaviour
             {
                 for (int j = 0; j < sData.m_Pets.Count; ++j)
                 {
-                    if(sData.m_Pets[j] == m_PetChoices[i].name)
+                    if (sData.m_Pets[j].m_PetName == m_PetChoices[i].name)
                     {
                         if(m_PetChoices[i].name == sData.m_CurrPet)
                         {
                             pet_ = (GameObject)Instantiate(m_PetChoices[i]);
-                            pet_.name = m_PetChoices[i].name;
+
+                            Pet pData = pet_.GetComponent<Pet>();
+                            pData.name = m_PetChoices[i].name;
+                            pData.m_FearOne = sData.m_CurrPetFearOne;
+                            pData.m_FearTwo = sData.m_CurrPetFearTwo;
+                            pData.m_Hunger = sData.m_CurrPetHunger;
+                            pData.m_Cleanliness = sData.m_CurrPetCleanliness;
+                            pData.m_Bored = sData.m_CurrPetBored;
+                            pData.m_Nickname = sData.m_CurrPetNickname;
+
                             m_PlayerData.m_Pets.Add(pet_);
                         }
                         else
                         {
+                            Pet pData = m_PetChoices[i].GetComponent<Pet>();
+                            pData.m_Nickname = sData.m_Pets[j].m_Nickname;
+                            pData.m_FearOne = sData.m_Pets[j].m_FearOne;
+                            pData.m_FearTwo = sData.m_Pets[j].m_FearTwo;
+                            pData.m_Bored = sData.m_Pets[j].m_Boredom;
+                            pData.m_Cleanliness = sData.m_Pets[j].m_Cleanliness;
+                            pData.m_Hunger = sData.m_Pets[j].m_Hunger;
+
                             m_PlayerData.m_Pets.Add(m_PetChoices[i]);
                         }
                     }
@@ -196,12 +219,7 @@ public class GameController : MonoBehaviour
             }
 
             //Pet load data
-            pet_.GetComponent<Pet>().m_FearOne = sData.m_CurrPetFearOne;
-            pet_.GetComponent<Pet>().m_FearTwo = sData.m_CurrPetFearTwo;
-            pet_.GetComponent<Pet>().m_Hunger = sData.m_CurrPetHunger;
-            pet_.GetComponent<Pet>().m_Cleanliness = sData.m_CurrPetCleanliness;
-            pet_.GetComponent<Pet>().m_Bored = sData.m_CurrPetBored;
-            pet_.GetComponent<Pet>().m_Nickname = sData.m_CurrPetNickname;
+            
 
             if (minutesElapsed >= 1)
             {
@@ -226,7 +244,7 @@ public class GameController : MonoBehaviour
 class SaveData
 {
     //Player's save data
-    public List<string> m_Pets = new List<string>(); //List of pets the player owns
+    public List<PetData> m_Pets = new List<PetData>(); //List of pets the player owns
     public string m_CurrPet; //Player's currently active pet
     public string m_CurrPetNickname; //Player's currently active pet's nickname
     public int m_Shields; //Player's current shields
@@ -239,4 +257,16 @@ class SaveData
     public int m_CurrPetHunger;
     public int m_CurrPetCleanliness;
     public int m_CurrPetBored;
+}
+
+[Serializable]
+class PetData
+{
+    public string m_PetName;
+    public string m_Nickname;
+    public string m_FearOne;
+    public string m_FearTwo;
+    public int m_Hunger;
+    public int m_Cleanliness;
+    public int m_Boredom;
 }
