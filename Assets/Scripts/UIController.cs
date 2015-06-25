@@ -631,7 +631,6 @@ public class UIController : MonoBehaviour
         SetFearTitle();
         pets_.Add(currPet_);
         AssignPet(currPet_.name);
-        AssignPet(currPet_.name);
         AudioSource.PlayClipAtPoint(m_ClickClip, transform.position);
        
     }
