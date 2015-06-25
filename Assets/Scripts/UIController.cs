@@ -736,7 +736,7 @@ public class UIController : MonoBehaviour
             {
                 if(m_PlayerItems[i] == gc_.m_Items[j].name)
                 {
-                    //UnlockItem(m_PlayerItems[i]);
+                    UnlockItemByName(gc_.m_Items[j].name);
                 }
             }
         }
@@ -762,6 +762,28 @@ public class UIController : MonoBehaviour
                     m_PlayerItems.Add(gc_.m_Items[i].name);  
                     go.GetComponent<Button>().interactable = false;
                     go.GetComponentInChildren<Text>().text = "";    
+                }
+            }
+        }
+    }
+
+    /// <param name="Unlock Item By Name">
+    /// This function is used when the player loads a save to give the player their items
+    /// </param>
+    public void UnlockItemByName(string go)
+    {
+        for (int i = 0; i < gc_.m_Items.Count; ++i)
+        {
+            if (gc_.m_Items[i].m_ItemName == go)
+            {
+                if (GuardianPetsAssets.SHIELD_CURRENCY.GetBalance() >= gc_.m_Items[i].m_Cost)
+                {
+                    gc_.m_Items[i].gameObject.SetActive(true);
+                    if (gc_.m_Items[i].m_IsPlayerItem)
+                    {
+                        GameObject obj = GameObject.Find(gc_.m_Items[i].m_Names[gc_.m_Items[i].m_ItemSpot]);    //get the waypoint the item will be at
+                        gc_.m_Items[i].gameObject.transform.SetParent(obj.transform);
+                    }
                 }
             }
         }
