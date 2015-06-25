@@ -6,6 +6,7 @@ using Soomla.Store;
 
 public class UIController : MonoBehaviour
 {
+    #region Public Variables
     public List<GameObject> m_PlayerItems;
     public GameObject[] m_AnimalButtons;
     public GameObject m_ChangePetPanel;
@@ -14,49 +15,134 @@ public class UIController : MonoBehaviour
     public GameObject m_ButtonPage1;
     public GameObject m_ButtonPage2;
     public GameObject m_NewPlayerUI;
-    public GameObject m_NicknamePanel; //Panel for nickname prompt
-    public GameObject m_FearPanel; //Panel for the fear prompt
-    public GameObject m_CurrentPet; //UI Element for the current pet
-    public GameObject m_UpgradePanel; //Panel for the upgrades
-    public GameObject m_CameraPlane; //Plane which is drawing the camera on it
-    public GameObject m_RadarOverlay; //Image overlay which will have a radar with a rotating arm on it
-    public GameObject m_BackgroundPlane; //Plane which is drawing the background on it
-    public GameObject m_StorePanel; //Panel for the market
-    public GameObject m_GoodsButtonPrefab; //Button prefab for the items sold in the store
-    public GameObject m_ButtonParent; //Parent game object for the button prefab
-    public InputField m_NicknameIF; //Input field for the nickname prompt
-    public InputField m_FearIF; //Input field for the fear prompt
-    public PlayerData m_PlayerData; //Player data
-    public Sprite m_ShieldSprite; //Shield sprite for upgrades panel
 
-    public Text m_SpeechText;
-    public Text m_NicknameText; //Text element for the pet's nickname;
-    public Text m_TitleText; //Text element for the pet's current title
-    public Text m_EnergyText; //Player's current points - UI element
-    public Text m_ShieldsText; //Player's current shields = UI element
-    public Text m_EnergyTimerText; //Text element for the Points - UI element
-    public Slider m_EnergySlider; //Slider element for the Energy UI
-    public Slider m_LoveSlider;
-    public GameObject m_CloseScannerButton;
+    /// <summary>Panel for the nickname prompt</summary>
+    public GameObject m_NicknamePanel;
+
+    /// <summary>Panel for the fear prompt</summary>
+    public GameObject m_FearPanel;
+
+    /// <summary>UI Element for the current pet</summary>
+    public GameObject m_CurrentPet;
+
+    /// <summary>Plane which is drawing the background image on it</summary>
+    public GameObject m_BackgroundPlane;
+
+    /// <summary>Name of selected pet</summary>
     public string m_SelectedPet;
-    public float m_TransitionVolume = 0.3f;
+
+    /// <summary>Y offset for the check mark</summary>
     public float m_CheckMarkOffset = 150.0f;
 
+    /// <summary>The player's data</summary>
+    public PlayerData m_PlayerData;
+
+    /// <summary>Shield sprite for the upgrades panel</summary>
+    public Sprite m_ShieldSprite;
+
+    #region Scanner Variables
+    /// <summary>Plane which is drawing the camera on it</summary>
+    public GameObject m_CameraPlane;
+
+    /// <summary>Image overlay which will have the rader with a rotating arm on it</summary>
+    public GameObject m_RadarOverlay;
+
+    /// <summary>Button to close the radar scanner</summary>
+    public GameObject m_CloseScannerButton;
+    #endregion
+
+    #region Upgrades/Store Variables
+    /// <summary>Panel for the upgrades</summary>
+    public GameObject m_UpgradePanel;
+
+    /// <summary>Button prefab for the items sold in the store</summary>
+    public GameObject m_GoodsButtonPrefab;
+
+    /// <summary>Parent game object for the button prefab</summary>
+    public GameObject m_ButtonParent;
+    #endregion
+
+    #region Input Fields
+    /// <summary>Input field for the nickname prompt</summary>
+    public InputField m_NicknameIF;
+
+    /// <summary>Input field for the fear prompt</summary>
+    public InputField m_FearIF;
+    #endregion
+
+    #region Text Elements
+    /// <summary>Text element for the pet's speech</summary>
+    public Text m_SpeechText;
+
+    /// <summary>Text element for the pet's nickname</summary>
+    public Text m_NicknameText;
+
+    /// <summary>Text element for the pet's current title</summary>
+    public Text m_TitleText;
+
+    /// <summary>Text element for the player's current energy</summary>
+    public Text m_EnergyText;
+
+    /// <summary>Text element for the player's current shields</summary>
+    public Text m_ShieldsText;
+
+    /// <summary>Text element for the player's energy timer</summary>
+    public Text m_EnergyTimerText;
+    #endregion
+
+    #region Slider Elements
+    /// <summary>Slider element for the energy UI</summary>
+    public Slider m_EnergySlider;
+
+    /// <summary>Slider element for the love UI</summary>
+    public Slider m_LoveSlider;
+    #endregion
+
+    
+    #endregion
+
+    #region Audio Variables
+    /// <summary>Transition sound audio clip</summary>
     public AudioClip m_TransitionSound;
+
+    /// <summary>Upgrade sound audio clip</summary>
     public AudioClip m_UpgradeClip;
+
+    /// <summary>Array of feed sounds</summary>
     public AudioClip[] m_FeedClip;
+
+    /// <summary>Array of play sounds</summary>
     public AudioClip[] m_PlayClip;
+
+    /// <summary>Array of cleaning sounds</summary>
     public AudioClip[] m_CleanClip;
+
+    /// <summary>Click sound</summary>
     public AudioClip m_ClickClip;
+
+    /// <summary>Excercise sound</summary>
     public AudioClip m_ExerciseClip;
 
-    private List<GameObject> pets_; //all the pets the player has
+    /// <summary>Transition sound volume</summary>
+    public float m_TransitionVolume = 0.3f;
+    #endregion
+
+    #region Private Variables
+    /// <summary>List of pets the player owns</summary>
+    private List<GameObject> pets_;
+
+    /// <summary>Game object of player's current pet</summary>
     private GameObject currPet_;
+
+    /// <summary>Game object for the check mark in the New Player UI</summary>
     private GameObject checkMark_;
+
+    /// <summary>Pet Data script</summary>
     private Pet petData_;
-    private GameController gc_; //Game Controller script for easier access
+
+    /// <summary>Game Controller script</summary>
+    private GameController gc_;
     private AudioSource audio_;
-    private PlayerData playerData_;
 
     private GameObject lion_;
     private GameObject hippo;
@@ -88,18 +174,21 @@ public class UIController : MonoBehaviour
     private int timesPlayed_;
     private int timesFed_;
     private int timesWashed_;
+    #endregion
+
+    #region Attributes
     public int TimesPlayed { get { return timesPlayed_; } set { timesPlayed_ = value; } }
     public int TimesFed { get { return timesFed_; } set { timesFed_ = value; } }
     public int TimesWashed { get { return timesWashed_; } set { timesWashed_ = value; } }
+    #endregion
 
-	void Start () 
+    void Start () 
     {
         checkMark_ = GameObject.Find("Check");
         checkMark_.SetActive(false);
         audio_ = GetComponent<AudioSource>();
         gc_ = Camera.main.GetComponent<GameController>();
         isNewPlayer_ = gc_.m_FirstTimePlayer;
-        playerData_ = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerData>();
         if (isNewPlayer_)
         {
             m_GameUI.SetActive(false);

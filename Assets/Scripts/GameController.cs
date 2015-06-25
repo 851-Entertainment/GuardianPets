@@ -7,16 +7,34 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class GameController : MonoBehaviour
 {
-    public bool m_FirstTimePlayer = false; //Bool to determine whether or not we need to run the initial play segment
-    public List<GameObject> m_PetChoices = new List<GameObject>(); //List of possible pets -- this needs to stay here in case they decide to buy more pets
-    public PlayerData m_PlayerData; //The player data
-    public List<GameObject> m_AnimalButtons;
-    public List<Item> m_Items = new List<Item>(); //List of available items to purchase
+    /// <summary>Flag to determine whether or not we need to run the first play segment</summary>
+    public bool m_FirstTimePlayer = false;
 
+    /// <summary>List of possible pets - DO NOT ALTER THIS LIST</summary>
+    public List<GameObject> m_PetChoices = new List<GameObject>();
+
+    /// <summary>Player data</summary>
+    public PlayerData m_PlayerData;
+
+    /// <summary></summary>
+    public List<GameObject> m_AnimalButtons;
+
+    /// <summary>List of available items to purchase</summary>
+    public List<Item> m_Items = new List<Item>();
+
+    /// <summary>The UI controller script</summary>
     private UIController ui_;
-    private string currPetName_; //Name of the current pet, used to find the right pet in the list
-    private float saveTimer_; //Timer between autosaves
-    private float maxSaveTime_; //Max time between autosaves
+
+    /// <summary>Name of the current pet</summary>
+    private string currPetName_;
+
+    /// <summary>Timer between autosaves</summary>
+    private float saveTimer_;
+
+    /// <summary>Max time between autosaves</summary>
+    private float maxSaveTime_;
+
+    /// <summary>Pet game object</summary>
     private GameObject pet_;
 
     public string CurrentPet
