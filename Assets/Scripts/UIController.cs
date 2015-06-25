@@ -855,7 +855,7 @@ public class UIController : MonoBehaviour
             if(lion_ == null)
             {
                 lion_ = currPet_;
-                //gc_.m_PlayerData.m_Pets.Add(lion_);
+                gc_.m_PlayerData.m_Pets.Add(lion_);
             }
             gc_.SetPet(lion_);
         }
@@ -864,7 +864,7 @@ public class UIController : MonoBehaviour
             if (elephant_ == null)
             {
                 elephant_ = currPet_;
-               // gc_.m_PlayerData.m_Pets.Add(elephant_);
+                gc_.m_PlayerData.m_Pets.Add(elephant_);
             }
             gc_.SetPet(elephant_);
         }
@@ -873,7 +873,7 @@ public class UIController : MonoBehaviour
             if (hippo == null)
             {
                 hippo = currPet_;
-              //  gc_.m_PlayerData.m_Pets.Add(hippo);
+                gc_.m_PlayerData.m_Pets.Add(hippo);
             }
             gc_.SetPet(hippo);
         }
@@ -882,7 +882,7 @@ public class UIController : MonoBehaviour
             if (bear_ == null)
             {
                 bear_ = currPet_;
-              //  gc_.m_PlayerData.m_Pets.Add(bear_);
+                gc_.m_PlayerData.m_Pets.Add(bear_);
             }
             gc_.SetPet(bear_);
         }
@@ -891,7 +891,7 @@ public class UIController : MonoBehaviour
             if (alligator_ == null)
             {
                 alligator_ = currPet_;
-             //   gc_.m_PlayerData.m_Pets.Add(alligator_);
+                gc_.m_PlayerData.m_Pets.Add(alligator_);
             }
             gc_.SetPet(alligator_);
         }
@@ -900,7 +900,7 @@ public class UIController : MonoBehaviour
             if (monkey_ == null)
             {
                 monkey_ = currPet_;
-             //   gc_.m_PlayerData.m_Pets.Add(monkey_);
+                gc_.m_PlayerData.m_Pets.Add(monkey_);
             }
             gc_.SetPet(monkey_);
         }
