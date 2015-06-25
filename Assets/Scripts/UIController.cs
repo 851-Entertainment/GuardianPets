@@ -7,7 +7,7 @@ using Soomla.Store;
 public class UIController : MonoBehaviour
 {
     #region Public Variables
-    public List<GameObject> m_PlayerItems;
+    public List<GameObject> m_PlayerItems = new List<GameObject>();
     public GameObject[] m_AnimalButtons;
     public GameObject m_ChangePetPanel;
     public GameObject m_GameUI;
@@ -208,7 +208,7 @@ public class UIController : MonoBehaviour
         setFearString_ = true;
         m_SpeechBubble.SetActive(false);
         LoadPets();
-        //Loaditems();
+        Loaditems();
 	}
 	
 	void Update ()
@@ -750,7 +750,7 @@ public class UIController : MonoBehaviour
             if (gc_.m_Items[i].m_ItemName == go.name)
             {
                 if (GuardianPetsAssets.SHIELD_CURRENCY.GetBalance() >= gc_.m_Items[i].m_Cost)
-                {
+                {       
                     AudioSource.PlayClipAtPoint(m_UpgradeClip, transform.position);
                     GuardianPetsAssets.SHIELD_CURRENCY.Take(gc_.m_Items[i].m_Cost);
                     gc_.m_Items[i].gameObject.SetActive(true);
@@ -759,10 +759,9 @@ public class UIController : MonoBehaviour
                         GameObject obj = GameObject.Find(gc_.m_Items[i].m_Names[gc_.m_Items[i].m_ItemSpot]);    //get the waypoint the item will be at
                         gc_.m_Items[i].gameObject.transform.SetParent(obj.transform);
                     }
+                    m_PlayerItems.Add(gc_.m_Items[i].gameObject);  
                     go.GetComponent<Button>().interactable = false;
-                    go.GetComponentInChildren<Text>().text = "";
-
-                    m_PlayerItems.Add(go);
+                    go.GetComponentInChildren<Text>().text = "";    
                 }
             }
         }
