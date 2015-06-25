@@ -54,8 +54,8 @@ public class GameController : MonoBehaviour
 
 	void Awake ()
     {
-        Load();
         ui_ = Camera.main.GetComponent<UIController>();
+        Load();
 	}
 	
 	void Update ()
@@ -226,6 +226,7 @@ public class GameController : MonoBehaviour
                     }
                 }
             }
+
             ui_.TimesFed = sData.m_TimesFed;
             ui_.TimesPlayed = sData.m_TimesPlayed;
             ui_.TimesWashed = sData.m_TimesPlayed;
