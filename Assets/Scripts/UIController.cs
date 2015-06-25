@@ -129,7 +129,7 @@ public class UIController : MonoBehaviour
 
     #region Private Variables
     /// <summary>List of pets the player owns</summary>
-    private List<GameObject> pets_;
+    private List<GameObject> pets_ = new List<GameObject>();
 
     /// <summary>Game object of player's current pet</summary>
     private GameObject currPet_;
@@ -362,15 +362,15 @@ public class UIController : MonoBehaviour
             currPet_.GetComponent<Pet>().m_Cleanliness = Constants.DEFAULT_START_STATS;
             currPet_.GetComponent<Pet>().m_Hunger = Constants.DEFAULT_START_STATS;
             petData_.m_IsDancing = false;
+            pets_.Add(currPet_);
+            SetFearTitle();
+            AssignPet(currPet_.name);
             gc_.Save();
             m_NewPlayerUI.SetActive(false);
             //Destroy(m_NewPlayerUI);
             m_GameUI.SetActive(true);
-            SetFearTitle();
             AudioSource.PlayClipAtPoint(m_ClickClip, transform.position);
-            pets_.Add(currPet_);
-            AssignPet(currPet_.name);
-            AssignPet(currPet_.name);
+           
         }
     }
 
@@ -623,14 +623,15 @@ public class UIController : MonoBehaviour
             currPet_.GetComponent<Pet>().m_Cleanliness = Constants.DEFAULT_START_STATS;
             currPet_.GetComponent<Pet>().m_Hunger = Constants.DEFAULT_START_STATS;
             petData_.m_IsDancing = false;
+            pets_.Add(currPet_);
+            SetFearTitle();
+            AssignPet(currPet_.name);
             gc_.Save();
             m_NewPlayerUI.SetActive(false);
            // Destroy(m_NewPlayerUI);
             m_GameUI.SetActive(true);
         }
-        SetFearTitle();
-        pets_.Add(currPet_);
-        AssignPet(currPet_.name);
+      
         AudioSource.PlayClipAtPoint(m_ClickClip, transform.position);
        
     }
@@ -665,7 +666,8 @@ public class UIController : MonoBehaviour
         else
         {
             m_TitleText.text = "The " + currPet_.GetComponent<Pet>().m_FearOne + " Master";
-        }     
+        }
+        gc_.Save();
     }
 
     void SetSpeechText()
