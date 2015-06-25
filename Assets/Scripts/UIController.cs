@@ -318,7 +318,6 @@ public class UIController : MonoBehaviour
             checkMark_.SetActive(false);
             m_SelectedPet = btn.name; 
             gc_.CurrentPet = m_SelectedPet;
-            gc_.m_PlayerData.AddPet(m_SelectedPet);
             m_NicknamePanel.SetActive(true);
             gc_.SetUpGame();
             clickCounter_ = 0;

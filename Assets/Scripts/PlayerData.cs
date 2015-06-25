@@ -20,20 +20,6 @@ public class PlayerData : MonoBehaviour
 	
 	}
 
-    //This function converts the pet name (string) into the actual game object and adds it to the player's pet list
-    public void AddPet(string petName)
-    {
-        GameController tempGC = Camera.main.GetComponent<GameController>();
-
-        for(int i = 0; i < tempGC.m_PetChoices.Count; ++i)
-        {
-            if(tempGC.m_PetChoices[i].name == petName)
-            {
-                m_Pets.Add(tempGC.m_PetChoices[i]);
-            }
-        }
-    }
-
     //This function is called by the button functions from the pets, this removes the points from the player (it's always the same) and increments a counter
     //Once this counter reaches a certain number, it will add shields to the player's account
     public void RemoveEnergy()
