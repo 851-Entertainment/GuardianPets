@@ -7,7 +7,7 @@ using Soomla.Store;
 public class UIController : MonoBehaviour
 {
     #region Public Variables
-    public List<GameObject> m_PlayerItems = new List<GameObject>();
+    public List<string> m_PlayerItems = new List<string>();
     public GameObject[] m_AnimalButtons;
     public GameObject m_ChangePetPanel;
     public GameObject m_GameUI;
@@ -734,9 +734,9 @@ public class UIController : MonoBehaviour
         {
             for(int j = 0; j < gc_.m_Items.Count; ++j)
             {
-                if(m_PlayerItems[i].name == gc_.m_Items[j].name)
+                if(m_PlayerItems[i] == gc_.m_Items[j].name)
                 {
-                    UnlockItem(m_PlayerItems[i]);
+                    //UnlockItem(m_PlayerItems[i]);
                 }
             }
         }
@@ -759,7 +759,7 @@ public class UIController : MonoBehaviour
                         GameObject obj = GameObject.Find(gc_.m_Items[i].m_Names[gc_.m_Items[i].m_ItemSpot]);    //get the waypoint the item will be at
                         gc_.m_Items[i].gameObject.transform.SetParent(obj.transform);
                     }
-                    m_PlayerItems.Add(gc_.m_Items[i].gameObject);  
+                    m_PlayerItems.Add(gc_.m_Items[i].name);  
                     go.GetComponent<Button>().interactable = false;
                     go.GetComponentInChildren<Text>().text = "";    
                 }

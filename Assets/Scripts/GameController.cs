@@ -180,6 +180,7 @@ public class GameController : MonoBehaviour
         }
     }
 
+
     public void Load()
     {
         if (File.Exists(Application.persistentDataPath + Path.DirectorySeparatorChar + "gpSaveData.dat"))
@@ -277,7 +278,7 @@ class SaveData
     public List<PetData> m_Pets = new List<PetData>();
 
     /// <summary>List of the items the player owns</summary>
-    public List<GameObject> m_PlayerItems = new List<GameObject>();
+    public List<string> m_PlayerItems = new List<string>();
 
     /// <summary>Player's currently active pet</summary>
     public string m_CurrPet; //Player's currently active pet
