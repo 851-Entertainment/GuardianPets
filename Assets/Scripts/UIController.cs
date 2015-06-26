@@ -144,17 +144,25 @@ public class UIController : MonoBehaviour
     private GameController gc_;
     private AudioSource audio_;
 
+    /// <summary>Pet var that is assigned if the player is using the lion</summary>
     private GameObject lion_;
+    /// <summary>Pet var that is assigned if the player is using the hippo</summary>
     private GameObject hippo;
+    /// <summary>Pet var that is assigned if the player is using the elephant</summary>
     private GameObject elephant_;
+    /// <summary>Pet var that is assigned if the player is using the bear</summary>
     private GameObject bear_;
+    /// <summary>Pet var that is assigned if the player is using the alligator</summary>
     private GameObject alligator_;
+    /// <summary>Pet var that is assigned if the player is using the monkey</summary>
     private GameObject monkey_;
 
     private string bttnName_;
     private int clickCounter_ = 0;
     private int energySliderIncrease_ = 0;
     private int maxEnergy_;
+    /// <summary>temp var to set the pet active on the intial run.</summary>
+    private bool activatePet_ = true;
     private bool upgradeEnergy_ = false;
     private bool setFearString_ = true;
     private bool playCloseSound_ = true;
@@ -208,7 +216,7 @@ public class UIController : MonoBehaviour
         setFearString_ = true;
         m_SpeechBubble.SetActive(false);
         LoadPets();
-        Loaditems();
+        activatePet_ = true;
 	}
 	
 	void Update ()
@@ -216,6 +224,12 @@ public class UIController : MonoBehaviour
         currPet_ = gc_.ActivePet;
         if (currPet_ != null)
         {
+            if (activatePet_)
+            {
+                ChangePet(currPet_.name);
+                Loaditems();
+                activatePet_ = false;
+            }
             //set the fear string once at the start of the game
             if (setFearString_)
             {
@@ -364,6 +378,7 @@ public class UIController : MonoBehaviour
             pets_.Add(currPet_);
             SetFearTitle();
             AssignPet(currPet_.name);
+            currPet_.SetActive(true);
             gc_.Save();
             m_NewPlayerUI.SetActive(false);
             //Destroy(m_NewPlayerUI);
@@ -625,6 +640,7 @@ public class UIController : MonoBehaviour
             pets_.Add(currPet_);
             SetFearTitle();
             AssignPet(currPet_.name);
+            currPet_.SetActive(true);
             gc_.Save();
             m_NewPlayerUI.SetActive(false);
            // Destroy(m_NewPlayerUI);
