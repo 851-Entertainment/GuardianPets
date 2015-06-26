@@ -16,6 +16,7 @@ public class UIController : MonoBehaviour
     public GameObject m_ButtonPage1;
     public GameObject m_ButtonPage2;
     public GameObject m_NewPlayerUI;
+    public GameObject m_Radar;
 
     /// <summary>Panel for the nickname prompt</summary>
     public GameObject m_NicknamePanel;
@@ -158,8 +159,6 @@ public class UIController : MonoBehaviour
     /// <summary>Pet var that is assigned if the player is using the monkey</summary>
     private GameObject monkey_;
 
-    private GameObject radar_;
-
     private string bttnName_;
     private int clickCounter_ = 0;
     private int energySliderIncrease_ = 0;
@@ -220,8 +219,7 @@ public class UIController : MonoBehaviour
         m_SpeechBubble.SetActive(false);
         LoadPets();
         activatePet_ = true;
-        radar_ = GameObject.Find("Scanner");
-        radar_.SetActive(false);
+        m_Radar.SetActive(false);
 	}
 	
 	void Update ()
@@ -783,8 +781,8 @@ public class UIController : MonoBehaviour
                         gc_.m_Items[i].gameObject.transform.SetParent(obj.transform);
                     }
                     m_PlayerItems.Add(gc_.m_Items[i].name);  
-                   // go.GetComponent<Button>().interactable = false;
-                  //  go.GetComponentInChildren<Text>().text = "";    
+//                    go.GetComponent<Button>().interactable = false;
+      //              go.GetComponentInChildren<Text>().text = "";    
                 }
             }
         }
