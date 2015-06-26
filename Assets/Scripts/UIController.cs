@@ -8,6 +8,7 @@ public class UIController : MonoBehaviour
 {
     #region Public Variables
     public List<string> m_PlayerItems = new List<string>();
+    public GameObject[] m_ChangePetButtons;
     public GameObject[] m_AnimalButtons;
     public GameObject m_ChangePetPanel;
     public GameObject m_GameUI;
@@ -823,6 +824,26 @@ public class UIController : MonoBehaviour
         }
     }
 
+    /// <param name="Enable and Disable pet Selection Buttons">///Goes through and turns all selection buttons off and only turns the ones on that you have</param>
+    void SetPetChangeButtons()
+    {
+        for (int i = 0; i < m_ChangePetButtons.Length; ++i)
+        {
+            m_ChangePetButtons[i].SetActive(false);
+        }
+
+        for (int i = 0; i < m_ChangePetButtons.Length; ++i)
+        {
+            for (int j = 0; j < pets_.Count; ++j)
+            {
+                if (m_ChangePetButtons[i].name == pets_[j].name)
+                {
+                    m_ChangePetButtons[i].SetActive(true);
+                }
+            }
+        }
+    }
+
     public void ChangePet(string name)
     {
         //set all pets off 
@@ -970,6 +991,7 @@ public class UIController : MonoBehaviour
         if(open)
         {
             m_ChangePetPanel.SetActive(true);
+            SetPetChangeButtons();
         }
         else
         {
