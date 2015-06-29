@@ -112,12 +112,13 @@ public class GameController : MonoBehaviour
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Create(Application.persistentDataPath + Path.DirectorySeparatorChar + "gpSaveData.dat");
             SaveData sData = new SaveData();
-            PetData pData = new PetData();
             Pet pet = pet_.GetComponent<Pet>();
 
             //Player save data
             for (int i = 0; i < m_PlayerData.m_Pets.Count; ++i)
             {
+                PetData pData = new PetData();
+
                 pData.m_PetName = m_PlayerData.m_Pets[i].GetComponent<Pet>().m_PetName;
                 pData.m_Nickname = m_PlayerData.m_Pets[i].GetComponent<Pet>().m_Nickname;
                 pData.m_FearOne = m_PlayerData.m_Pets[i].GetComponent<Pet>().m_FearOne;
@@ -148,12 +149,13 @@ public class GameController : MonoBehaviour
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + Path.DirectorySeparatorChar + "gpSaveData.dat", FileMode.Open);
             SaveData sData = new SaveData();
-            PetData pData = new PetData();
             Pet pet = pet_.GetComponent<Pet>();
 
             //Player save data
             for (int i = 0; i < m_PlayerData.m_Pets.Count; ++i)
             {
+                PetData pData = new PetData();
+
                 pData.m_PetName = m_PlayerData.m_Pets[i].GetComponent<Pet>().m_PetName;
                 pData.m_Nickname = m_PlayerData.m_Pets[i].GetComponent<Pet>().m_Nickname;
                 pData.m_FearOne = m_PlayerData.m_Pets[i].GetComponent<Pet>().m_FearOne;
