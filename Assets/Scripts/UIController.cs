@@ -564,10 +564,11 @@ public class UIController : MonoBehaviour
 
         foreach (VirtualCurrencyPack vcp in StoreInfo.CurrencyPacks)
         {
+            string itemID = vcp.ItemId;
             GameObject go = (GameObject)Instantiate(m_GoodsButtonPrefab, new Vector3(startXPos, startYPos, 0.0f), Quaternion.identity);
             go.gameObject.transform.SetParent(m_UpgradePanel.transform, false);
             go.GetComponentInChildren<Image>().sprite = m_ShieldSprite;
-            go.GetComponentInChildren<Button>().onClick.AddListener(delegate { StoreInventory.BuyItem(vcp.ItemId); });
+            go.GetComponentInChildren<Button>().onClick.AddListener(delegate { StoreInventory.BuyItem(itemID); });
             go.GetComponentInChildren<Text>().text = vcp.Description;
 
             if (col < maxCol)
