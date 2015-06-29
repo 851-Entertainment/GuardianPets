@@ -378,7 +378,8 @@ public class UIController : MonoBehaviour
             currPet_.GetComponent<Pet>().m_Cleanliness = Constants.DEFAULT_START_STATS;
             currPet_.GetComponent<Pet>().m_Hunger = Constants.DEFAULT_START_STATS;
             petData_.m_IsDancing = false;
-            pets_.Add(currPet_);
+           // pets_.Add(currPet_);
+            gc_.m_PlayerData.m_Pets.Add(currPet_);
             SetFearTitle();
             AssignPet(currPet_.name);
             currPet_.SetActive(true);
@@ -640,7 +641,8 @@ public class UIController : MonoBehaviour
             currPet_.GetComponent<Pet>().m_Cleanliness = Constants.DEFAULT_START_STATS;
             currPet_.GetComponent<Pet>().m_Hunger = Constants.DEFAULT_START_STATS;
             petData_.m_IsDancing = false;
-            pets_.Add(currPet_);
+            //pets_.Add(currPet_);
+            gc_.m_PlayerData.m_Pets.Add(currPet_);
             SetFearTitle();
             AssignPet(currPet_.name);
             currPet_.SetActive(true);
@@ -816,9 +818,9 @@ public class UIController : MonoBehaviour
     {
         for (int i = 0; i < m_AnimalButtons.Length; ++i)
         {
-            for (int j = 0; j < pets_.Count; ++j)
+            for (int j = 0; j < gc_.m_PlayerData.m_Pets.Count; ++j)
             {
-                if (m_AnimalButtons[i].name == pets_[j].name)
+                if (m_AnimalButtons[i].name == gc_.m_PlayerData.m_Pets[j].name)
                 {
                     m_AnimalButtons[i].SetActive(false);
                 }
@@ -836,9 +838,9 @@ public class UIController : MonoBehaviour
 
         for (int i = 0; i < m_ChangePetButtons.Length; ++i)
         {
-            for (int j = 0; j < pets_.Count; ++j)
+            for (int j = 0; j < gc_.m_PlayerData.m_Pets.Count; ++j)
             {
-                if (m_ChangePetButtons[i].name == pets_[j].name)
+                if (m_ChangePetButtons[i].name == gc_.m_PlayerData.m_Pets[j].name)
                 {
                     m_ChangePetButtons[i].SetActive(true);
                 }
@@ -849,11 +851,11 @@ public class UIController : MonoBehaviour
     public void ChangePet(string name)
     {
         //set all pets off 
-        if (pets_ != null)
+        if (gc_.m_PlayerData.m_Pets != null)
         {
-            for (int i = 0; i < pets_.Count; ++i)
+            for (int i = 0; i < gc_.m_PlayerData.m_Pets.Count; ++i)
             {
-                pets_[i].SetActive(false);
+                gc_.m_PlayerData.m_Pets[i].SetActive(false);
             }
         }
         //turn on the proper one based on the name passed in
@@ -959,32 +961,32 @@ public class UIController : MonoBehaviour
         if (go.name == "Lion")
         {    
             lion_ = go;
-            pets_.Add(lion_);
+            gc_.m_PlayerData.m_Pets.Add(lion_);
         }
         else if (go.name == "Elephant")
         {   
             elephant_ = go;
-            pets_.Add(elephant_);
+            gc_.m_PlayerData.m_Pets.Add(elephant_);
         }
         else if (go.name == "Hippo")
         {  
             hippo = go;
-            pets_.Add(hippo);
+            gc_.m_PlayerData.m_Pets.Add(hippo);
         }
         else if (go.name == "Bear")
         {  
             bear_ = go;
-            pets_.Add(bear_);
+            gc_.m_PlayerData.m_Pets.Add(bear_);
         }
         else if (go.name == "Alligator")
         {    
             alligator_ = go;
-            pets_.Add(alligator_);
+            gc_.m_PlayerData.m_Pets.Add(alligator_);
         }
         else if (go.name == "Monkey")
         {
             monkey_ = go;
-            pets_.Add(monkey_);
+            gc_.m_PlayerData.m_Pets.Add(monkey_);
         }
     }
 
