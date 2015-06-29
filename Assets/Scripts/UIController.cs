@@ -130,8 +130,6 @@ public class UIController : MonoBehaviour
     #endregion
 
     #region Private Variables
-    /// <summary>List of pets the player owns</summary>
-    private List<GameObject> pets_ = new List<GameObject>();
 
     /// <summary>Game object of player's current pet</summary>
     private GameObject currPet_;
@@ -378,7 +376,6 @@ public class UIController : MonoBehaviour
             currPet_.GetComponent<Pet>().m_Cleanliness = Constants.DEFAULT_START_STATS;
             currPet_.GetComponent<Pet>().m_Hunger = Constants.DEFAULT_START_STATS;
             petData_.m_IsDancing = false;
-           // pets_.Add(currPet_);
             gc_.m_PlayerData.m_Pets.Add(currPet_);
             SetFearTitle();
             AssignPet(currPet_.name);
@@ -641,7 +638,6 @@ public class UIController : MonoBehaviour
             currPet_.GetComponent<Pet>().m_Cleanliness = Constants.DEFAULT_START_STATS;
             currPet_.GetComponent<Pet>().m_Hunger = Constants.DEFAULT_START_STATS;
             petData_.m_IsDancing = false;
-            //pets_.Add(currPet_);
             gc_.m_PlayerData.m_Pets.Add(currPet_);
             SetFearTitle();
             AssignPet(currPet_.name);
