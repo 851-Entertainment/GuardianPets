@@ -17,6 +17,8 @@ public class UIController : MonoBehaviour
     public GameObject m_ButtonPage2;
     public GameObject m_NewPlayerUI;
     public GameObject m_Radar;
+    public GameObject m_InteractMenuBar;
+    public GameObject m_PetMenuBar;
 
     /// <summary>Panel for the nickname prompt</summary>
     public GameObject m_NicknamePanel;
@@ -1015,4 +1017,19 @@ public class UIController : MonoBehaviour
         DisablePetButton();
     }
     #endregion 
+
+    /// <param name="Menu Bars for UI">///Turns on or off the menu bar based on if it is currently active or not and which bar is in use</param>
+    public void OpenMenuBar(GameObject menuBar)
+    {
+       if(menuBar.name == m_InteractMenuBar.name)
+       {
+           m_PetMenuBar.SetActive(false);
+           m_InteractMenuBar.SetActive(!m_InteractMenuBar.activeSelf);
+       }
+       else if(menuBar.name == m_PetMenuBar.name)
+       {
+           m_InteractMenuBar.SetActive(false);
+           m_PetMenuBar.SetActive(!m_PetMenuBar.activeSelf);
+       }
+    }
 }
