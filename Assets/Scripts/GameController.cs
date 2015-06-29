@@ -103,7 +103,7 @@ public class GameController : MonoBehaviour
         Save();
     }
 
-    //When this Save function is called, all other save functions get called. No where else should save.
+    /// <summary>Saves all variables to file</summary>
     public void Save()
     {
         if (!File.Exists(Application.persistentDataPath + Path.DirectorySeparatorChar + "gpSaveData.dat"))
@@ -180,7 +180,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-
+    /// <summary>Loads all variables from file</summary>
     public void Load()
     {
         if (File.Exists(Application.persistentDataPath + Path.DirectorySeparatorChar + "gpSaveData.dat"))
