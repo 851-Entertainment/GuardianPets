@@ -37,6 +37,9 @@ public class AchievementManager : MonoBehaviour
     /// <summary>A reference to the text that shows the points inside the menu</summary>
     public Text m_TextPoints;
 
+    /// <summary>Holds all of the unlocked achievements</summary>
+    public List<GameObject> m_UnlockedAchievements;
+
     /// <summary>The time it takes for the inventory to fade in and out in seconds</summary>
     private int fadeTime_ = 2;
 
@@ -260,6 +263,8 @@ public class AchievementManager : MonoBehaviour
 
             //Give player shields equal to the number of points the achievement is worth
             GuardianPetsAssets.SHIELD_CURRENCY.Give(m_Achievements[title].Points);
+
+            m_UnlockedAchievements.Add(achievement);
         }
     }
 
