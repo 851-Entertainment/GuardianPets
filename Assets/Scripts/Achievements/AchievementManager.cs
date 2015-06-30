@@ -9,7 +9,6 @@ public class AchievementManager : MonoBehaviour
     /// <summary>A prefab used for creating a new achievement</summary>
     public GameObject m_AchievementPrefab;
 
-
     /// <summary>The UI controller script</summary>
     public UIController m_UIController;
 
@@ -31,14 +30,17 @@ public class AchievementManager : MonoBehaviour
     /// <summary>This dictionary contains all achievements</summary>
     public Dictionary<string, Achievement> m_Achievements = new Dictionary<string, Achievement>();
 
+    /// <summary>List of the trophies to unlock</summary>
+    public List<GameObject> m_Trophy = new List<GameObject>();
+
+    /// <summary>Index for where in the trophy list you are at for unlocks</summary>
+    private int trophyIndex = 0;
+
     /// <summary>This sprite is used for indicating if an achievement is unlocked</summary>
     public Sprite m_UnlockedSprite;
 
     /// <summary>A reference to the text that shows the points inside the menu</summary>
     public Text m_TextPoints;
-
-    /// <summary>Holds all of the unlocked achievements</summary>
-    public List<GameObject> m_UnlockedAchievements = new List<GameObject>();
 
     /// <summary>The time it takes for the inventory to fade in and out in seconds</summary>
     private int fadeTime_ = 2;
@@ -262,9 +264,7 @@ public class AchievementManager : MonoBehaviour
             StartCoroutine(FadeAchievement(achievement));
 
             //Give player shields equal to the number of points the achievement is worth
-            GuardianPetsAssets.SHIELD_CURRENCY.Give(m_Achievements[title].Points);
-
-            m_UnlockedAchievements.Add(achievement);
+            GuardianPetsAssets.SHIELD_CURRENCY.Give(m_Achievements[title].Points);   
         }
     }
 
@@ -298,6 +298,8 @@ public class AchievementManager : MonoBehaviour
                 newAchievement.AddDependency(dependency);
             }
         }
+
+        
     }
 
     /// <summary>Fills the onscreen achievement with information</summary>
@@ -375,5 +377,14 @@ public class AchievementManager : MonoBehaviour
 
         //Destroys the visual object
         Destroy(achievement);
+    }
+    /// <param name="achievement">Activate a trophy if it has been unlocked</param>
+    void CheckTrophy(Achievement achievement)
+    {
+        if(achievement.UnlockedTrophy)
+        {
+            m_Trophy[trophyIndex].SetActive(true);
+            trophyIndex++;
+        }
     }
 }

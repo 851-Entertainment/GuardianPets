@@ -14,6 +14,9 @@ public class Achievement
     /// <summary>Flag indicating whether the achievement is unlocked</summary>
     private bool unlocked_;
 
+    /// <summary>Flag indicating whether the trophy has been unlocked</summary>
+    private bool unlockedTrophy_;
+
     /// <summary>Amount of shields the achievement is worth</summary>
     private int points_;
 
@@ -46,6 +49,12 @@ public class Achievement
         get { return unlocked_; } set { unlocked_ = value; }
     }
 
+    public bool UnlockedTrophy
+    {
+        get { return unlockedTrophy_; }
+        set { unlockedTrophy_ = value; }
+    }
+
     public int Points
     {
         get { return points_; } set { points_ = value; }
@@ -72,6 +81,7 @@ public class Achievement
         this.name_ = name;
         this.description_ = description;
         this.unlocked_ = false;
+        this.unlockedTrophy_ = false;
         this.points_ = points;
         this.spriteIndex_ = spriteIndex;
         this.achievementRef_ = achievementRef;
@@ -115,6 +125,7 @@ public class Achievement
     public void SaveAchievement(bool value)
     {
         unlocked_ = value; //Sets the value
+        unlockedTrophy_ = value;
 
         //Gets the amount of points
         int tmpPoints = PlayerPrefs.GetInt("Points");
@@ -134,6 +145,7 @@ public class Achievement
     {
         //Loads the status
         unlocked_ = PlayerPrefs.GetInt(name_) == 1 ? true : false;
+        unlockedTrophy_ = PlayerPrefs.GetInt(name_) == 1 ? true : false;
 
         if (unlocked_) //If the achievement is unlocked then we need to change the sprite and aquire the points
         {
