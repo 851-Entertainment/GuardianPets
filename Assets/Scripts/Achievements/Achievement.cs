@@ -160,8 +160,9 @@ public class Achievement
         {
             AchievementManager.Instance.m_TextPoints.text = "Points: " + PlayerPrefs.GetInt("Points");
             achievementRef_.GetComponent<Image>().sprite = AchievementManager.Instance.m_UnlockedSprite;
+            CheckTrophy(true);
         }
-        CheckTrophy(true);
+        
     }
 
     /// <param name="achievement">Activate a trophy if it has been unlocked</param>
