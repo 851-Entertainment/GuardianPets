@@ -21,6 +21,9 @@ public class UIController : MonoBehaviour
     public GameObject m_PetMenuBar;
     public GameObject m_TrophyMenu;
 
+    /// <summary>List of the trophies to unlock</summary>
+    public List<GameObject> m_Trophy = new List<GameObject>();
+
     /// <summary>Panel for the nickname prompt</summary>
     public GameObject m_NicknamePanel;
 

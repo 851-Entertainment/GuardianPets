@@ -30,12 +30,6 @@ public class AchievementManager : MonoBehaviour
     /// <summary>This dictionary contains all achievements</summary>
     public Dictionary<string, Achievement> m_Achievements = new Dictionary<string, Achievement>();
 
-    /// <summary>List of the trophies to unlock</summary>
-    public List<GameObject> m_Trophy = new List<GameObject>();
-
-    /// <summary>Index for where in the trophy list you are at for unlocks</summary>
-    private int trophyIndex = 0;
-
     /// <summary>This sprite is used for indicating if an achievement is unlocked</summary>
     public Sprite m_UnlockedSprite;
 
@@ -373,22 +367,13 @@ public class AchievementManager : MonoBehaviour
                 yield return null;
             }
             yield return new WaitForSeconds(2); //Waits for 2 seconds so that we can read the achievement
-            
+
             //Switches around the values
-            startAlpha = 1; 
+            startAlpha = 1;
             endAlpha = 0;
         }
 
         //Destroys the visual object
         Destroy(achievement);
-    }
-    /// <param name="achievement">Activate a trophy if it has been unlocked</param>
-    void CheckTrophy(bool achievement)
-    {
-        if(achievement)
-        {
-            m_Trophy[trophyIndex].SetActive(true);
-            trophyIndex++;
-        }
     }
 }
