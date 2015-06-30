@@ -68,7 +68,7 @@ public class AchievementManager : MonoBehaviour
 
         #region Creating Achievements
         //Creates the general achievements
-        CreateAchievement("General", "Feed I", "Feed your pet 25 times.", 1, 0);
+        CreateAchievement("General", "Feed I", "Feed your pet 25 times.", 1, 0, null, true);
         CreateAchievement("General", "Feed II", "Feed your pet 50 times.", 1, 0);
         CreateAchievement("General", "Feed III", "Feed your pet 75 times.", 2, 0);
         CreateAchievement("General", "Feed IV", "Feed your pet 100 times.", 3, 0);
@@ -266,6 +266,10 @@ public class AchievementManager : MonoBehaviour
             //Give player shields equal to the number of points the achievement is worth
             GuardianPetsAssets.SHIELD_CURRENCY.Give(m_Achievements[title].Points);   
         }
+        if(m_Achievements[title].UnlockedTrophy)
+        {
+            CheckTrophy(true);
+        }
     }
 
     /// <summary>Creates an achievement</summary>
@@ -275,7 +279,7 @@ public class AchievementManager : MonoBehaviour
     /// <param name="points">The amount of points the achievement is worth</param>
     /// <param name="spriteIndex">The index used to finde an icon inside the sprites array</param>
     /// <param name="dependencies"></param>
-    public void CreateAchievement(string parent, string title, string description ,int points, int spriteIndex, string[] dependencies = null)
+    public void CreateAchievement(string parent, string title, string description ,int points, int spriteIndex, string[] dependencies = null, bool trophy = false)
     {   
         //Creates the achievement gameobject
         GameObject achievement = (GameObject)Instantiate(m_AchievementPrefab);
@@ -379,9 +383,9 @@ public class AchievementManager : MonoBehaviour
         Destroy(achievement);
     }
     /// <param name="achievement">Activate a trophy if it has been unlocked</param>
-    void CheckTrophy(Achievement achievement)
+    void CheckTrophy(bool achievement)
     {
-        if(achievement.UnlockedTrophy)
+        if(achievement)
         {
             m_Trophy[trophyIndex].SetActive(true);
             trophyIndex++;
