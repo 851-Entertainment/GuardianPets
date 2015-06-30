@@ -266,10 +266,10 @@ public class AchievementManager : MonoBehaviour
             //Give player shields equal to the number of points the achievement is worth
             GuardianPetsAssets.SHIELD_CURRENCY.Give(m_Achievements[title].Points);   
         }
-        if(m_Achievements[title].UnlockedTrophy)
+        /*if(m_Achievements[title].UnlockedTrophy)
         {
             CheckTrophy(true);
-        }
+        }*/
     }
 
     /// <summary>Creates an achievement</summary>
@@ -285,7 +285,7 @@ public class AchievementManager : MonoBehaviour
         GameObject achievement = (GameObject)Instantiate(m_AchievementPrefab);
 
         //Creates the achievement
-        Achievement newAchievement = new Achievement(title, description, points, spriteIndex, achievement);
+        Achievement newAchievement = new Achievement(title, description, points, spriteIndex, achievement, trophy);
 
         //Adds the achievement to our dictionary
         m_Achievements.Add(title, newAchievement);

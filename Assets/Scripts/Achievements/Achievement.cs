@@ -23,6 +23,9 @@ public class Achievement
     /// <summary>Index of the icon in the sprite array</summary>
     private int spriteIndex_;
 
+    /// <summary>Flag indicating whether the achievement unlocks a trophy</summary>
+    private bool trophy_;
+
     /// <summary>Reference to the achievement object</summary>
     private GameObject achievementRef_;
 
@@ -76,7 +79,7 @@ public class Achievement
     /// <param name="points">The amount of points the achievement is worth</param>
     /// <param name="spriteIndex">The spriteindex</param>
     /// <param name="achievementRef">A reference to the achievement's gameobject</param>
-    public Achievement(string name, string description, int points, int spriteIndex, GameObject achievementRef)
+    public Achievement(string name, string description, int points, int spriteIndex, GameObject achievementRef, bool trophy)
     {
         this.name_ = name;
         this.description_ = description;
@@ -85,9 +88,10 @@ public class Achievement
         this.points_ = points;
         this.spriteIndex_ = spriteIndex;
         this.achievementRef_ = achievementRef;
+        this.trophy_ = trophy;
         
         //Loads the achievement so that we have the correct information
-        Loadachievement();
+        LoadAchievement();
     }
 
     /// <summary>Adds a dependency to the achievement</summary>
@@ -141,7 +145,7 @@ public class Achievement
     }
 
     /// <summary>Loads the achievement</summary>
-    public void Loadachievement()
+    public void LoadAchievement()
     {
         //Loads the status
         unlocked_ = PlayerPrefs.GetInt(name_) == 1 ? true : false;
