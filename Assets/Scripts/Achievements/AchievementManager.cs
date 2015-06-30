@@ -38,7 +38,7 @@ public class AchievementManager : MonoBehaviour
     public Text m_TextPoints;
 
     /// <summary>Holds all of the unlocked achievements</summary>
-    public List<GameObject> m_UnlockedAchievements;
+    public List<GameObject> m_UnlockedAchievements = new List<GameObject>();
 
     /// <summary>The time it takes for the inventory to fade in and out in seconds</summary>
     private int fadeTime_ = 2;

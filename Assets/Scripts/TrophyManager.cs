@@ -5,12 +5,12 @@ using System.Collections.Generic;
 public class TrophyManager : MonoBehaviour
 {
     /// <summary>All of the unlockable trophies the player can get</summary>
-    public List<GameObject> m_UnlockableTrophies;
+    public List<GameObject> m_UnlockableTrophies = new List<GameObject>();
 
     /// <summary>///Achievement Manager in the scene</summary>
     private AchievementManager achievementManager_;
     /// <summary>///Trophies the player has</summary>
-    private List<GameObject> trophies_;
+    private List<GameObject> trophies_ = new List<GameObject>();
 
 	void Start ()
     {
@@ -30,8 +30,9 @@ public class TrophyManager : MonoBehaviour
             for(int j = 0; j < trophies_.Count; ++j)
             {
                 //if there has been an unlocked achievement then it's time to unlock a trophy
-                if (achievementManager_.m_UnlockedAchievements.Count > trophies_.Count)
+                if (achievementManager_.m_UnlockedAchievements.Count >= trophies_.Count)
                 {
+                    trophies_.Add(achievementManager_.m_UnlockedAchievements[i]);
                     //add the unlocked achievement to the trophy list
                     SetTrophyActive();
                 }   
