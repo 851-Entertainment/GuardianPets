@@ -19,6 +19,7 @@ public class UIController : MonoBehaviour
     public GameObject m_Radar;
     public GameObject m_InteractMenuBar;
     public GameObject m_PetMenuBar;
+    public GameObject m_TrophyMenu;
 
     /// <summary>Panel for the nickname prompt</summary>
     public GameObject m_NicknamePanel;
@@ -1032,5 +1033,11 @@ public class UIController : MonoBehaviour
            m_InteractMenuBar.SetActive(false);
            m_PetMenuBar.SetActive(!m_PetMenuBar.activeSelf);
        }
+    }
+
+    /// <param name="Change the active state of the trophy menu"></param>
+    public void SetActiveTrophyMenu()
+    {
+        m_TrophyMenu.SetActive(!m_TrophyMenu.activeSelf);
     }
 }
