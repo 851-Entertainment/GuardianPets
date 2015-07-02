@@ -203,38 +203,31 @@ public class GameController : MonoBehaviour
                 {
                     if (sData.m_Pets[j].m_PetName == m_PetChoices[i].name)
                     {
-                        if(m_PetChoices[i].name == sData.m_CurrPet)
-                        {
-                            pet_ = (GameObject)Instantiate(m_PetChoices[i]);
-
-                            Pet pData = pet_.GetComponent<Pet>();
-                            pData.name = m_PetChoices[i].name;
-                            pData.m_FearOne = sData.m_Pets[j].m_FearOne;
-                            pData.m_FearTwo = sData.m_Pets[j].m_FearTwo;
-                            pData.m_Hunger = sData.m_Pets[j].m_Hunger;
-                            pData.m_Cleanliness = sData.m_Pets[j].m_Cleanliness;
-                            pData.m_Bored = sData.m_Pets[j].m_Boredom;
-                            pData.m_Nickname = sData.m_Pets[j].m_Nickname;
-
-                            m_PlayerData.m_Pets.Add(pet_);
-                        }
-                        else
-                        {
-                            Pet pData = m_PetChoices[i].GetComponent<Pet>();
-                            pData.m_Nickname = sData.m_Pets[j].m_Nickname;
-                            pData.m_FearOne = sData.m_Pets[j].m_FearOne;
-                            pData.m_FearTwo = sData.m_Pets[j].m_FearTwo;
-                            pData.m_Bored = sData.m_Pets[j].m_Boredom;
-                            pData.m_Cleanliness = sData.m_Pets[j].m_Cleanliness;
-                            pData.m_Hunger = sData.m_Pets[j].m_Hunger;
-
-                            m_PlayerData.m_Pets.Add(m_PetChoices[i]);
-                        }
+                        pet_ = (GameObject)Instantiate(m_PetChoices[i]);
+                     
+                        Pet pData = pet_.GetComponent<Pet>();
+                        pData.name = m_PetChoices[i].name;
+                        pData.m_FearOne = sData.m_Pets[j].m_FearOne;
+                        pData.m_FearTwo = sData.m_Pets[j].m_FearTwo;
+                        pData.m_Hunger = sData.m_Pets[j].m_Hunger;
+                        pData.m_Cleanliness = sData.m_Pets[j].m_Cleanliness;
+                        pData.m_Bored = sData.m_Pets[j].m_Boredom;
+                        pData.m_Nickname = sData.m_Pets[j].m_Nickname;
+                        
+                        m_PlayerData.m_Pets.Add(pet_);
                     }
                 }
             }
 
-            ui_.TimesFed = sData.m_TimesFed;
+            for (int i = 0; i < m_PlayerData.m_Pets.Count; ++i)
+            {
+                if (m_PlayerData.m_Pets[i].name == sData.m_CurrPet)
+                {
+                    pet_ = m_PlayerData.m_Pets[i];
+                }
+            }
+
+                ui_.TimesFed = sData.m_TimesFed;
             ui_.TimesPlayed = sData.m_TimesPlayed;
             ui_.TimesWashed = sData.m_TimesPlayed;
             ui_.m_PlayerItems = sData.m_PlayerItems;
