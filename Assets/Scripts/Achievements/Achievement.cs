@@ -116,6 +116,8 @@ public class Achievement
             //Changes the sprite to the unlocked sprite
             achievementRef_.GetComponent<Image>().sprite = AchievementManager.Instance.m_UnlockedSprite;
 
+            CheckTrophy(true);
+
             //Saves the achievement
             SaveAchievement(true);     
 
