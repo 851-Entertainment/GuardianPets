@@ -1002,18 +1002,21 @@ public class UIController : MonoBehaviour
 
     public void PickNewPet()
     {
-        //Sets up the new layer UI again and turns off the game UI 
-        m_GameUI.SetActive(false);
-        currPet_.SetActive(false);
-        m_NewPlayerUI.SetActive(true);
-        foreach (Transform child in m_NewPlayerUI.transform)
+        if(!(m_PlayerData.m_Pets.Count >= Constants.MAX_PETS))
         {
-            child.gameObject.SetActive(true);
+            //Sets up the new layer UI again and turns off the game UI 
+            m_GameUI.SetActive(false);
+            currPet_.SetActive(false);
+            m_NewPlayerUI.SetActive(true);
+            foreach (Transform child in m_NewPlayerUI.transform)
+            {
+                child.gameObject.SetActive(true);
+            }
+            checkMark_.SetActive(false);
+            m_FearPanel.SetActive(false);
+            m_NicknamePanel.SetActive(false);
+            DisablePetButton();
         }
-        checkMark_.SetActive(false);
-        m_FearPanel.SetActive(false);
-        m_NicknamePanel.SetActive(false);
-        DisablePetButton();
     }
     #endregion 
 
