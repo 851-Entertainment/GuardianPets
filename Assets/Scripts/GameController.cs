@@ -114,6 +114,8 @@ public class GameController : MonoBehaviour
             SaveData sData = new SaveData();
             Pet pet = pet_.GetComponent<Pet>();
 
+            sData.m_Pets.Clear();
+
             //Player save data
             for (int i = 0; i < m_PlayerData.m_Pets.Count; ++i)
             {
@@ -150,6 +152,8 @@ public class GameController : MonoBehaviour
             FileStream file = File.Open(Application.persistentDataPath + Path.DirectorySeparatorChar + "gpSaveData.dat", FileMode.Open);
             SaveData sData = new SaveData();
             Pet pet = pet_.GetComponent<Pet>();
+
+            sData.m_Pets.Clear();
 
             //Player save data
             for (int i = 0; i < m_PlayerData.m_Pets.Count; ++i)

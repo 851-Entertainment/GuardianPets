@@ -382,7 +382,7 @@ public class UIController : MonoBehaviour
             currPet_.GetComponent<Pet>().m_Cleanliness = Constants.DEFAULT_START_STATS;
             currPet_.GetComponent<Pet>().m_Hunger = Constants.DEFAULT_START_STATS;
             petData_.m_IsDancing = false;
-            gc_.m_PlayerData.m_Pets.Add(currPet_);
+            //gc_.m_PlayerData.m_Pets.Add(currPet_);
             SetFearTitle();
             AssignPet(currPet_.name);
             currPet_.SetActive(true);
@@ -645,7 +645,7 @@ public class UIController : MonoBehaviour
             currPet_.GetComponent<Pet>().m_Cleanliness = Constants.DEFAULT_START_STATS;
             currPet_.GetComponent<Pet>().m_Hunger = Constants.DEFAULT_START_STATS;
             petData_.m_IsDancing = false;
-            gc_.m_PlayerData.m_Pets.Add(currPet_);
+            //gc_.m_PlayerData.m_Pets.Add(currPet_);
             SetFearTitle();
             AssignPet(currPet_.name);
             currPet_.SetActive(true);
@@ -964,32 +964,26 @@ public class UIController : MonoBehaviour
         if (go.name == "Lion")
         {    
             lion_ = go;
-            gc_.m_PlayerData.m_Pets.Add(lion_);
         }
         else if (go.name == "Elephant")
         {   
             elephant_ = go;
-            gc_.m_PlayerData.m_Pets.Add(elephant_);
         }
         else if (go.name == "Hippo")
         {  
             hippo = go;
-            gc_.m_PlayerData.m_Pets.Add(hippo);
         }
         else if (go.name == "Bear")
         {  
             bear_ = go;
-            gc_.m_PlayerData.m_Pets.Add(bear_);
         }
         else if (go.name == "Alligator")
         {    
             alligator_ = go;
-            gc_.m_PlayerData.m_Pets.Add(alligator_);
         }
         else if (go.name == "Monkey")
         {
             monkey_ = go;
-            gc_.m_PlayerData.m_Pets.Add(monkey_);
         }
     }
 
