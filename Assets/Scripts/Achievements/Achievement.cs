@@ -172,10 +172,20 @@ public class Achievement
     {
         if (achievement)
         {
+            //get the trophy manager script and enable the trophy at the correct index 
             TrophyManager trophy = ui_.m_Trophy[trophyIndex].GetComponent<TrophyManager>();
             ui_.m_Trophy[trophyIndex].SetActive(true);
-            ui_.m_Trophy[trophyIndex].GetComponent<Image>().sprite = achievementRef_.GetComponentInChildren<Transform>().Find("Image").GetComponent<Image>().sprite;
-            trophy.m_Description = "Unlocked the " + achievementRef_.GetComponentInChildren<Transform>().Find("Title").GetComponent<Text>().text + " achievement!";
+
+            //image component on the trophy 
+            Image tophyImage = ui_.m_Trophy[trophyIndex].GetComponent<Image>();
+            //image component on the achievement 
+            Image achievementImage = achievementRef_.transform.FindChild("Image").GetComponent<Image>();
+            //achievement name 
+            Text acievementDescription = achievementRef_.transform.FindChild("Title").GetComponent<Text>();
+
+            //assign the trophy's name and image to the achievements name and image then increment the trophy index
+            tophyImage.sprite = achievementImage.sprite;
+            trophy.m_Description = "Unlocked the " + acievementDescription.text + " achievement!";
             trophyIndex++;
         }
     }   
