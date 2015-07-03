@@ -172,8 +172,11 @@ public class Achievement
     {
         if (achievement)
         {
+            TrophyManager trophy = ui_.m_Trophy[trophyIndex].GetComponent<TrophyManager>();
             ui_.m_Trophy[trophyIndex].SetActive(true);
+            ui_.m_Trophy[trophyIndex].GetComponent<Image>().sprite = achievementRef_.GetComponentInChildren<Transform>().Find("Image").GetComponent<Image>().sprite;
+            trophy.m_Description = "Unlocked the " + achievementRef_.GetComponentInChildren<Transform>().Find("Title").GetComponent<Text>().text + " achievement!";
             trophyIndex++;
         }
-    }
+    }   
 }
