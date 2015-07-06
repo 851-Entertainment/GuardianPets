@@ -14,6 +14,12 @@ public class StoreManager : MonoBehaviour
     /// <summary>Shield sprite for the store panel</summary>
     public Sprite m_ShieldSprite;
 
+    /// <summary>A reference to the scrollrect that controls the achievements in the menu</summary>
+    public ScrollRect m_ScrollRect;
+
+    /// <summary>A reference to the active button(category)</summary>
+    private AchievementButton activeButton_;
+
     /// <summary>Game Controller script</summary>
     private GameController gc_;
 
@@ -24,6 +30,20 @@ public class StoreManager : MonoBehaviour
     {
         gc_ = Camera.main.GetComponent<GameController>();
         uc_ = Camera.main.GetComponent<UIController>();
+
+        //Sets the active button to as the general button, so that we have something to show the first time we open the inventory
+        activeButton_ = GameObject.Find("UpgradesBtn").GetComponent<AchievementButton>();
+
+        PopulateStore();
+
+        foreach (GameObject storeList in GameObject.FindGameObjectsWithTag("StoreList"))
+        {
+            storeList.SetActive(false);
+        }
+
+        activeButton_.Click(); //Clicks the active button
+
+        m_StorePanel.SetActive(false);
 	}
 
     public void PopulateStore()
@@ -36,8 +56,6 @@ public class StoreManager : MonoBehaviour
         int col = 0;
         int maxCol = 3;
         int maxRow = 100;
-
-        m_StorePanel.SetActive(!m_StorePanel.activeSelf);
 
         foreach (Item item in gc_.m_Items)
         {
@@ -90,5 +108,25 @@ public class StoreManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    /// <summary>Changes the category</summary>
+    /// <param name="button">The button we just clicked</param>
+    public void ChangeCategory(GameObject button)
+    {
+        //Creates a reference to buttonScript on the button we just clicked
+        AchievementButton achievementButton = button.GetComponent<AchievementButton>();
+
+        //Changes the content, that the scroll rect controls
+        m_ScrollRect.content = achievementButton.m_AchievementList.GetComponent<RectTransform>();
+
+        //Clicks in the current button
+        achievementButton.Click();
+
+        //Clicks out the active button
+        activeButton_.Click();
+
+        //Changes the active button
+        activeButton_ = achievementButton;
     }
 }
