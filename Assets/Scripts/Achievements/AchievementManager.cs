@@ -78,7 +78,7 @@ public class AchievementManager : MonoBehaviour
         CreateAchievement("General", "Feed VII", "Feed your pet 750 times.", 7, 0);
         CreateAchievement("General", "Feed VIII", "Feed your pet 1000 times.", 10, 0);
 
-        CreateAchievement("General", "Play I", "Play with your pet 25 times.", 1, 0);
+        CreateAchievement("General", "Play I", "Play with your pet 25 times.", 1, 0, null, true);
         CreateAchievement("General", "Play II", "Play with your pet 50 times.", 1, 0);
         CreateAchievement("General", "Play III", "Play with your pet 75 times.", 2, 0);
         CreateAchievement("General", "Play IV", "Play with your pet 100 times.", 3, 0);
