@@ -486,7 +486,6 @@ public class UIController : MonoBehaviour
         if (m_UpgradePanel.activeSelf)
         {
             m_UpgradePanel.SetActive(false);
-            CleanUpMenu();
             AudioSource.PlayClipAtPoint(m_ClickClip, transform.position);
         }
     }
@@ -516,14 +515,6 @@ public class UIController : MonoBehaviour
         currPet_.SetActive(true);
         m_CloseScannerButton.SetActive(false);
         playCloseSound_ = true;
-    }
-
-    void CleanUpMenu()
-    {
-        foreach (Transform child in m_ButtonParent.transform)
-        {
-            GameObject.Destroy(child.gameObject);
-        }
     }
 
     #region Store/Micro transaction stuff
