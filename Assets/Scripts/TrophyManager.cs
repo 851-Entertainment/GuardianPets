@@ -7,7 +7,7 @@ public class TrophyManager : MonoBehaviour
 {
     /// <param name="Trophy Description">Displays what the trophy was</param>
     public string m_Description = "";
-    /// <param name="Where the description lives"></param>
+    /// <param name="Description Textfield">Where the description lives</param>
     public Text m_TextField;
 
     private Color startColor;

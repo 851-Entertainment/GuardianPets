@@ -35,11 +35,6 @@ public class Achievement
     /// <summary>Achievement that is dependent on this achievement</summary>
     private string child;
 
-    private UIController ui_;
-
-    /// <summary>Index for where in the trophy list you are at for unlocks</summary>
-    private int trophyIndex = 0;
-
     #region Properties
 
     public string Name
@@ -93,8 +88,9 @@ public class Achievement
         this.points_ = points;
         this.spriteIndex_ = spriteIndex;
         this.achievementRef_ = achievementRef;
+       
         this.trophy_ = trophy;
-        ui_ = GameObject.Find("Main Camera").GetComponent<UIController>();
+       
         //Loads the achievement so that we have the correct information
         LoadAchievement();
     }
@@ -115,8 +111,6 @@ public class Achievement
         {   
             //Changes the sprite to the unlocked sprite
             achievementRef_.GetComponent<Image>().sprite = AchievementManager.Instance.m_UnlockedSprite;
-
-            CheckTrophy(true);
 
             //Saves the achievement
             SaveAchievement(true);     
@@ -162,31 +156,7 @@ public class Achievement
         {
             AchievementManager.Instance.m_TextPoints.text = "Points: " + PlayerPrefs.GetInt("Points");
             achievementRef_.GetComponent<Image>().sprite = AchievementManager.Instance.m_UnlockedSprite;
-            CheckTrophy(true);
         }
         
-    }
-
-    /// <param name="achievement">Activate a trophy if it has been unlocked</param>
-    void CheckTrophy(bool achievement)
-    {
-        if (achievement)
-        {
-            //get the trophy manager script and enable the trophy at the correct index 
-            TrophyManager trophy = ui_.m_Trophy[trophyIndex].GetComponent<TrophyManager>();
-            ui_.m_Trophy[trophyIndex].SetActive(true);
-
-            //image component on the trophy 
-            Image tophyImage = ui_.m_Trophy[trophyIndex].GetComponent<Image>();
-            //image component on the achievement 
-            Image achievementImage = achievementRef_.transform.FindChild("Image").GetComponent<Image>();
-            //achievement name 
-            Text acievementDescription = achievementRef_.transform.FindChild("Title").GetComponent<Text>();
-
-            //assign the trophy's name and image to the achievements name and image then increment the trophy index
-            tophyImage.sprite = achievementImage.sprite;
-            trophy.m_Description = "Unlocked the " + acievementDescription.text + " achievement!";
-            trophyIndex++;
-        }
     }   
 }

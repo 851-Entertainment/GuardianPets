@@ -39,8 +39,13 @@ public class AchievementManager : MonoBehaviour
     /// <summary>The time it takes for the inventory to fade in and out in seconds</summary>
     private int fadeTime_ = 2;
 
+    /// <summary>Index for where in the trophy list you are at for unlocks</summary>
+    private int trophyIndex = 0;
+
     /// <summary>An instance for the AchievementManager, this is used for the singleton pattern</summary>
     private static AchievementManager instance_;
+
+    private UIController ui_;
 
     /// <summary>A property for accesing the singleton</summary>
     public static AchievementManager Instance
@@ -57,6 +62,8 @@ public class AchievementManager : MonoBehaviour
 
 	void Start () 
     {
+        ui_ = GameObject.Find("Main Camera").GetComponent<UIController>();
+
         //Sets the active button to as the general button, so that we have something to show the first time we open the inventory
         activeButton_ = GameObject.Find("GeneralBtn").GetComponent<AchievementButton>();
 
@@ -295,9 +302,7 @@ public class AchievementManager : MonoBehaviour
                 dependency.Child = title;
                 newAchievement.AddDependency(dependency);
             }
-        }
-
-        
+        }      
     }
 
     /// <summary>Fills the onscreen achievement with information</summary>
@@ -317,6 +322,25 @@ public class AchievementManager : MonoBehaviour
         achievement.transform.GetChild(1).GetComponent<Text>().text = m_Achievements[title].Description;
         achievement.transform.GetChild(2).GetComponent<Text>().text = m_Achievements[title].Points.ToString();
         achievement.transform.GetChild(3).GetComponent<Image>().sprite = m_Sprites[m_Achievements[title].SpriteIndex];
+
+        if (m_Achievements[title].Unlocked)
+        {
+            //get the trophy manager script and enable the trophy at the correct index 
+            TrophyManager trophy = ui_.m_Trophy[trophyIndex].GetComponent<TrophyManager>();
+            ui_.m_Trophy[trophyIndex].SetActive(true);
+
+            //image component on the trophy 
+            Image tophyImage = ui_.m_Trophy[trophyIndex].GetComponent<Image>();
+            //image component on the achievement 
+            Image achievementImage = achievement.transform.FindChild("Image").GetComponent<Image>();
+            //achievement name 
+            Text acievementDescription = achievement.transform.FindChild("Title").GetComponent<Text>();
+
+            //assign the trophy's name and image to the achievements name and image then increment the trophy index
+            tophyImage.sprite = achievementImage.sprite;
+            trophy.m_Description = "Unlocked the " + acievementDescription.text + " achievement!";
+            trophyIndex++;
+        }
     }
 
     /// <summary>Changes the category</summary>
