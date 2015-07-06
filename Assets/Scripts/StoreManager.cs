@@ -62,9 +62,11 @@ public class StoreManager : MonoBehaviour
             GameObject go = (GameObject)Instantiate(m_GoodsButtonPrefab, new Vector3(startXPos, startYPos, 0.0f), Quaternion.identity);
             go.gameObject.transform.SetParent(GameObject.Find(item.m_Category).transform, false);
             go.name = item.m_ItemName;
-            go.GetComponentInChildren<Image>().sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
+            go.transform.GetChild(0).GetComponent<Text>().text = item.m_ItemName;
+            go.transform.GetChild(1).GetComponent<Text>().text = item.m_Description;
+            go.transform.GetChild(2).GetComponent<Text>().text = item.m_Cost.ToString();
+            go.transform.GetChild(3).GetComponent<Image>().sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
             go.GetComponentInChildren<Button>().onClick.AddListener(delegate { uc_.UnlockItem(go); });
-            go.GetComponentInChildren<Text>().text = item.m_Description + " This costs " + item.m_Cost + " shields.";
 
             if (col < maxCol)
             {
@@ -86,11 +88,16 @@ public class StoreManager : MonoBehaviour
         foreach (VirtualCurrencyPack vcp in StoreInfo.CurrencyPacks)
         {
             string itemID = vcp.ItemId;
+            string s = vcp.Description;
+            int index = s.IndexOf("$");
+
             GameObject go = (GameObject)Instantiate(m_GoodsButtonPrefab, new Vector3(startXPos, startYPos, 0.0f), Quaternion.identity);
             go.gameObject.transform.SetParent(GameObject.Find("Shields").transform, false);
-            go.GetComponentInChildren<Image>().sprite = m_ShieldSprite;
+            go.transform.GetChild(0).GetComponent<Text>().text = vcp.Name;
+            go.transform.GetChild(1).GetComponent<Text>().text = vcp.Description;
+            go.transform.GetChild(2).GetComponent<Text>().text = s.Substring(index + 1);
+            go.transform.GetChild(3).GetComponent<Image>().sprite = m_ShieldSprite;
             go.GetComponentInChildren<Button>().onClick.AddListener(delegate { StoreInventory.BuyItem(itemID); });
-            go.GetComponentInChildren<Text>().text = vcp.Description;
 
             if (col < maxCol)
             {

@@ -99,7 +99,7 @@ namespace Soomla.Store
 /*        ACTUAL VALUES                                                                          */
         public static VirtualCurrencyPack HUNDREDEIGHTY_PACK = new VirtualCurrencyPack(
            "180 Shields",                                                //Name
-           "180 Shields!\nThis costs $1.99",                             //Description
+           "This costs $1.99",                                           //Description
            "shields_180",                                                //Item ID
            180,
            SHIELD_CURRENCY_ITEM_ID,                                       //The currency associated with this pack
@@ -108,7 +108,7 @@ namespace Soomla.Store
 
         public static VirtualCurrencyPack FIVEHUNDRED_PACK = new VirtualCurrencyPack(
            "500 Shields",                                                //Name
-           "500 Shields!\n11% More Shields!\nThis costs $4.99",          //Description
+           "11% More Shields!\nThis costs $4.99",                        //Description
            "shields_500",                                                //Item ID
            500,
            SHIELD_CURRENCY_ITEM_ID,                                       //The currency associated with this pack
@@ -117,7 +117,7 @@ namespace Soomla.Store
 
         public static VirtualCurrencyPack TWELVEHUNDRED_PACK = new VirtualCurrencyPack(
            "1200 Shields",                                                //Name
-           "1200 Shields!\n33% More Shields!\nThis costs $9.99",          //Description
+           "33% More Shields!\nThis costs $9.99",                         //Description
            "shields_1200",                                                //Item ID
            1200,
            SHIELD_CURRENCY_ITEM_ID,                                       //The currency associated with this pack
@@ -126,7 +126,7 @@ namespace Soomla.Store
 
         public static VirtualCurrencyPack THIRTYONEHUNDRED_PACK = new VirtualCurrencyPack(
            "3100 Shields",                                                //Name
-           "3100 Shields!\n38% More Shields!\nThis costs $24.99",         //Description
+           "38% More Shields!\nThis costs $24.99",                        //Description
            "shields_3100",                                                //Item ID
            3100,
            SHIELD_CURRENCY_ITEM_ID,                                       //The currency associated with this pack
@@ -135,7 +135,7 @@ namespace Soomla.Store
 
         public static VirtualCurrencyPack SIXTYFIVEHUNDRED_PACK = new VirtualCurrencyPack(
             "6500 Shields",                                                //Name
-            "6500 Shields!\n44% More Shields!\nThis costs $49.99",         //Description
+            "44% More Shields!\nThis costs $49.99",                        //Description
             "shields_6500",                                                //Item ID
             6500,
             SHIELD_CURRENCY_ITEM_ID,                                       //The currency associated with this pack
@@ -144,7 +144,7 @@ namespace Soomla.Store
 
         public static VirtualCurrencyPack FOURTEENTHOUSANDSHIELD_PACK = new VirtualCurrencyPack(
             "14000 Shields",                                                //Name
-            "14000 Shields!\n56% More Shields!\nThis costs $99.99",         //Description
+            "56% More Shields!\nThis costs $99.99",                         //Description
             "shields_14000",                                                //Item ID
             14000,
             SHIELD_CURRENCY_ITEM_ID,                                       //The currency associated with this pack
