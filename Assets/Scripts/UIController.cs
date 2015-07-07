@@ -1055,6 +1055,12 @@ public class UIController : MonoBehaviour
     }
     #endregion 
 
+    /// <param name="obj">Sets whatever object you want active</param>
+    public void OpenMenu(GameObject obj)
+    {
+        obj.SetActive(true);
+    }
+
     /// <param name="">Disables the new player UI to return the player to the game</param>
     public void ReturnToGame()
     {
@@ -1064,7 +1070,7 @@ public class UIController : MonoBehaviour
         currPet_.SetActive(true);
     }
 
-    /// <param name="Menu Bars for UI">///Turns on or off the menu bar based on if it is currently active or not and which bar is in use</param>
+    /// <param name="menuBar">///Turns on or off the menu bar based on if it is currently active or not and which bar is in use</param>
     public void OpenMenuBar(GameObject menuBar)
     {
        if(menuBar.name == m_InteractMenuBar.name)
@@ -1079,7 +1085,7 @@ public class UIController : MonoBehaviour
        }
     }
 
-    /// <param name="Change the active state of the trophy menu"></param>
+    /// <param name="">Change the active state of the trophy menu</param>
     public void SetActiveTrophyMenu()
     {
         m_TrophyMenu.SetActive(!m_TrophyMenu.activeSelf);
