@@ -338,7 +338,7 @@ public class AchievementManager : MonoBehaviour
 
             //assign the trophy's name and image to the achievements name and image then increment the trophy index
             tophyImage.sprite = achievementImage.sprite;
-            trophy.m_Description = "Unlocked the " + acievementDescription.text + " achievement!";
+            trophy.m_Description = "Unlocked the " + acievementDescription.text + "\nachievement!";
             trophyIndex++;
         }
     }
