@@ -22,7 +22,6 @@ public class Pet : MonoBehaviour
     public bool m_IsPlaying;
     private float playingTimer_ = 0.0f;
 
-    private GameController gc_;
     private Animator animator_;
     private float statTimer_;
     private float sickTimer_;
@@ -32,7 +31,6 @@ public class Pet : MonoBehaviour
 
 	void Start ()
     {
-        gc_ = Camera.main.GetComponent<GameController>();
         statTimer_ = Constants.STAT_TIMER;
         animator_ = GetComponent<Animator>();
       
