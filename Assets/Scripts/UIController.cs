@@ -48,6 +48,9 @@ public class UIController : MonoBehaviour
     /// <summary>Shield sprite for the upgrades panel</summary>
     public Sprite m_ShieldSprite;
 
+    /// <summary>The amount a pet will cost if it isn't a new player</summary>
+    public int m_PetCost = 1000; 
+
     #region Scanner Variables
     /// <summary>Plane which is drawing the camera on it</summary>
     public GameObject m_CameraPlane;
@@ -143,6 +146,9 @@ public class UIController : MonoBehaviour
     /// <summary>Game object for the check mark in the New Player UI</summary>
     private GameObject checkMark_;
 
+    /// <summary>Button to go back from pick pet menu</summary>
+    private GameObject returnFromPetMenu_;
+
     /// <summary>Pet Data script</summary>
     private Pet petData_;
 
@@ -198,6 +204,8 @@ public class UIController : MonoBehaviour
 
     void Start () 
     {
+        returnFromPetMenu_ = GameObject.Find("Back Button");
+        returnFromPetMenu_.SetActive(false);
         checkMark_ = GameObject.Find("Check");
         checkMark_.SetActive(false);
         audio_ = GetComponent<AudioSource>();
@@ -325,32 +333,66 @@ public class UIController : MonoBehaviour
     //                -- After the player has selected their pet, it will prompt to give them a nickname
     public void SelectPet(GameObject btn)
     {
-        Transform tempPos;
-        if (clickCounter_ == 0)
+        if (isNewPlayer_)
         {
-            bttnName_ = btn.name;
-            tempPos = btn.GetComponentInChildren<Transform>();
-            checkMark_.transform.position = new Vector3(tempPos.transform.position.x, tempPos.transform.position.y + m_CheckMarkOffset, tempPos.transform.position.z);       
-            checkMark_.SetActive(true);
-            clickCounter_++;
+            Transform tempPos;
+            if (clickCounter_ == 0)
+            {
+                bttnName_ = btn.name;
+                tempPos = btn.GetComponentInChildren<Transform>();
+                checkMark_.transform.position = new Vector3(tempPos.transform.position.x, tempPos.transform.position.y + m_CheckMarkOffset, tempPos.transform.position.z);
+                checkMark_.SetActive(true);
+                clickCounter_++;
+            }
+            else if (clickCounter_ >= 1 && bttnName_ == btn.name)
+            {
+                checkMark_.SetActive(false);
+                m_SelectedPet = btn.name;
+                gc_.CurrentPet = m_SelectedPet;
+                m_NicknamePanel.SetActive(true);
+                gc_.SetUpGame();
+                clickCounter_ = 0;
+                // petsOwned_.Add(bttnName_);
+            }
+            else
+            {
+                bttnName_ = btn.name;
+                tempPos = btn.GetComponentInChildren<Transform>();
+                checkMark_.transform.position = new Vector3(tempPos.transform.position.x, tempPos.transform.position.y + m_CheckMarkOffset, tempPos.transform.position.z);
+                checkMark_.SetActive(true);
+                clickCounter_++;
+            }
         }
-        else if(clickCounter_ >= 1 && bttnName_ == btn.name)
+        else if(m_PlayerData.m_Shields >= m_PetCost && !isNewPlayer_)
         {
-            checkMark_.SetActive(false);
-            m_SelectedPet = btn.name; 
-            gc_.CurrentPet = m_SelectedPet;
-            m_NicknamePanel.SetActive(true);
-            gc_.SetUpGame();
-            clickCounter_ = 0;
-           // petsOwned_.Add(bttnName_);
-        }
-        else
-        {
-            bttnName_ = btn.name;
-            tempPos = btn.GetComponentInChildren<Transform>();
-            checkMark_.transform.position = new Vector3(tempPos.transform.position.x, tempPos.transform.position.y + m_CheckMarkOffset, tempPos.transform.position.z);
-            checkMark_.SetActive(true);
-            clickCounter_++;
+            m_PlayerData.m_Shields -= m_PetCost;
+            Transform tempPos;
+            if (clickCounter_ == 0)
+            {
+                bttnName_ = btn.name;
+                tempPos = btn.GetComponentInChildren<Transform>();
+                checkMark_.transform.position = new Vector3(tempPos.transform.position.x, tempPos.transform.position.y + m_CheckMarkOffset, tempPos.transform.position.z);
+                checkMark_.SetActive(true);
+                clickCounter_++;
+            }
+            else if (clickCounter_ >= 1 && bttnName_ == btn.name)
+            {
+                checkMark_.SetActive(false);
+                m_SelectedPet = btn.name;
+                gc_.CurrentPet = m_SelectedPet;
+                m_NicknamePanel.SetActive(true);
+                gc_.SetUpGame();
+                clickCounter_ = 0;
+                // petsOwned_.Add(bttnName_);
+            }
+            else
+            {
+                bttnName_ = btn.name;
+                tempPos = btn.GetComponentInChildren<Transform>();
+                checkMark_.transform.position = new Vector3(tempPos.transform.position.x, tempPos.transform.position.y + m_CheckMarkOffset, tempPos.transform.position.z);
+                checkMark_.SetActive(true);
+                clickCounter_++;
+            }
         }
     }
 
@@ -995,6 +1037,8 @@ public class UIController : MonoBehaviour
     {
         if(!(m_PlayerData.m_Pets.Count >= Constants.MAX_PETS))
         {
+            isNewPlayer_ = false;
+            returnFromPetMenu_.SetActive(true);
             //Sets up the new layer UI again and turns off the game UI 
             m_GameUI.SetActive(false);
             currPet_.SetActive(false);
@@ -1010,6 +1054,15 @@ public class UIController : MonoBehaviour
         }
     }
     #endregion 
+
+    /// <param name="">Disables the new player UI to return the player to the game</param>
+    public void ReturnToGame()
+    {
+        m_NewPlayerUI.SetActive(false);
+        m_GameUI.SetActive(true);
+        m_PetMenuBar.SetActive(false);
+        currPet_.SetActive(true);
+    }
 
     /// <param name="Menu Bars for UI">///Turns on or off the menu bar based on if it is currently active or not and which bar is in use</param>
     public void OpenMenuBar(GameObject menuBar)
