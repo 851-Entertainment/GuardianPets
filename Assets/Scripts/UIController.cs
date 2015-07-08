@@ -20,6 +20,8 @@ public class UIController : MonoBehaviour
     public GameObject m_InteractMenuBar;
     public GameObject m_PetMenuBar;
     public GameObject m_TrophyMenu;
+    /// <summary>Button for playing with the pet</summary>
+    public GameObject m_PlayButton;
 
     /// <summary>List of the trophies to unlock</summary>
     public List<GameObject> m_Trophy = new List<GameObject>();
@@ -1055,10 +1057,10 @@ public class UIController : MonoBehaviour
     }
     #endregion 
 
-    /// <param name="obj">Sets whatever object you want active</param>
+    /// <param name="obj">Sets whatever object you want to the opposite state it is in</param>
     public void OpenMenu(GameObject obj)
     {
-        obj.SetActive(true);
+        obj.SetActive(!obj.activeSelf);
     }
 
     /// <param name="">Disables the new player UI to return the player to the game</param>
@@ -1089,5 +1091,11 @@ public class UIController : MonoBehaviour
     public void SetActiveTrophyMenu()
     {
         m_TrophyMenu.SetActive(!m_TrophyMenu.activeSelf);
+    }
+
+    /// <param name="bttn">Changes the play button source image with the button image of the passed in parameter</param>
+    public void ChangePlayButtonImage(Button bttn)
+    {
+        m_PlayButton.GetComponent<Image>().sprite = bttn.image.sprite;
     }
 }
