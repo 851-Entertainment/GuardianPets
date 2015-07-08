@@ -10,6 +10,7 @@ public class UIController : MonoBehaviour
     public List<string> m_PlayerItems = new List<string>();
     public GameObject[] m_ChangePetButtons;
     public GameObject[] m_AnimalButtons;
+    public GameObject[] m_Toys;
     public GameObject m_ChangePetPanel;
     public GameObject m_GameUI;
     public GameObject m_SpeechBubble;
@@ -283,6 +284,7 @@ public class UIController : MonoBehaviour
         }
         m_CameraPlane.GetComponent<CameraAccess>().UpdateCamera();
         UpdateSpeech();
+        UpdateToys();
 	}
 
     void UpdateTimer()
@@ -1097,5 +1099,20 @@ public class UIController : MonoBehaviour
     public void ChangePlayButtonImage(Button bttn)
     {
         m_PlayButton.GetComponent<Image>().sprite = bttn.image.sprite;
+    }
+
+    /// <param name="">When a toy has been unlocked enable the button</param>
+    void UpdateToys()
+    {
+        for(int i = 0; i < m_PlayerItems.Count; ++i)
+        {
+           for(int j = 0; j < m_Toys.Length; ++i)
+           {
+               if(m_Toys[j].name == m_PlayerItems[i] && m_Toys[j].activeSelf != true)
+               {
+                   m_Toys[j].SetActive(true);
+               }
+           }
+        }
     }
 }
