@@ -1104,15 +1104,15 @@ public class UIController : MonoBehaviour
     /// <param name="">When a toy has been unlocked enable the button</param>
     void UpdateToys()
     {
-        for(int i = 0; i < m_PlayerItems.Count; ++i)
+        for (int i = 0; i < m_Toys.Length; ++i)
         {
-           for(int j = 0; j < m_Toys.Length; ++i)
-           {
-               if(m_Toys[j].name == m_PlayerItems[i] && m_Toys[j].activeSelf != true)
+            for(int j = 0; j < m_PlayerItems.Count; ++j)
+            {
+               if(m_Toys[i].name == m_PlayerItems[j])
                {
-                   m_Toys[j].SetActive(true);
+                   m_Toys[i].SetActive(true);
                }
-           }
+            }
         }
     }
 }
