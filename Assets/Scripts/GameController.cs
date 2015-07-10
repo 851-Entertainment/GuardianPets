@@ -227,7 +227,7 @@ public class GameController : MonoBehaviour
                 }
             }
 
-                ui_.TimesFed = sData.m_TimesFed;
+            ui_.TimesFed = sData.m_TimesFed;
             ui_.TimesPlayed = sData.m_TimesPlayed;
             ui_.TimesWashed = sData.m_TimesPlayed;
             ui_.m_PlayerItems = sData.m_PlayerItems;
@@ -235,7 +235,10 @@ public class GameController : MonoBehaviour
             DateTime now = DateTime.Now;
             TimeSpan ts = now - Convert.ToDateTime(sData.m_CloseDate);
             float minutesElapsed = (float)ts.TotalMinutes / 5;
+            float secondsElapsed = (float)ts.TotalSeconds;
             float energyToAdd;
+            ui_.EnergyTimer = secondsElapsed;
+
             if(minutesElapsed >= 1)
             {
                 energyToAdd = minutesElapsed;

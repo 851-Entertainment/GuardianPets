@@ -21,6 +21,8 @@ public class UIController : MonoBehaviour
     public GameObject m_InteractMenuBar;
     public GameObject m_PetMenuBar;
     public GameObject m_TrophyMenu;
+    public float EnergyTimer { get { return energyTimer_; } set { energyTimer_ = value; } }
+
     /// <summary>Button for playing with the pet</summary>
     public GameObject m_PlayButton;
 
@@ -232,7 +234,7 @@ public class UIController : MonoBehaviour
         {
             RemoveUI();
         }
-
+        
         energyTimer_ = Constants.ENERGY_TIMER;
         m_EnergySlider.minValue = 0;
         m_EnergySlider.maxValue = Constants.DEFAULT_MAX_ENERGY;
@@ -326,6 +328,7 @@ public class UIController : MonoBehaviour
                 scannerTimer_ = 0.0f;
             }
         }
+       
     }
 
     void RemoveUI()
