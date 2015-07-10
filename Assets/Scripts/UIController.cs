@@ -262,11 +262,11 @@ public class UIController : MonoBehaviour
 
             if(m_PlayerData.m_Energy == 0)
             {
-                m_EnergySlider.fillRect.GetComponent<Image>().color = Color.black;
+                //m_EnergySlider.fillRect.GetComponent<Image>().color = Color.black;
             }
             else
             {
-                m_EnergySlider.fillRect.GetComponent<Image>().color = Color.yellow;
+                //m_EnergySlider.fillRect.GetComponent<Image>().color = Color.yellow;
             }
             petData_ = currPet_.GetComponent<Pet>();
 
