@@ -260,14 +260,6 @@ public class UIController : MonoBehaviour
             m_ShieldsText.text = GuardianPetsAssets.SHIELD_CURRENCY.GetBalance().ToString();
             m_EnergySlider.value = m_PlayerData.m_Energy + energySliderIncrease_;
 
-            if(m_PlayerData.m_Energy == 0)
-            {
-                //m_EnergySlider.fillRect.GetComponent<Image>().color = Color.black;
-            }
-            else
-            {
-                //m_EnergySlider.fillRect.GetComponent<Image>().color = Color.yellow;
-            }
             petData_ = currPet_.GetComponent<Pet>();
 
             m_LoveSlider.value = petData_.m_Love;
