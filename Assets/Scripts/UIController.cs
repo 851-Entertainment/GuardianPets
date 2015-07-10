@@ -271,11 +271,11 @@ public class UIController : MonoBehaviour
             m_LoveSlider.value = petData_.m_Love;
             if (petData_.m_Love == 300)
             {
-                m_LoveSlider.fillRect.GetComponent<Image>().color = Color.red;
+                //m_LoveSlider.fillRect.GetComponent<Image>().color = Color.red;
             }
             else
             {
-                m_LoveSlider.fillRect.GetComponent<Image>().color = Color.black;
+                //m_LoveSlider.fillRect.GetComponent<Image>().color = Color.black;
             }
 
             UpdateTimer();
