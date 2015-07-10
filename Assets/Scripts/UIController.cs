@@ -181,6 +181,8 @@ public class UIController : MonoBehaviour
     private bool upgradeEnergy_ = false;
     private bool setFearString_ = true;
     private bool playCloseSound_ = true;
+    ///<summary>Can update the check toy function. False if all toys have been unlocked</summary>
+    private bool checkToys_ = true;
     private bool isNewPlayer_;
     private bool scannerActive_;
     private float setSpeechTimer_;
@@ -197,6 +199,8 @@ public class UIController : MonoBehaviour
     private int timesPlayed_;
     private int timesFed_;
     private int timesWashed_;
+    private int toyIndex_ = 0;
+    private int playerItemIndex_ = 0;
     #endregion
 
     #region Attributes
@@ -1093,17 +1097,35 @@ public class UIController : MonoBehaviour
         m_PlayButton.GetComponent<Image>().sprite = bttn.image.sprite;
     }
 
-    /// <param name="">When a toy has been unlocked enable the button</param>
+    /// <param name="">Loops through the toy array and the player item array and sees if what the player currently has matches an item in the toy array. If so set it active in the scene.</param>
     void UpdateToys()
     {
-        for (int i = 0; i < m_Toys.Length; ++i)
+        if (checkToys_)
         {
-            for(int j = 0; j < m_PlayerItems.Count; ++j)
+            for (toyIndex_ = 0; toyIndex_ < m_Toys.Length; ++toyIndex_)
             {
-               if(m_Toys[i].name == m_PlayerItems[j])
-               {
-                   m_Toys[i].SetActive(true);
-               }
+                for (int playerItemIndex_ = 0; playerItemIndex_ < m_PlayerItems.Count; ++playerItemIndex_)
+                {
+                    if (m_Toys[toyIndex_].name == m_PlayerItems[playerItemIndex_])
+                    {
+                        m_Toys[toyIndex_].SetActive(true);
+                    }
+                }
+            }
+
+            //if not all the toys are active in the scene reset the counters so we can check again
+            foreach (GameObject obj in m_Toys)
+            {
+                if (obj.activeSelf == false)
+                {
+                    toyIndex_ = 0;
+                    playerItemIndex_ = 0;
+                    checkToys_ = true;
+                }
+                else
+                {
+                    checkToys_ = false;
+                }
             }
         }
     }
