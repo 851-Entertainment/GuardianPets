@@ -39,6 +39,9 @@ public class UIController : MonoBehaviour
     /// <summary>Plane which is drawing the background image on it</summary>
     public GameObject m_BackgroundPlane;
 
+    /// <summary>Panel for the achievement menu</summary>
+    public GameObject m_AchievementPanel;
+
     /// <summary>Name of selected pet</summary>
     public string m_SelectedPet;
 
@@ -530,6 +533,11 @@ public class UIController : MonoBehaviour
         if (m_UpgradePanel.activeSelf)
         {
             m_UpgradePanel.SetActive(false);
+            AudioSource.PlayClipAtPoint(m_ClickClip, transform.position);
+        }
+        if(m_AchievementPanel.activeSelf)
+        {
+            m_AchievementPanel.SetActive(false);
             AudioSource.PlayClipAtPoint(m_ClickClip, transform.position);
         }
     }
