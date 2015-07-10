@@ -201,6 +201,7 @@ public class UIController : MonoBehaviour
     private int timesWashed_;
     private int toyIndex_ = 0;
     private int playerItemIndex_ = 0;
+    private int numToysActive;
     #endregion
 
     #region Attributes
@@ -211,6 +212,7 @@ public class UIController : MonoBehaviour
 
     void Start () 
     {
+        checkToys_ = true;
         returnFromPetMenu_ = GameObject.Find("Back Button");
         returnFromPetMenu_.SetActive(false);
         checkMark_ = GameObject.Find("Check");
@@ -1120,12 +1122,16 @@ public class UIController : MonoBehaviour
                 {
                     toyIndex_ = 0;
                     playerItemIndex_ = 0;
-                    checkToys_ = true;
                 }
                 else
                 {
-                    checkToys_ = false;
+                    numToysActive++;
                 }
+            }
+
+            if (numToysActive >= m_Toys.Length)
+            {
+                 checkToys_ = false;
             }
         }
     }
