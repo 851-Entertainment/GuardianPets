@@ -201,7 +201,7 @@ public class UIController : MonoBehaviour
     private int timesWashed_;
     private int toyIndex_ = 0;
     private int playerItemIndex_ = 0;
-    private int numToysActive;
+    private int numToysActive = -1;
     #endregion
 
     #region Attributes
@@ -1108,9 +1108,10 @@ public class UIController : MonoBehaviour
             {
                 for (int playerItemIndex_ = 0; playerItemIndex_ < m_PlayerItems.Count; ++playerItemIndex_)
                 {
-                    if (m_Toys[toyIndex_].name == m_PlayerItems[playerItemIndex_])
-                    {
+                    if (m_Toys[toyIndex_].name == m_PlayerItems[playerItemIndex_] && m_Toys[toyIndex_].activeSelf != true)
+                    {     
                         m_Toys[toyIndex_].SetActive(true);
+                        IncrementNumToys();
                     }
                 }
             }
@@ -1123,15 +1124,24 @@ public class UIController : MonoBehaviour
                     toyIndex_ = 0;
                     playerItemIndex_ = 0;
                 }
-                else
-                {
-                    numToysActive++;
-                }
             }
 
             if (numToysActive >= m_Toys.Length)
             {
                  checkToys_ = false;
+            }
+        }
+    }
+
+    /// <param name="">If something is active in the toys array increment the counter</param>
+    void IncrementNumToys()
+    {
+        //if not all the toys are active in the scene reset the counters so we can check again
+        foreach (GameObject obj in m_Toys)
+        {
+            if (obj.activeSelf == true)
+            {
+                numToysActive++;
             }
         }
     }
