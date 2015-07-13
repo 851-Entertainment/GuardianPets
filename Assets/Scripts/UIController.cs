@@ -41,9 +41,6 @@ public class UIController : MonoBehaviour
     /// <summary>Plane which is drawing the background image on it</summary>
     public GameObject m_BackgroundPlane;
 
-    /// <summary>Panel for the achievement menu</summary>
-    public GameObject m_AchievementPanel;
-
     /// <summary>Name of selected pet</summary>
     public string m_SelectedPet;
 
@@ -157,6 +154,9 @@ public class UIController : MonoBehaviour
     /// <summary>Button to go back from pick pet menu</summary>
     private GameObject returnFromPetMenu_;
 
+    /// <summary>Panel for the achievement menu</summary>
+    private GameObject achievementPanel_;
+
     /// <summary>Pet Data script</summary>
     private Pet petData_;
 
@@ -218,6 +218,7 @@ public class UIController : MonoBehaviour
     void Start () 
     {
         checkToys_ = true;
+        achievementPanel_ = GameObject.Find("AchievementMenu");
         returnFromPetMenu_ = GameObject.Find("Back Button");
         returnFromPetMenu_.SetActive(false);
         checkMark_ = GameObject.Find("Check");
@@ -533,9 +534,9 @@ public class UIController : MonoBehaviour
             m_UpgradePanel.SetActive(false);
             AudioSource.PlayClipAtPoint(m_ClickClip, transform.position);
         }
-        if(m_AchievementPanel.activeSelf)
+        if (achievementPanel_.activeSelf)
         {
-            m_AchievementPanel.SetActive(false);
+            achievementPanel_.SetActive(false);
             AudioSource.PlayClipAtPoint(m_ClickClip, transform.position);
         }
     }
