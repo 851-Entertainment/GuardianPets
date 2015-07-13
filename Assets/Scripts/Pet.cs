@@ -43,7 +43,8 @@ public class Pet : MonoBehaviour
         UpdateSpeechBubble();
         SpeechBubbleTimer();
         MakePetSick();
-        m_Love = m_Hunger + m_Cleanliness + m_Bored;
+        //m_Love = m_Hunger + m_Cleanliness + m_Bored;
+        m_Love = -20;
 	}
 
     void MakePetSick()

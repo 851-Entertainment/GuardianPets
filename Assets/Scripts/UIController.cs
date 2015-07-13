@@ -277,14 +277,6 @@ public class UIController : MonoBehaviour
             petData_ = currPet_.GetComponent<Pet>();
 
             m_LoveSlider.value = petData_.m_Love;
-            if (petData_.m_Love == 300)
-            {
-                //m_LoveSlider.fillRect.GetComponent<Image>().color = Color.red;
-            }
-            else
-            {
-                //m_LoveSlider.fillRect.GetComponent<Image>().color = Color.black;
-            }
 
             UpdateTimer();
         }
@@ -468,7 +460,7 @@ public class UIController : MonoBehaviour
             if (currPet_.GetComponent<Pet>().m_Hunger <= Constants.MIN_PET_STAT)
             {
                 currPet_.GetComponent<Pet>().m_Hunger = Constants.MIN_PET_STAT;
-                if (/*currPet_.GetComponent<Pet>().CheckShieldConditions()*/ petData_.m_Love == 0)
+                if (petData_.m_Love == 0)
                 {
                     GuardianPetsAssets.SHIELD_CURRENCY.Give(Constants.SHIELDS_REWARDED, false);
                 }
@@ -499,7 +491,7 @@ public class UIController : MonoBehaviour
             if (currPet_.GetComponent<Pet>().m_Bored <= Constants.MIN_PET_STAT)
             {
                 currPet_.GetComponent<Pet>().m_Bored = Constants.MIN_PET_STAT;
-                if (/*currPet_.GetComponent<Pet>().CheckShieldConditions()*/ petData_.m_Love == 0)
+                if (petData_.m_Love == 0)
                 {
                     GuardianPetsAssets.SHIELD_CURRENCY.Give(Constants.SHIELDS_REWARDED, false);
                 }
@@ -521,7 +513,7 @@ public class UIController : MonoBehaviour
             if (currPet_.GetComponent<Pet>().m_Cleanliness <= Constants.MIN_PET_STAT)
             {
                 currPet_.GetComponent<Pet>().m_Cleanliness = Constants.MIN_PET_STAT;
-                if (/*currPet_.GetComponent<Pet>().CheckShieldConditions()*/ petData_.m_Love == 0)
+                if (petData_.m_Love == 0)
                 {
                     GuardianPetsAssets.SHIELD_CURRENCY.Give(Constants.SHIELDS_REWARDED, false);
                 }
