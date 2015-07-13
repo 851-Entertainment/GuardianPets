@@ -280,7 +280,7 @@ public class UIController : MonoBehaviour
 
             petData_ = currPet_.GetComponent<Pet>();
 
-            m_LoveSlider.value = petData_.m_Love;
+            m_LoveSlider.value = 300.0f - petData_.m_Love;
 
             UpdateTimer();
         }
