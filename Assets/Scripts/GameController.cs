@@ -180,6 +180,7 @@ public class GameController : MonoBehaviour
             sData.m_TimesPlayed = ui_.TimesPlayed;
             sData.m_TimesFed = ui_.TimesFed;
             sData.m_PlayerItems = ui_.m_PlayerItems;
+            sData.m_EnergyTimer = ui_.EnergyTimer;
 
             bf.Serialize(file, sData);
             file.Close();
@@ -237,7 +238,7 @@ public class GameController : MonoBehaviour
             float minutesElapsed = (float)ts.TotalMinutes / 5;
             float secondsElapsed = (float)ts.TotalSeconds;
             float energyToAdd;
-            ui_.EnergyTimer = secondsElapsed;
+            ui_.EnergyTimer = sData.m_EnergyTimer - secondsElapsed;
 
             if(minutesElapsed >= 1)
             {
@@ -305,6 +306,9 @@ class SaveData
 
     /// <summary>Amount of times the player has washed their pet</summary>
     public int m_TimesCleaned;
+
+    /// <summary>Player's Energy Timer when saved</summary>
+    public float m_EnergyTimer;
 }
 
 [Serializable]

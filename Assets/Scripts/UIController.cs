@@ -234,8 +234,11 @@ public class UIController : MonoBehaviour
         {
             RemoveUI();
         }
-        
-        energyTimer_ = Constants.ENERGY_TIMER;
+        if(isNewPlayer_)
+        {
+            energyTimer_ = Constants.ENERGY_TIMER;
+        }
+
         m_EnergySlider.minValue = 0;
         m_EnergySlider.maxValue = Constants.DEFAULT_MAX_ENERGY;
         m_LoveSlider.minValue = 0;
