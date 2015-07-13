@@ -43,10 +43,11 @@ public class Pet : MonoBehaviour
         UpdateSpeechBubble();
         SpeechBubbleTimer();
         MakePetSick();
-        //m_Love = m_Hunger + m_Cleanliness + m_Bored;
-        m_Love = -20;
+        m_Love = m_Hunger + m_Cleanliness + m_Bored;
+       // m_Love = -20;
 	}
 
+    /// <param name="">Makes pet sick if the random number hits 50</param>
     void MakePetSick()
     {
         sickTimer_ += Time.deltaTime;
@@ -61,7 +62,7 @@ public class Pet : MonoBehaviour
         }
     }
 
-
+    /// <param name="">Updates the pet's animations</param>
     void UpdateAnim()
     {
         if (m_IsDancing)
@@ -159,6 +160,7 @@ public class Pet : MonoBehaviour
         return retVal;
     }
 
+    /// <param name="">Every 45 seconds a random number is generated and checks if the pet is hungry, bored or needs a bath. If any is true the bool for it is set true</param>
     void UpdateSpeechBubble()
     {
         ranNumTimer_ += Time.deltaTime;
@@ -166,22 +168,22 @@ public class Pet : MonoBehaviour
         {
             ranNumTimer_ = 0.0f;
             int randNum = Random.Range(0, 3);
-            if (randNum == 0)
+            if (randNum == 0 && m_Hunger >= 10.0f)
             {
                 m_IsHungry = true;
             }
-            else if (randNum == 1)
+            else if (randNum == 1 && m_Bored >= 10.0f)
             {
                 m_IsBored = true;
             }
-            else if (randNum == 2)
+            else if (randNum == 2 && m_Cleanliness >= 10.0f)
             {
                 m_NeedsCleaning = true;
             }
         }
-      
     }
 
+    /// <param name="">Timer for enabling and disabling the timer</param>
     void SpeechBubbleTimer()
     {
         if(m_NeedsCleaning || m_IsBored || m_IsHungry)
