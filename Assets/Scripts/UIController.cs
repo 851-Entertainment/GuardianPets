@@ -226,6 +226,9 @@ public class UIController : MonoBehaviour
         audio_ = GetComponent<AudioSource>();
         gc_ = Camera.main.GetComponent<GameController>();
         isNewPlayer_ = gc_.m_FirstTimePlayer;
+
+        m_NicknameIF.characterLimit = Constants.CHARACTER_LIMIT;
+
         if (isNewPlayer_)
         {
             m_GameUI.SetActive(false);

@@ -24,4 +24,5 @@ public class Constants : MonoBehaviour
     public const int SHIELDS_REWARDED = 1; //This is the amount of shields the player is awarded for meeting/maintaining the 3 conditions of the pet
     public const int BASE_UPGRADE_COST = 10; //This is the base upgrade cost that gets multiplied with the upgrade level
     public const int RADAR_TIME = 60; //Time in seconds for radar to rotate around once
+    public const int CHARACTER_LIMIT = 12; //Max amount of characters in any given text box
 }
