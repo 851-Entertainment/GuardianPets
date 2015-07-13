@@ -160,11 +160,11 @@ public class Pet : MonoBehaviour
         return retVal;
     }
 
-    /// <param name="">Every 45 seconds a random number is generated and checks if the pet is hungry, bored or needs a bath. If any is true the bool for it is set true</param>
+    /// <param name="">Every 50 seconds a random number is generated and checks if the pet is hungry, bored or needs a bath. If any is true the bool for it is set true</param>
     void UpdateSpeechBubble()
     {
         ranNumTimer_ += Time.deltaTime;
-        if (ranNumTimer_ >= 45.0f)
+        if (ranNumTimer_ >= 50.0f)
         {
             ranNumTimer_ = 0.0f;
             int randNum = Random.Range(0, 3);
