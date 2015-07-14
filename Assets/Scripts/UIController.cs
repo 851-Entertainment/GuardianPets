@@ -11,6 +11,7 @@ public class UIController : MonoBehaviour
     public GameObject[] m_ChangePetButtons;
     public GameObject[] m_AnimalButtons;
     public GameObject[] m_Toys;
+    public List<GameObject> m_StoreButtons = new List<GameObject>();
     public GameObject m_ChangePetPanel;
     public GameObject m_GameUI;
     public GameObject m_SpeechBubble;
@@ -593,7 +594,6 @@ public class UIController : MonoBehaviour
             go.GetComponentInChildren<Image>().sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
             go.GetComponentInChildren<Button>().onClick.AddListener(delegate { UnlockItem(go); });
             go.GetComponentInChildren<Text>().text = item.m_Description + " This costs " + item.m_Cost + " shields.";
-
             if (col < maxCol)
             {
                 col++;
@@ -831,8 +831,7 @@ public class UIController : MonoBehaviour
                         gc_.m_Items[i].gameObject.transform.SetParent(obj.transform);
                     }
                     m_PlayerItems.Add(gc_.m_Items[i].name);  
-//                    go.GetComponent<Button>().interactable = false;
-      //              go.GetComponentInChildren<Text>().text = "";    
+                    go.GetComponent<Button>().interactable = false;    
                 }
             }
         }
@@ -854,6 +853,13 @@ public class UIController : MonoBehaviour
                     {
                         GameObject obj = GameObject.Find(gc_.m_Items[i].m_Names[gc_.m_Items[i].m_ItemSpot]);    //get the waypoint the item will be at
                         gc_.m_Items[i].gameObject.transform.SetParent(obj.transform);
+                    }
+                    for(int j = 0; j < m_StoreButtons.Count; ++j)
+                    {
+                        if(m_StoreButtons[j].name == go)
+                        {
+                            m_StoreButtons[j].GetComponent<Button>().interactable = false;
+                        }
                     }
                 }
             }

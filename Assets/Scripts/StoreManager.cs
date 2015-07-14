@@ -67,7 +67,7 @@ public class StoreManager : MonoBehaviour
             go.transform.GetChild(3).GetComponent<Text>().text = item.m_Cost.ToString();
             go.transform.GetChild(4).GetComponent<Image>().sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
             go.GetComponentInChildren<Button>().onClick.AddListener(delegate { uc_.UnlockItem(go); });
-
+            uc_.m_StoreButtons.Add(go);
             if (col < maxCol)
             {
                 col++;
