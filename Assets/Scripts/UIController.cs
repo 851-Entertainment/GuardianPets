@@ -149,6 +149,8 @@ public class UIController : MonoBehaviour
     /// <summary>Game object of player's current pet</summary>
     private GameObject currPet_;
 
+    private GameObject petSheildCost_;
+
     /// <summary>Game object for the check mark in the New Player UI</summary>
     private GameObject checkMark_;
 
@@ -221,7 +223,9 @@ public class UIController : MonoBehaviour
         checkToys_ = true;
         achievementPanel_ = GameObject.Find("AchievementMenu");
         returnFromPetMenu_ = GameObject.Find("Back Button");
+        petSheildCost_ = GameObject.Find("Sheilds ");
         returnFromPetMenu_.SetActive(false);
+        petSheildCost_.SetActive(false);
         checkMark_ = GameObject.Find("Check");
         checkMark_.SetActive(false);
         audio_ = GetComponent<AudioSource>();
@@ -1057,6 +1061,7 @@ public class UIController : MonoBehaviour
         {
             isNewPlayer_ = false;
             returnFromPetMenu_.SetActive(true);
+            petSheildCost_.SetActive(true);
             //Sets up the new layer UI again and turns off the game UI 
             m_GameUI.SetActive(false);
             currPet_.SetActive(false);
