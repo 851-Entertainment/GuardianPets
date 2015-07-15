@@ -1,9 +1,11 @@
 fileFormatVersion: 2
 guid: 95885ff097f55774a9ed53ece128c9e1
-timeCreated: 1436543962
+timeCreated: 1436971331
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Left-Right Buttons_0
+    21300002: Left-Right Buttons_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -48,7 +50,27 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: Left-Right Buttons_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 69
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Left-Right Buttons_1
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 69
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
   assetBundleName: 
