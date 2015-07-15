@@ -10,6 +10,7 @@ public class LoadingScreen : MonoBehaviour
 
     private int loadProgress_ = 0;
     private float timer_ = 0.0f;
+    private bool loadDone_ = false;
 
     void Start()
     {
@@ -31,12 +32,14 @@ public class LoadingScreen : MonoBehaviour
         m_Text.text = "Loading..." + loadProgress_ + "%";
 
         AsyncOperation async = Application.LoadLevelAsync("Game");
+        async.allowSceneActivation = false;
 
-        while(!async.isDone)
+        while (!async.isDone)
         {
             loadProgress_ = (int)(async.progress * 100);
             m_Text.text = "Loading..." + loadProgress_ + "%";
             m_ProgressBar.transform.localScale = new Vector3(async.progress, m_ProgressBar.transform.localScale.y, m_ProgressBar.transform.localScale.z);
+            
             yield return null;
         }
     }
