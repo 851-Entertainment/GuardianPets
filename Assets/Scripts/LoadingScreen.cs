@@ -38,7 +38,11 @@ public class LoadingScreen : MonoBehaviour
                 }
                 if (loadProgress_ >= 100.0f)
                 {
-                    async.allowSceneActivation = true;
+                    timer_ += Time.deltaTime;
+                    if(timer_ >= 3.0f)
+                    {
+                        async.allowSceneActivation = true;
+                    }
                 }
             }
         }
