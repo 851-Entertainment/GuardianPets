@@ -28,12 +28,15 @@ public class LoadingScreen : MonoBehaviour
 
         if(async != null)
         {
-            Debug.Log("async not null");
             if(async.progress >= 0.9f)
             {
-                Debug.Log("Async is done");
-                timer_ += Time.deltaTime;
-                if(timer_ >= 3.0f)
+                while (loadProgress_ < 99.9f)
+                {
+                    loadProgress_++;
+                    m_Text.text = "Loading..." + loadProgress_ + "%";
+                    m_ProgressBar.transform.localScale = new Vector3((loadProgress_ / 100), m_ProgressBar.transform.localScale.y, m_ProgressBar.transform.localScale.z);
+                }
+                if (loadProgress_ >= 100.0f)
                 {
                     async.allowSceneActivation = true;
                 }
@@ -43,31 +46,18 @@ public class LoadingScreen : MonoBehaviour
 
     IEnumerator DisplayLoadingScreen()
     {
-        m_ProgressBar.transform.localScale = new Vector3(loadProgress_, m_ProgressBar.transform.localScale.y, m_ProgressBar.transform.localScale.z);
+        m_ProgressBar.transform.localScale = new Vector3((loadProgress_ / 100), m_ProgressBar.transform.localScale.y, m_ProgressBar.transform.localScale.z);
 
         m_Text.text = "Loading..." + loadProgress_ + "%";
-
         
         async.allowSceneActivation = false;
 
-        while (!async.isDone)
+        while (async.progress < 0.9f)
         {
-            Debug.Log("Loading");
             loadProgress_ = (int)(async.progress * 100);
             m_Text.text = "Loading..." + loadProgress_ + "%";
             m_ProgressBar.transform.localScale = new Vector3(async.progress, m_ProgressBar.transform.localScale.y, m_ProgressBar.transform.localScale.z);
             yield return null;
-        }
-        //StartScene(async);
-        
-        
-    }
-
-    void StartScene(AsyncOperation scene)
-    {
-        if (scene.isDone)
-        {
-            scene.allowSceneActivation = true;
         }
     }
 }
