@@ -313,6 +313,9 @@ public class UIController : MonoBehaviour
             {
                 gc_.m_PlayerData.m_Energy += Constants.ENERGY_REWARDED;
                 energyTimer_ = Constants.ENERGY_TIMER;
+                minutes_ = Mathf.Floor(energyTimer_ / 60).ToString("00");
+                seconds_ = (energyTimer_ % 60).ToString("00");
+                m_EnergyTimerText.text = minutes_ + ":" + seconds_;
             }
         }
         else
@@ -488,7 +491,7 @@ public class UIController : MonoBehaviour
             RandomSound(1, m_FeedClip);
             if (gc_.m_PlayerData.m_Energy == 20)
             {
-                energyTimer_ = 300f;
+                energyTimer_ = Constants.ENERGY_TIMER;
             }
         }
     }
@@ -522,7 +525,7 @@ public class UIController : MonoBehaviour
             RandomSound(2, m_PlayClip);
             if(gc_.m_PlayerData.m_Energy == 20)
             {
-                energyTimer_ = 300f;
+                energyTimer_ = Constants.ENERGY_TIMER;
             }
         }
     }
@@ -548,7 +551,7 @@ public class UIController : MonoBehaviour
             RandomSound(2, m_CleanClip);
             if (gc_.m_PlayerData.m_Energy == 20)
             {
-                energyTimer_ = 300f;
+                energyTimer_ = Constants.ENERGY_TIMER;
             }
         }
     }
@@ -704,7 +707,7 @@ public class UIController : MonoBehaviour
             gc_.m_PlayerData.RemoveEnergy();
             if (gc_.m_PlayerData.m_Energy == 20)
             {
-                energyTimer_ = 300f;
+                energyTimer_ = Constants.ENERGY_TIMER;
             }
         }
     }
