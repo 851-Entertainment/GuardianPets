@@ -189,6 +189,7 @@ public class UIController : MonoBehaviour
     private bool upgradeEnergy_ = false;
     private bool setFearString_ = true;
     private bool playCloseSound_ = true;
+    private bool resetTimerValue_ = true;
     ///<summary>Can update the check toy function. False if all toys have been unlocked</summary>
     private bool checkToys_ = true;
     private bool isNewPlayer_;
@@ -286,7 +287,6 @@ public class UIController : MonoBehaviour
             petData_ = currPet_.GetComponent<Pet>();
 
             m_LoveSlider.value = 300.0f - petData_.m_Love;
-
             UpdateTimer();
         }
         m_CameraPlane.GetComponent<CameraAccess>().UpdateCamera();
@@ -299,11 +299,16 @@ public class UIController : MonoBehaviour
         if (gc_.m_PlayerData.m_Energy < Constants.DEFAULT_MAX_ENERGY)
         {
             m_EnergyTimerText.enabled = true;
-            energyTimer_ -= Time.deltaTime;
+            if (resetTimerValue_)
+            {
+                //for the first run
+                energyTimer_ = Constants.ENERGY_TIMER;
+                resetTimerValue_ = false;
+            }   
             minutes_ = Mathf.Floor(energyTimer_ / 60).ToString("00");
             seconds_ = (energyTimer_ % 60).ToString("00");
             m_EnergyTimerText.text = minutes_ + ":" + seconds_;
-
+            energyTimer_ -= Time.deltaTime;
             if (energyTimer_ <= 0.0f)
             {
                 gc_.m_PlayerData.m_Energy += Constants.ENERGY_REWARDED;
