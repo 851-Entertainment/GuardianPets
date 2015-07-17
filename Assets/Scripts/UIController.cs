@@ -916,31 +916,38 @@ public class UIController : MonoBehaviour
                 gc_.m_PlayerData.m_Pets[i].SetActive(false);
             }
         }
+
         //turn on the proper one based on the name passed in
         #region Activate Pet
         if (name == "Lion" && lion_ != null)
         {
             lion_.SetActive(true);
+            setFearString_ = true;
         }
         else if (name == "Elephant" && elephant_ != null)
         {
             elephant_.SetActive(true);
+            setFearString_ = true;
         }
         else if (name == "Hippo" && hippo != null)
         {
             hippo.SetActive(true);
+            setFearString_ = true;
         }
         else if (name == "Bear" && bear_ != null)
         {
             bear_.SetActive(true);
+            setFearString_ = true;
         }
         else if (name == "Alligator" && alligator_ != null)
         {
             alligator_.SetActive(true);
+            setFearString_ = true;
         }
         else if (name == "Monkey" && monkey_ != null)
         {
             monkey_.SetActive(true);
+            setFearString_ = true;
         }
         AssignPet(name);
         #endregion
