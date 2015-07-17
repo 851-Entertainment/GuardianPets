@@ -292,6 +292,7 @@ public class UIController : MonoBehaviour
         m_CameraPlane.GetComponent<CameraAccess>().UpdateCamera();
         UpdateSpeech();
         UpdateToys();
+        resetEnergyTimer(300.0f);
 	}
 
     void UpdateTimer()
@@ -481,6 +482,18 @@ public class UIController : MonoBehaviour
             }
             gc_.m_PlayerData.RemoveEnergy();
             RandomSound(1, m_FeedClip);
+            if (gc_.m_PlayerData.m_Energy == 20)
+            {
+                energyTimer_ = 300f;
+            }
+        }
+    }
+
+    void resetEnergyTimer(float value)
+    {
+        if(energyTimer_ <= 0.0f)
+        {
+            energyTimer_ = value;
         }
     }
 
@@ -511,6 +524,10 @@ public class UIController : MonoBehaviour
             }
             gc_.m_PlayerData.RemoveEnergy();
             RandomSound(2, m_PlayClip);
+            if(gc_.m_PlayerData.m_Energy == 20)
+            {
+                energyTimer_ = 300f;
+            }
         }
     }
 
@@ -533,6 +550,10 @@ public class UIController : MonoBehaviour
             }
             gc_.m_PlayerData.RemoveEnergy();
             RandomSound(2, m_CleanClip);
+            if (gc_.m_PlayerData.m_Energy == 20)
+            {
+                energyTimer_ = 300f;
+            }
         }
     }
 
@@ -685,6 +706,10 @@ public class UIController : MonoBehaviour
                 }
             }
             gc_.m_PlayerData.RemoveEnergy();
+            if (gc_.m_PlayerData.m_Energy == 20)
+            {
+                energyTimer_ = 300f;
+            }
         }
     }
 
