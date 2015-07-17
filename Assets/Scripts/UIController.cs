@@ -364,6 +364,8 @@ public class UIController : MonoBehaviour
                 m_NicknamePanel.SetActive(true);
                 gc_.SetUpGame();
                 clickCounter_ = 0;
+                returnFromPetMenu_.SetActive(false);
+                petSheildCost_.SetActive(false);
                 // petsOwned_.Add(bttnName_);
             }
             else
@@ -395,6 +397,8 @@ public class UIController : MonoBehaviour
                 m_NicknamePanel.SetActive(true);
                 gc_.SetUpGame();
                 clickCounter_ = 0;
+                returnFromPetMenu_.SetActive(false);
+                petSheildCost_.SetActive(false);
                 // petsOwned_.Add(bttnName_);
             }
             else
