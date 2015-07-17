@@ -375,9 +375,8 @@ public class UIController : MonoBehaviour
                 clickCounter_++;
             }
         }
-        else if(m_PlayerData.m_Shields >= m_PetCost && !isNewPlayer_)
+        else if(GuardianPetsAssets.SHIELD_CURRENCY.GetBalance() >= m_PetCost && !isNewPlayer_)
         {
-            m_PlayerData.m_Shields -= m_PetCost;
             Transform tempPos;
             if (clickCounter_ == 0)
             {
@@ -389,6 +388,7 @@ public class UIController : MonoBehaviour
             }
             else if (clickCounter_ >= 1 && bttnName_ == btn.name)
             {
+                GuardianPetsAssets.SHIELD_CURRENCY.Take(m_PetCost);
                 checkMark_.SetActive(false);
                 m_SelectedPet = btn.name;
                 gc_.CurrentPet = m_SelectedPet;
