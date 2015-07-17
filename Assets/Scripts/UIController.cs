@@ -292,7 +292,6 @@ public class UIController : MonoBehaviour
         m_CameraPlane.GetComponent<CameraAccess>().UpdateCamera();
         UpdateSpeech();
         UpdateToys();
-        resetEnergyTimer(300.0f);
 	}
 
     void UpdateTimer()
@@ -486,14 +485,6 @@ public class UIController : MonoBehaviour
             {
                 energyTimer_ = 300f;
             }
-        }
-    }
-
-    void resetEnergyTimer(float value)
-    {
-        if(energyTimer_ <= 0.0f)
-        {
-            energyTimer_ = value;
         }
     }
 
