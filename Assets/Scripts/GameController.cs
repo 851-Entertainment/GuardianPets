@@ -103,6 +103,19 @@ public class GameController : MonoBehaviour
         Save();
     }
 
+    void OnApplicationPause(bool paused)
+    {
+        if(paused)
+        {
+            PlayerPrefs.Save();
+            Save();
+        }
+        else
+        {
+            Load();
+        }
+    }
+
     /// <summary>Saves all variables to file</summary>
     public void Save()
     {
