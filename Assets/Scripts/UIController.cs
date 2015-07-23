@@ -193,6 +193,7 @@ public class UIController : MonoBehaviour
     ///<summary>Can update the check toy function. False if all toys have been unlocked</summary>
     private bool checkToys_ = true;
     private bool isNewPlayer_;
+    private bool checkLove_ = true;
     private bool scannerActive_;
     private float setSpeechTimer_;
     private float energyTimer_; //Timer until the player receives their next set of points, starts at 300 because the interval is 5 minutes, and there are 300 seconds in 5 minutes
@@ -208,6 +209,8 @@ public class UIController : MonoBehaviour
     private int timesPlayed_;
     private int timesFed_;
     private int timesWashed_;
+    private int timesLoved_;
+    private int timesExercised_;
     private int toyIndex_ = 0;
     private int playerItemIndex_ = 0;
     private int numToysActive = -1;
@@ -217,6 +220,8 @@ public class UIController : MonoBehaviour
     public int TimesPlayed { get { return timesPlayed_; } set { timesPlayed_ = value; } }
     public int TimesFed { get { return timesFed_; } set { timesFed_ = value; } }
     public int TimesWashed { get { return timesWashed_; } set { timesWashed_ = value; } }
+    public int TimesLoved { get { return timesLoved_; } set { timesLoved_ = value; } }
+    public int TimesExercised { get { return timesExercised_; } set { timesExercised_ = value; } }
     #endregion
 
     void Start () 
@@ -260,6 +265,19 @@ public class UIController : MonoBehaviour
         activatePet_ = true;
         m_Radar.SetActive(false);
 	}
+
+    void CheckLoveFilled()
+    {
+        if (m_LoveSlider.value == m_LoveSlider.maxValue && checkLove_)
+        {
+            timesLoved_++;
+            checkLove_ = false;
+        }
+        else if(m_LoveSlider.value != m_LoveSlider.maxValue)
+        {
+            checkLove_ = true;
+        }
+    }
 	
 	void Update ()
     {
@@ -493,6 +511,7 @@ public class UIController : MonoBehaviour
             {
                 energyTimer_ = Constants.ENERGY_TIMER;
             }
+            CheckLoveFilled();
         }
     }
 
@@ -527,6 +546,7 @@ public class UIController : MonoBehaviour
             {
                 energyTimer_ = Constants.ENERGY_TIMER;
             }
+            CheckLoveFilled();
         }
     }
 
@@ -553,6 +573,7 @@ public class UIController : MonoBehaviour
             {
                 energyTimer_ = Constants.ENERGY_TIMER;
             }
+            CheckLoveFilled();
         }
     }
 
@@ -694,6 +715,7 @@ public class UIController : MonoBehaviour
             AudioSource.PlayClipAtPoint(m_ExerciseClip, transform.position);
             petData_.m_Exercise++;
             currPet_.GetComponent<Pet>().m_Bored -= Constants.STAT_DECREASE_VAL;
+            timesExercised_++;
             if (currPet_.GetComponent<Pet>().m_Bored <= Constants.MIN_PET_STAT)
             {
                 currPet_.GetComponent<Pet>().m_Bored = Constants.MIN_PET_STAT;
@@ -709,6 +731,7 @@ public class UIController : MonoBehaviour
             {
                 energyTimer_ = Constants.ENERGY_TIMER;
             }
+            CheckLoveFilled();
         }
     }
 

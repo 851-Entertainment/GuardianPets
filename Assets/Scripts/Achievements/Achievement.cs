@@ -130,7 +130,7 @@ public class Achievement
     public void SaveAchievement(bool value)
     {
         unlocked_ = value; //Sets the value
-        unlockedTrophy_ = value;
+        unlockedTrophy_ = trophy_;
 
         //Gets the amount of points
         int tmpPoints = PlayerPrefs.GetInt("Points");

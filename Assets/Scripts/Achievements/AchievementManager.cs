@@ -69,51 +69,51 @@ public class AchievementManager : MonoBehaviour
 
         #region Creating Achievements
         //Creates the general achievements
-        CreateAchievement("General", "Feed I", "Feed your pet 25 times.", 1, 0, null, true);
-        CreateAchievement("General", "Feed II", "Feed your pet 50 times.", 1, 0);
-        CreateAchievement("General", "Feed III", "Feed your pet 75 times.", 2, 0);
-        CreateAchievement("General", "Feed IV", "Feed your pet 100 times.", 3, 0);
-        CreateAchievement("General", "Feed V", "Feed your pet 250 times.", 4, 0);
-        CreateAchievement("General", "Feed VI", "Feed your pet 500 times.", 5, 0);
-        CreateAchievement("General", "Feed VII", "Feed your pet 750 times.", 7, 0);
-        CreateAchievement("General", "Feed VIII", "Feed your pet 1000 times.", 10, 0);
+        CreateAchievement("General", "Feed I", "Feed your pet 25 times.", 1, 0, null, false);
+        CreateAchievement("General", "Feed II", "Feed your pet 50 times.", 1, 0, null, false);
+        CreateAchievement("General", "Feed III", "Feed your pet 75 times.", 2, 0, null, false);
+        CreateAchievement("General", "Feed IV", "Feed your pet 100 times.", 3, 0, null, false);
+        CreateAchievement("General", "Feed V", "Feed your pet 250 times.", 4, 0, null, false);
+        CreateAchievement("General", "Feed VI", "Feed your pet 500 times.", 5, 0, null, false);
+        CreateAchievement("General", "Feed VII", "Feed your pet 750 times.", 7, 0, null, false);
+        CreateAchievement("General", "Feed VIII", "Feed your pet 1000 times.", 10, 0, null, true);
 
-        CreateAchievement("General", "Play I", "Play with your pet 25 times.", 1, 0, null, true);
-        CreateAchievement("General", "Play II", "Play with your pet 50 times.", 1, 0);
-        CreateAchievement("General", "Play III", "Play with your pet 75 times.", 2, 0);
-        CreateAchievement("General", "Play IV", "Play with your pet 100 times.", 3, 0);
-        CreateAchievement("General", "Play V", "Play with your pet 250 times.", 4, 0);
-        CreateAchievement("General", "Play VI", "Play with your pet 500 times.", 5, 0);
-        CreateAchievement("General", "Play VII", "Play with your pet 750 times.", 7, 0);
-        CreateAchievement("General", "Play VIII", "Play with your pet 1000 times.", 10, 0);
+        CreateAchievement("General", "Play I", "Play with your pet 25 times.", 1, 0, null, false);
+        CreateAchievement("General", "Play II", "Play with your pet 50 times.", 1, 0, null, false);
+        CreateAchievement("General", "Play III", "Play with your pet 75 times.", 2, 0, null, false);
+        CreateAchievement("General", "Play IV", "Play with your pet 100 times.", 3, 0, null, false);
+        CreateAchievement("General", "Play V", "Play with your pet 250 times.", 4, 0, null, false);
+        CreateAchievement("General", "Play VI", "Play with your pet 500 times.", 5, 0, null, false);
+        CreateAchievement("General", "Play VII", "Play with your pet 750 times.", 7, 0, null, false);
+        CreateAchievement("General", "Play VIII", "Play with your pet 1000 times.", 10, 0, null, true);
 
-        CreateAchievement("General", "Wash I", "Wash your pet 25 times.", 1, 0);
-        CreateAchievement("General", "Wash II", "Wash your pet 50 times.", 1, 0);
-        CreateAchievement("General", "Wash III", "Wash your pet 75 times.", 2, 0);
-        CreateAchievement("General", "Wash IV", "Wash your pet 100 times.", 3, 0);
-        CreateAchievement("General", "Wash V", "Wash your pet 250 times.", 4, 0);
-        CreateAchievement("General", "Wash VI", "Wash your pet 500 times.", 5, 0);
-        CreateAchievement("General", "Wash VII", "Wash your pet 750 times.", 7, 0);
-        CreateAchievement("General", "Wash VIII", "Wash your pet 1000 times.", 10, 0);
+        CreateAchievement("General", "Wash I", "Wash your pet 25 times.", 1, 0, null, false);
+        CreateAchievement("General", "Wash II", "Wash your pet 50 times.", 1, 0, null, false);
+        CreateAchievement("General", "Wash III", "Wash your pet 75 times.", 2, 0, null, false);
+        CreateAchievement("General", "Wash IV", "Wash your pet 100 times.", 3, 0, null, false);
+        CreateAchievement("General", "Wash V", "Wash your pet 250 times.", 4, 0, null, false);
+        CreateAchievement("General", "Wash VI", "Wash your pet 500 times.", 5, 0, null, false);
+        CreateAchievement("General", "Wash VII", "Wash your pet 750 times.", 7, 0, null, false);
+        CreateAchievement("General", "Wash VIII", "Wash your pet 1000 times.", 10, 0, null, true);
 
-        CreateAchievement("General", "Exercise I", "Exercise your pet 25 times.", 1, 0);
-        CreateAchievement("General", "Exercise II", "Exercise your pet 50 times.", 1, 0);
-        CreateAchievement("General", "Exercise III", "Exercise your pet 75 times.", 2, 0);
-        CreateAchievement("General", "Exercise IV", "Exercise your pet 100 times.", 3, 0);
-        CreateAchievement("General", "Exercise V", "Exercise your pet 250 times.", 4, 0);
-        CreateAchievement("General", "Exercise VI", "Exercise your pet 500 times.", 5, 0);
-        CreateAchievement("General", "Exercise VII", "Exercise your pet 750 times.", 7, 0);
-        CreateAchievement("General", "Exercise VIII", "Exercise your pet 1000 times.", 10, 0);
+        CreateAchievement("General", "Exercise I", "Exercise your pet 25 times.", 1, 0, null, false);
+        CreateAchievement("General", "Exercise II", "Exercise your pet 50 times.", 1, 0, null, false);
+        CreateAchievement("General", "Exercise III", "Exercise your pet 75 times.", 2, 0, null, false);
+        CreateAchievement("General", "Exercise IV", "Exercise your pet 100 times.", 3, 0, null, false);
+        CreateAchievement("General", "Exercise V", "Exercise your pet 250 times.", 4, 0, null, false);
+        CreateAchievement("General", "Exercise VI", "Exercise your pet 500 times.", 5, 0, null, false);
+        CreateAchievement("General", "Exercise VII", "Exercise your pet 750 times.", 7, 0, null, false);
+        CreateAchievement("General", "Exercise VIII", "Exercise your pet 1000 times.", 10, 0, null, true);
 
-        CreateAchievement("General", "Fill Love I", "Fill the love meter once.", 1, 0);
-        CreateAchievement("General", "Fill Love II", "Fill the love mever 25 times.", 2, 0);
-        CreateAchievement("General", "Fill Love III", "Fill the love meter 50 times.", 3, 0);
-        CreateAchievement("General", "Fill Love IV", "Fill the love meter 75 times.", 4, 0);
-        CreateAchievement("General", "Fill Love V", "Fill the love meter 100 times.", 5, 0);
+        CreateAchievement("General", "Fill Love I", "Fill the love meter once.", 1, 0, null, false);
+        CreateAchievement("General", "Fill Love II", "Fill the love mever 25 times.", 2, 0, null, false);
+        CreateAchievement("General", "Fill Love III", "Fill the love meter 50 times.", 3, 0, null, false);
+        CreateAchievement("General", "Fill Love IV", "Fill the love meter 75 times.", 4, 0, null, false);
+        CreateAchievement("General", "Fill Love V", "Fill the love meter 100 times.", 5, 0, null, true);
 
-        CreateAchievement("General", "Unlock Item I", "Unlock your first item.", 1, 0);
-        CreateAchievement("General", "Unlock Item II", "Unlock five items.", 2, 0);
-        CreateAchievement("General", "Unlock Item III", "Unlock 10 items.", 3, 0);
+        CreateAchievement("General", "Unlock Item I", "Unlock your first item.", 1, 0, null, false);
+        CreateAchievement("General", "Unlock Item II", "Unlock five items.", 2, 0, null, false);
+        CreateAchievement("General", "Unlock Item III", "Unlock 10 items.", 3, 0, null, true);
         #endregion
 
         //Makes sure that the achievements are disabled when we start        
@@ -241,6 +241,79 @@ public class AchievementManager : MonoBehaviour
         else if (m_UIController.TimesWashed == 1000)
         {
             EarnAchievement("Wash VIII");
+        }
+        #endregion
+
+        #region Check Love
+        if (m_UIController.TimesLoved == 1)
+        {
+            EarnAchievement("Fill Love I");
+        }
+        else if (m_UIController.TimesLoved == 25)
+        {
+            EarnAchievement("Fill Love II");
+        }
+        else if (m_UIController.TimesLoved == 50)
+        {
+            EarnAchievement("Fill Love III");
+        }
+        else if (m_UIController.TimesLoved == 75)
+        {
+            EarnAchievement("Fill Love IV");
+        }
+        else if (m_UIController.TimesLoved == 100)
+        {
+            EarnAchievement("Fill Love V");
+        }
+        #endregion
+
+        #region Check Times Exercised
+        if (m_UIController.TimesExercised == 25)
+        {
+            EarnAchievement("Exercise I");
+        }
+        else if (m_UIController.TimesExercised == 50)
+        {
+            EarnAchievement("Exercise II");
+        }
+        else if (m_UIController.TimesExercised == 75)
+        {
+            EarnAchievement("Exercise III");
+        }
+        else if (m_UIController.TimesExercised == 100)
+        {
+            EarnAchievement("Exercise IV");
+        }
+        else if (m_UIController.TimesExercised == 250)
+        {
+            EarnAchievement("Exercise V");
+        }
+        else if (m_UIController.TimesExercised == 500)
+        {
+            EarnAchievement("Exercise VI");
+        }
+        else if (m_UIController.TimesExercised == 750)
+        {
+            EarnAchievement("Exercise VII");
+        }
+        else if (m_UIController.TimesExercised == 1000)
+        {
+            EarnAchievement("Exercise VIII");
+        }
+        #endregion
+
+        #region Check Times Loved
+        if (m_UIController.m_PlayerItems.Count == 1)
+        {
+            EarnAchievement("Unlock Item I");
+        }
+        else if (m_UIController.m_PlayerItems.Count == 5)
+        {
+            EarnAchievement("Unlock Item II");
+        }
+        else if (m_UIController.m_PlayerItems.Count == 10)
+        {
+            EarnAchievement("Unlock Item III");
         }
         #endregion
     }

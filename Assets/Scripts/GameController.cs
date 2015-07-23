@@ -151,6 +151,8 @@ public class GameController : MonoBehaviour
             sData.m_CurrPet = pet_.name;
             sData.m_CurrPetNickname = pet.m_Nickname;
             sData.m_TimesCleaned = ui_.TimesWashed;
+            sData.m_TimesExercised = ui_.TimesExercised;
+            sData.m_TimesLoved = ui_.TimesLoved;
             sData.m_TimesPlayed = ui_.TimesPlayed;
             sData.m_TimesFed = ui_.TimesFed;
             sData.m_PlayerItems = ui_.m_PlayerItems;
@@ -191,6 +193,8 @@ public class GameController : MonoBehaviour
             sData.m_CurrPetNickname = pet.m_Nickname;
             sData.m_TimesCleaned = ui_.TimesWashed;
             sData.m_TimesPlayed = ui_.TimesPlayed;
+            sData.m_TimesExercised = ui_.TimesExercised;
+            sData.m_TimesLoved = ui_.TimesLoved;
             sData.m_TimesFed = ui_.TimesFed;
             sData.m_PlayerItems = ui_.m_PlayerItems;
             sData.m_EnergyTimer = ui_.EnergyTimer;
@@ -244,6 +248,8 @@ public class GameController : MonoBehaviour
             ui_.TimesFed = sData.m_TimesFed;
             ui_.TimesPlayed = sData.m_TimesPlayed;
             ui_.TimesWashed = sData.m_TimesPlayed;
+            ui_.TimesExercised = sData.m_TimesExercised;
+            ui_.TimesLoved = sData.m_TimesLoved;
             ui_.m_PlayerItems = sData.m_PlayerItems;
             m_PlayerData.m_Shields = sData.m_Shields;
             DateTime now = DateTime.Now;
@@ -319,6 +325,12 @@ class SaveData
 
     /// <summary>Amount of times the player has washed their pet</summary>
     public int m_TimesCleaned;
+
+    /// <summary>Amount of times the player has washed their pet</summary>
+    public int m_TimesExercised;
+
+    /// <summary>Amount of times the player has washed their pet</summary>
+    public int m_TimesLoved;
 
     /// <summary>Player's Energy Timer when saved</summary>
     public float m_EnergyTimer;
