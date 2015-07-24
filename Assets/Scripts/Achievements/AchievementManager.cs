@@ -70,7 +70,7 @@ public class AchievementManager : MonoBehaviour
         #region Creating Achievements
         //Creates the general achievements
         CreateAchievement("General", "Feed I", "Feed your pet 25 times.", 1, 0, null, false);
-        CreateAchievement("General", "Feed II", "Feed your pet 50 times.", 1, 0, null, false);
+        CreateAchievement("General", "Feed II", "Feed your pet 50 times.", 1, 0, null, true);
         CreateAchievement("General", "Feed III", "Feed your pet 75 times.", 2, 0, null, false);
         CreateAchievement("General", "Feed IV", "Feed your pet 100 times.", 3, 0, null, false);
         CreateAchievement("General", "Feed V", "Feed your pet 250 times.", 4, 0, null, false);
@@ -396,7 +396,7 @@ public class AchievementManager : MonoBehaviour
         achievement.transform.GetChild(2).GetComponent<Text>().text = m_Achievements[title].Points.ToString();
         achievement.transform.GetChild(3).GetComponent<Image>().sprite = m_Sprites[m_Achievements[title].SpriteIndex];
 
-        if (m_Achievements[title].Unlocked)
+        if (m_Achievements[title].UnlockedTrophy)
         {
             //get the trophy manager script and enable the trophy at the correct index 
             TrophyManager trophy = ui_.m_Trophy[trophyIndex].GetComponent<TrophyManager>();

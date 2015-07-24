@@ -23,6 +23,8 @@ public class Achievement
     /// <summary>Index of the icon in the sprite array</summary>
     private int spriteIndex_;
 
+    private int trophyUnlockedInt_;
+
     /// <summary>Flag indicating whether the achievement unlocks a trophy</summary>
     private bool trophy_;
 
@@ -130,7 +132,7 @@ public class Achievement
     public void SaveAchievement(bool value)
     {
         unlocked_ = value; //Sets the value
-        unlockedTrophy_ = trophy_;
+        unlockedTrophy_ = this.trophy_;
 
         //Gets the amount of points
         int tmpPoints = PlayerPrefs.GetInt("Points");
@@ -141,6 +143,16 @@ public class Achievement
         //Stores the achievement's status
         PlayerPrefs.SetInt(name_, value ? 1 : 0);
 
+        if(unlockedTrophy_)
+        {
+            trophyUnlockedInt_ = 1;
+        }
+        else
+        {
+            trophyUnlockedInt_ = 0;
+        }
+        PlayerPrefs.SetInt("Trophy", trophyUnlockedInt_);
+
         //Saves the achievement
         PlayerPrefs.Save();
     }
@@ -150,7 +162,7 @@ public class Achievement
     {
         //Loads the status
         unlocked_ = PlayerPrefs.GetInt(name_) == 1 ? true : false;
-        unlockedTrophy_ = PlayerPrefs.GetInt(name_) == 1 ? true : false;
+        unlockedTrophy_ = PlayerPrefs.GetInt("Trophy") == 1 ? true : false;
 
         if (unlocked_) //If the achievement is unlocked then we need to change the sprite and aquire the points
         {
