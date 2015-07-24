@@ -143,16 +143,6 @@ public class Achievement
         //Stores the achievement's status
         PlayerPrefs.SetInt(name_, value ? 1 : 0);
 
-        if(unlockedTrophy_)
-        {
-            trophyUnlockedInt_ = 1;
-        }
-        else
-        {
-            trophyUnlockedInt_ = 0;
-        }
-        PlayerPrefs.SetInt("Trophy", trophyUnlockedInt_);
-
         //Saves the achievement
         PlayerPrefs.Save();
     }
@@ -162,13 +152,12 @@ public class Achievement
     {
         //Loads the status
         unlocked_ = PlayerPrefs.GetInt(name_) == 1 ? true : false;
-        unlockedTrophy_ = PlayerPrefs.GetInt("Trophy") == 1 ? true : false;
 
-        if (unlocked_) //If the achievement is unlocked then we need to change the sprite and aquire the points
+        if (unlocked_ && trophy_) //If the achievement is unlocked then we need to change the sprite and aquire the points
         {
+            unlockedTrophy_ = true;
             AchievementManager.Instance.m_TextPoints.text = "Points: " + PlayerPrefs.GetInt("Points");
             achievementRef_.GetComponent<Image>().sprite = AchievementManager.Instance.m_UnlockedSprite;
         }
-        
     }   
 }
