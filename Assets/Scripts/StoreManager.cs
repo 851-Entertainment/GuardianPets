@@ -92,7 +92,15 @@ public class StoreManager : MonoBehaviour
             int index = s.IndexOf("$");
 
             GameObject go = (GameObject)Instantiate(m_GoodsButtonPrefab, new Vector3(startXPos, startYPos, 0.0f), Quaternion.identity);
-            go.gameObject.transform.SetParent(GameObject.Find("Shields").transform, false);
+            if(vcp.CurrencyItemId == "currency_shield")
+            {
+                go.gameObject.transform.SetParent(GameObject.Find("Shields").transform, false);
+            }
+            else
+            {
+                go.gameObject.transform.SetParent(GameObject.Find("Scans").transform, false);
+            }
+            
             go.transform.GetChild(1).GetComponent<Text>().text = vcp.Name;
             go.transform.GetChild(2).GetComponent<Text>().text = vcp.Description;
             go.transform.GetChild(3).GetComponent<Text>().text = s.Substring(index + 1);
