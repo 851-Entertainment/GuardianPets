@@ -14,6 +14,9 @@ public class StoreManager : MonoBehaviour
     /// <summary>Shield sprite for the store panel</summary>
     public Sprite m_ShieldSprite;
 
+    /// <summary>Scanner sprite for the store panel</summary>
+    public Sprite m_ScanSprite;
+
     /// <summary>A reference to the scrollrect that controls the achievements in the menu</summary>
     public ScrollRect m_ScrollRect;
 
@@ -95,16 +98,18 @@ public class StoreManager : MonoBehaviour
             if(vcp.CurrencyItemId == "currency_shield")
             {
                 go.gameObject.transform.SetParent(GameObject.Find("Shields").transform, false);
+                go.transform.GetChild(4).GetComponent<Image>().sprite = m_ShieldSprite;
             }
             else
             {
                 go.gameObject.transform.SetParent(GameObject.Find("Scans").transform, false);
+                go.transform.GetChild(4).GetComponent<Image>().sprite = m_ScanSprite;
             }
             
             go.transform.GetChild(1).GetComponent<Text>().text = vcp.Name;
             go.transform.GetChild(2).GetComponent<Text>().text = vcp.Description;
             go.transform.GetChild(3).GetComponent<Text>().text = s.Substring(index + 1);
-            go.transform.GetChild(4).GetComponent<Image>().sprite = m_ShieldSprite;
+            
             go.GetComponentInChildren<Button>().onClick.AddListener(delegate { StoreInventory.BuyItem(itemID); });
 
             if (col < maxCol)
