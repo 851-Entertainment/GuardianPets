@@ -245,16 +245,14 @@ public class UIController : MonoBehaviour
 
         if (isNewPlayer_)
         {
+            m_PlayerData.m_Scans = Constants.START_SCANS;
             m_GameUI.SetActive(false);
             m_NewPlayerUI.SetActive(true);
+            energyTimer_ = Constants.ENERGY_TIMER;
         }
         else
         {
             RemoveUI();
-        }
-        if(isNewPlayer_)
-        {
-            energyTimer_ = Constants.ENERGY_TIMER;
         }
 
         m_EnergySlider.minValue = 0;

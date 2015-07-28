@@ -211,6 +211,7 @@ public class GameController : MonoBehaviour
     {
         if (File.Exists(Application.persistentDataPath + Path.DirectorySeparatorChar + "gpSaveData.dat"))
         {
+            m_FirstTimePlayer = false;
             Debug.Log("Loading from " + Application.persistentDataPath);
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + Path.DirectorySeparatorChar + "gpSaveData.dat", FileMode.Open);
@@ -281,10 +282,8 @@ public class GameController : MonoBehaviour
             {
                 pet_.GetComponent<Pet>().AddStats((int)minutesElapsed);
             }
-
-            SetUpGame();
+            SetUpGame(); 
             file.Close();
-            m_FirstTimePlayer = false;
         }
         else
         {
