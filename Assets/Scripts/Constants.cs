@@ -25,5 +25,5 @@ public class Constants : MonoBehaviour
     public const int BASE_UPGRADE_COST = 10; //This is the base upgrade cost that gets multiplied with the upgrade level
     public const int RADAR_TIME = 60; //Time in seconds for radar to rotate around once
     public const int CHARACTER_LIMIT = 10; //Max amount of characters in any given text box
-    public const int START_SCANS = 1; //scans the player starts off with
+    public const int START_SCANS = 5; //scans the player starts off with
 }
