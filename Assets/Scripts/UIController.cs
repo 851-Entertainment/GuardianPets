@@ -318,13 +318,7 @@ public class UIController : MonoBehaviour
     {
         if (gc_.m_PlayerData.m_Energy < Constants.DEFAULT_MAX_ENERGY)
         {
-            m_EnergyTimerText.enabled = true;
-            if (resetTimerValue_)
-            {
-                //for the first run
-                energyTimer_ = Constants.ENERGY_TIMER;
-                resetTimerValue_ = false;
-            }   
+            m_EnergyTimerText.enabled = true;   
             minutes_ = Mathf.Floor(energyTimer_ / 60).ToString("00");
             seconds_ = (energyTimer_ % 60).ToString("00");
             m_EnergyTimerText.text = minutes_ + ":" + seconds_;
