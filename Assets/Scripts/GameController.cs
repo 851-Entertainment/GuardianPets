@@ -146,6 +146,7 @@ public class GameController : MonoBehaviour
             }
 
             sData.m_Energy = m_PlayerData.m_Energy;
+            sData.m_Scans = m_PlayerData.m_Scans;
             sData.m_Shields = m_PlayerData.m_Shields;
             sData.m_CloseDate = DateTime.Now;
             sData.m_CurrPet = pet_.name;
@@ -187,6 +188,7 @@ public class GameController : MonoBehaviour
             }
 
             sData.m_Energy = m_PlayerData.m_Energy;
+            sData.m_Scans = m_PlayerData.m_Scans;
             sData.m_Shields = m_PlayerData.m_Shields;
             sData.m_CloseDate = DateTime.Now;
             sData.m_CurrPet = pet_.name;
@@ -252,6 +254,7 @@ public class GameController : MonoBehaviour
             ui_.TimesLoved = sData.m_TimesLoved;
             ui_.m_PlayerItems = sData.m_PlayerItems;
             m_PlayerData.m_Shields = sData.m_Shields;
+            m_PlayerData.m_Scans = sData.m_Scans;
             DateTime now = DateTime.Now;
             TimeSpan ts = now - Convert.ToDateTime(sData.m_CloseDate);
             float minutesElapsed = (float)ts.TotalMinutes / 5;
@@ -310,6 +313,8 @@ class SaveData
 
     /// <summary>Player's current shields</summary>
     public int m_Shields;
+
+    public int m_Scans;
 
     /// <summary>Player's energy at the time of the save</summary>
     public int m_Energy;

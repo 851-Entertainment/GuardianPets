@@ -22,6 +22,7 @@ public class UIController : MonoBehaviour
     public GameObject m_InteractMenuBar;
     public GameObject m_PetMenuBar;
     public GameObject m_TrophyMenu;
+    public int m_ScannerCost = 1;
     public float EnergyTimer { get { return energyTimer_; } set { energyTimer_ = value; } }
 
     /// <summary>Button for playing with the pet</summary>
@@ -66,6 +67,8 @@ public class UIController : MonoBehaviour
 
     /// <summary>Button to close the radar scanner</summary>
     public GameObject m_CloseScannerButton;
+
+    public Text m_ScannerText;
     #endregion
 
     #region Upgrades/Store Variables
@@ -236,7 +239,7 @@ public class UIController : MonoBehaviour
         checkMark_.SetActive(false);
         audio_ = GetComponent<AudioSource>();
         gc_ = Camera.main.GetComponent<GameController>();
-        isNewPlayer_ = gc_.m_FirstTimePlayer;
+        isNewPlayer_ = gc_.m_FirstTimePlayer; 
 
         m_NicknameIF.characterLimit = Constants.CHARACTER_LIMIT;
 
@@ -310,6 +313,7 @@ public class UIController : MonoBehaviour
         m_CameraPlane.GetComponent<CameraAccess>().UpdateCamera();
         UpdateSpeech();
         UpdateToys();
+        m_ScannerText.text = m_PlayerData.m_Scans.ToString();
 	}
 
     void UpdateTimer()
@@ -596,15 +600,18 @@ public class UIController : MonoBehaviour
 
     public void OpenScanner()
     {
-        scannerActive_ = true;
-        m_CameraPlane.GetComponent<CameraAccess>().m_DisableWebCam = false;
-        m_GameUI.SetActive(false);
-        m_CameraPlane.SetActive(true);
-        m_CameraPlane.GetComponent<CameraAccess>().enabled = true;
-        m_RadarOverlay.SetActive(true);
-        m_BackgroundPlane.SetActive(false);
-        currPet_.SetActive(false);
-       
+        if (m_PlayerData.m_Scans >= m_ScannerCost)
+        {
+            m_PlayerData.m_Scans -= m_ScannerCost;
+            scannerActive_ = true;
+            m_CameraPlane.GetComponent<CameraAccess>().m_DisableWebCam = false;
+            m_GameUI.SetActive(false);
+            m_CameraPlane.SetActive(true);
+            m_CameraPlane.GetComponent<CameraAccess>().enabled = true;
+            m_RadarOverlay.SetActive(true);
+            m_BackgroundPlane.SetActive(false);
+            currPet_.SetActive(false);
+        }
     }
 
     public void CloseScanner()
