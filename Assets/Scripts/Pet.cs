@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Pet : MonoBehaviour
 {
+    public float StatTimer { get { return statTimer_; } set { statTimer_ = value; } }
     public bool m_IsSick = false;
     public bool m_IsHungry;
     public bool m_NeedsCleaning;

@@ -144,7 +144,7 @@ public class GameController : MonoBehaviour
 
                 sData.m_Pets.Add(pData);
             }
-
+            sData.m_StatTimer = pet_.GetComponent<Pet>().StatTimer;
             sData.m_Energy = m_PlayerData.m_Energy;
             sData.m_Scans = m_PlayerData.m_Scans;
             sData.m_Shields = m_PlayerData.m_Shields;
@@ -200,6 +200,7 @@ public class GameController : MonoBehaviour
             sData.m_TimesFed = ui_.TimesFed;
             sData.m_PlayerItems = ui_.m_PlayerItems;
             sData.m_EnergyTimer = ui_.EnergyTimer;
+            sData.m_StatTimer = pet_.GetComponent<Pet>().StatTimer;
 
             bf.Serialize(file, sData);
             file.Close();
@@ -260,18 +261,26 @@ public class GameController : MonoBehaviour
             TimeSpan ts = now - Convert.ToDateTime(sData.m_CloseDate);
             float minutesElapsed = (float)ts.TotalMinutes / 5;
             float secondsElapsed = (float)ts.TotalSeconds;
-            float energyToAdd;
+            float energyToAdd = 0.0f;
+            float statsToAdd;
             ui_.EnergyTimer = sData.m_EnergyTimer - secondsElapsed;
+            pet_.GetComponent<Pet>().StatTimer = sData.m_StatTimer - secondsElapsed;
 
             if(minutesElapsed >= 1)
             {
                 energyToAdd = minutesElapsed;
+                statsToAdd = minutesElapsed;
+            }
+            else if(minutesElapsed > 3)
+            {
+                statsToAdd = 3;
             }
             else
             {
-                energyToAdd = 0;
+                energyToAdd = 0.0f;
+                statsToAdd = 0.0f;
             }
-
+            UpdateStats((int)statsToAdd);
             m_PlayerData.m_Energy = sData.m_Energy + (int)energyToAdd;
             if(m_PlayerData.m_Energy > Constants.DEFAULT_MAX_ENERGY)
             {
@@ -291,6 +300,36 @@ public class GameController : MonoBehaviour
             m_FirstTimePlayer = true;
             m_PlayerData.m_Energy = Constants.DEFAULT_START_ENERGY;
             m_PlayerData.m_Shields = Constants.DEFAULT_START_SHIELDS;
+        }
+    }
+
+    void UpdateStats(int timesToRun)
+    {
+        while (timesToRun > 0)
+        {
+            timesToRun--;
+            int randNum = UnityEngine.Random.Range(0, 3);
+            if (randNum == 0)
+            {
+                if (pet_.GetComponent<Pet>().m_Hunger < Constants.MAX_PET_STAT)
+                {
+                    pet_.GetComponent<Pet>().m_Hunger += Constants.STAT_INCREASE_VAL;
+                }
+            }
+            else if (randNum == 1)
+            {
+                if (pet_.GetComponent<Pet>().m_Cleanliness < Constants.MAX_PET_STAT)
+                {
+                    pet_.GetComponent<Pet>().m_Cleanliness += Constants.STAT_INCREASE_VAL;
+                }
+            }
+            else if (randNum == 2)
+            {
+                if (pet_.GetComponent<Pet>().m_Bored < Constants.MAX_PET_STAT)
+                {
+                    pet_.GetComponent<Pet>().m_Bored += Constants.STAT_INCREASE_VAL;
+                }
+            }
         }
     }
 }
@@ -338,6 +377,9 @@ class SaveData
 
     /// <summary>Player's Energy Timer when saved</summary>
     public float m_EnergyTimer;
+
+    /// <summary>Player's Stat Timer for increasing stats</summary>
+    public float m_StatTimer;
 }
 
 [Serializable]
