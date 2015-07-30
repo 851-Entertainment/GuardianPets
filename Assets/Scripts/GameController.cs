@@ -56,6 +56,7 @@ public class GameController : MonoBehaviour
     {
         ui_ = Camera.main.GetComponent<UIController>();
         Load();
+        ui_.UpdateEnergyTimer = true;
 	}
 	
 	void Update ()
@@ -113,6 +114,7 @@ public class GameController : MonoBehaviour
         else
         {
             LoadAfterPause();
+            ui_.UpdateEnergyTimer = true;
         }
     }
 
@@ -212,6 +214,7 @@ public class GameController : MonoBehaviour
     {
         if (File.Exists(Application.persistentDataPath + Path.DirectorySeparatorChar + "gpSaveData.dat"))
         {
+            ui_.UpdateEnergyTimer = false;
             m_FirstTimePlayer = false;
             Debug.Log("Loading from " + Application.persistentDataPath);
             BinaryFormatter bf = new BinaryFormatter();
@@ -265,6 +268,14 @@ public class GameController : MonoBehaviour
             float energyToAdd = 0.0f;
             float statsToAdd = 0.0f;
             ui_.EnergyTimer = sData.m_EnergyTimer - secondsElapsed;
+            float timeLeft = 0.0f;
+            //basically if the timer goes past zero when the game is off or minimized this will correct the timer so it doesn't start off at 5 minutes 
+            while (ui_.EnergyTimer < 0.0f)
+            {
+                timeLeft = ui_.EnergyTimer;
+                ui_.EnergyTimer = Constants.ENERGY_TIMER;
+                ui_.EnergyTimer += timeLeft;
+            }
             pet_.GetComponent<Pet>().StatTimer = sData.m_StatTimer - secondsElapsed;
 
             if (threeMinutesElapsed >= 1)
@@ -340,6 +351,7 @@ public class GameController : MonoBehaviour
     {
         if (File.Exists(Application.persistentDataPath + Path.DirectorySeparatorChar + "gpSaveData.dat"))
         {
+            ui_.UpdateEnergyTimer = false;
             m_FirstTimePlayer = false;
             Debug.Log("Loading from " + Application.persistentDataPath);
             BinaryFormatter bf = new BinaryFormatter();
@@ -354,6 +366,14 @@ public class GameController : MonoBehaviour
             float energyToAdd = 0.0f;
             float statsToAdd = 0.0f;
             ui_.EnergyTimer = sData.m_EnergyTimer - secondsElapsed;
+            float timeLeft = 0.0f;
+            //basically if the timer goes past zero when the game is off or minimized this will correct the timer so it doesn't start off at 5 minutes 
+            while(ui_.EnergyTimer < 0.0f)
+            {
+                timeLeft = ui_.EnergyTimer;
+                ui_.EnergyTimer = Constants.ENERGY_TIMER;
+                ui_.EnergyTimer += timeLeft;
+            }
             pet_.GetComponent<Pet>().StatTimer = sData.m_StatTimer - secondsElapsed;
 
             if (threeMinutesElapsed >= 1)

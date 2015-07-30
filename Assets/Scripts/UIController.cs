@@ -24,6 +24,7 @@ public class UIController : MonoBehaviour
     public GameObject m_TrophyMenu;
     public int m_ScannerCost = 1;
     public float EnergyTimer { get { return energyTimer_; } set { energyTimer_ = value; } }
+    public bool UpdateEnergyTimer { get { return updateEnergyTimer_; } set { updateEnergyTimer_ = value; } }
 
     /// <summary>Button for playing with the pet</summary>
     public GameObject m_PlayButton;
@@ -195,6 +196,7 @@ public class UIController : MonoBehaviour
     private bool resetTimerValue_ = true;
     ///<summary>Can update the check toy function. False if all toys have been unlocked</summary>
     private bool checkToys_ = true;
+    private bool updateEnergyTimer_ = true;
     private bool isNewPlayer_;
     private bool checkLove_ = true;
     private bool scannerActive_;
@@ -245,6 +247,7 @@ public class UIController : MonoBehaviour
 
         if (isNewPlayer_)
         {
+            updateEnergyTimer_ = true;
             m_PlayerData.m_Scans = Constants.START_SCANS;
             m_GameUI.SetActive(false);
             m_NewPlayerUI.SetActive(true);
@@ -316,7 +319,7 @@ public class UIController : MonoBehaviour
 
     void UpdateTimer()
     {
-        if (gc_.m_PlayerData.m_Energy < Constants.DEFAULT_MAX_ENERGY)
+        if (gc_.m_PlayerData.m_Energy < Constants.DEFAULT_MAX_ENERGY && updateEnergyTimer_)
         {
             m_EnergyTimerText.enabled = true;   
             minutes_ = Mathf.Floor(energyTimer_ / 60).ToString("00");
