@@ -112,7 +112,7 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            Load();
+            LoadAfterPause();
         }
     }
 
@@ -260,25 +260,28 @@ public class GameController : MonoBehaviour
             DateTime now = DateTime.Now;
             TimeSpan ts = now - Convert.ToDateTime(sData.m_CloseDate);
             float minutesElapsed = (float)ts.TotalMinutes / 5;
+            float threeMinutesElapsed = (float)ts.TotalMinutes / 3; //every three minutes a stat needed to be increased so get how many times this needs to happen
             float secondsElapsed = (float)ts.TotalSeconds;
             float energyToAdd = 0.0f;
-            float statsToAdd;
+            float statsToAdd = 0.0f;
             ui_.EnergyTimer = sData.m_EnergyTimer - secondsElapsed;
             pet_.GetComponent<Pet>().StatTimer = sData.m_StatTimer - secondsElapsed;
 
+            if (threeMinutesElapsed >= 1)
+            {
+                statsToAdd = threeMinutesElapsed;
+            }
+            else
+            {
+                statsToAdd = 0.0f;
+            }
             if(minutesElapsed >= 1)
             {
                 energyToAdd = minutesElapsed;
-                statsToAdd = minutesElapsed;
-            }
-            else if(minutesElapsed > 3)
-            {
-                statsToAdd = 3;
             }
             else
             {
                 energyToAdd = 0.0f;
-                statsToAdd = 0.0f;
             }
             UpdateStats((int)statsToAdd);
             m_PlayerData.m_Energy = sData.m_Energy + (int)energyToAdd;
@@ -330,6 +333,57 @@ public class GameController : MonoBehaviour
                     pet_.GetComponent<Pet>().m_Bored += Constants.STAT_INCREASE_VAL;
                 }
             }
+        }
+    }
+    /// <param name="">This is the function used to load the contents after a pause has occured so everything has been updated properly</param>
+    void LoadAfterPause()
+    {
+        if (File.Exists(Application.persistentDataPath + Path.DirectorySeparatorChar + "gpSaveData.dat"))
+        {
+            m_FirstTimePlayer = false;
+            Debug.Log("Loading from " + Application.persistentDataPath);
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + Path.DirectorySeparatorChar + "gpSaveData.dat", FileMode.Open);
+            SaveData sData = (SaveData)bf.Deserialize(file);
+
+            DateTime now = DateTime.Now;
+            TimeSpan ts = now - Convert.ToDateTime(sData.m_CloseDate);
+            float minutesElapsed = (float)ts.TotalMinutes / 5;
+            float threeMinutesElapsed = (float)ts.TotalMinutes / 3; //every three minutes a stat needed to be increased so get how many times this needs to happen
+            float secondsElapsed = (float)ts.TotalSeconds;
+            float energyToAdd = 0.0f;
+            float statsToAdd = 0.0f;
+            ui_.EnergyTimer = sData.m_EnergyTimer - secondsElapsed;
+            pet_.GetComponent<Pet>().StatTimer = sData.m_StatTimer - secondsElapsed;
+
+            if (threeMinutesElapsed >= 1)
+            {
+                statsToAdd = threeMinutesElapsed;
+            }
+            else
+            {
+                statsToAdd = 0.0f;
+            }
+            if (minutesElapsed >= 1)
+            {
+                energyToAdd = minutesElapsed;
+            }
+            else
+            {
+                energyToAdd = 0.0f;
+            }
+            UpdateStats((int)statsToAdd);
+            m_PlayerData.m_Energy = sData.m_Energy + (int)energyToAdd;
+            if (m_PlayerData.m_Energy > Constants.DEFAULT_MAX_ENERGY)
+            {
+                m_PlayerData.m_Energy = Constants.DEFAULT_MAX_ENERGY;
+            }
+
+            if (minutesElapsed >= 1)
+            {
+                pet_.GetComponent<Pet>().AddStats((int)minutesElapsed);
+            }
+            file.Close();
         }
     }
 }
