@@ -276,6 +276,11 @@ public class GameController : MonoBehaviour
                 ui_.EnergyTimer = Constants.ENERGY_TIMER;
                 ui_.EnergyTimer += timeLeft;
             }
+            while(ui_.EnergyTimer > Constants.ENERGY_TIMER)
+            {
+                timeLeft = ui_.EnergyTimer;
+                ui_.EnergyTimer = timeLeft - Constants.ENERGY_TIMER;
+            }
             pet_.GetComponent<Pet>().StatTimer = sData.m_StatTimer - secondsElapsed;
 
             if (threeMinutesElapsed >= 1)
@@ -373,6 +378,11 @@ public class GameController : MonoBehaviour
                 timeLeft = ui_.EnergyTimer;
                 ui_.EnergyTimer = Constants.ENERGY_TIMER;
                 ui_.EnergyTimer += timeLeft;
+            }
+            while (ui_.EnergyTimer > Constants.ENERGY_TIMER)
+            {
+                timeLeft = ui_.EnergyTimer;
+                ui_.EnergyTimer = timeLeft - Constants.ENERGY_TIMER;
             }
             pet_.GetComponent<Pet>().StatTimer = sData.m_StatTimer - secondsElapsed;
 
