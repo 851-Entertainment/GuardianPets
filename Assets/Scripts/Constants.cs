@@ -17,7 +17,9 @@ public class Constants : MonoBehaviour
     public const int DEFAULT_START_STATS = 50; //Stats that new pets automatically start at
     public const int ENERGY_TIMER = 300; //Amount of time to wait to get more points - in seconds
     public const int STAT_TIMER = 180; //Amount of time for a stat to be increased randomly - in seconds
-    public const int DEFAULT_MAX_ENERGY = 20; //Maximum amount of energy the player can have
+    public const int STAT_TIMER_2 = 300; //Amount of time for a stat to be increased randomly - in seconds
+    public const int STAT_TIMER_3 = 360; //Amount of time for a stat to be increased randomly - in seconds
+    public const int DEFAULT_MAX_ENERGY = 25; //Maximum amount of energy the player can have
     public const int DEFAULT_MAX_LOVE = 300; //Maximum amount of energy the player can have
     public const int ACTION_COST = 1; //Cost per action - play, wash, feed.
     public const int ENERGY_REWARDED = 1; //This is the energy you get from waiting the 5 minutes

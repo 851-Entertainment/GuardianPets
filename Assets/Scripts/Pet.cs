@@ -107,7 +107,19 @@ public class Pet : MonoBehaviour
                     m_Bored += Constants.STAT_INCREASE_VAL;
                 }
             }
-            statTimer_ = Constants.STAT_TIMER;
+            int randomTimer = Random.Range(0, 3);
+            if (randomTimer == 0)
+            {
+                statTimer_ = Constants.STAT_TIMER;
+            }
+            else if(randomTimer == 1)
+            {
+                statTimer_ = Constants.STAT_TIMER_2;
+            }
+            else if (randomTimer == 2)
+            {
+                statTimer_ = Constants.STAT_TIMER_3;
+            }
         }
     }
 
