@@ -292,6 +292,8 @@ public class UIController : MonoBehaviour
             {
                 ChangePet(currPet_.name);
                 Loaditems();
+                m_FearIF.text = currPet_.GetComponent<Pet>().m_FearOne.ToString();
+                SetFearTitle();
                 activatePet_ = false;
             }
             //set the fear string once at the start of the game

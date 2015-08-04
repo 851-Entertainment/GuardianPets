@@ -66,7 +66,7 @@ public class GameController : MonoBehaviour
             pet_.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 5.0f));
         }
 
-        if(Input.GetKey(KeyCode.Escape))
+        if(Input.GetKey(KeyCode.Escape) && !m_FirstTimePlayer)
         {
             Save();
             if (Application.platform == RuntimePlatform.Android)
@@ -109,15 +109,18 @@ public class GameController : MonoBehaviour
 
     void OnApplicationPause(bool paused)
     {
-        if(paused)
+        if (!m_FirstTimePlayer)
         {
-            PlayerPrefs.Save();
-            Save();
-        }
-        else
-        {
-            LoadAfterPause();
-            ui_.UpdateEnergyTimer = true;
+            if (paused)
+            {
+                PlayerPrefs.Save();
+                Save();
+            }
+            else
+            {
+                LoadAfterPause();
+                ui_.UpdateEnergyTimer = true;
+            }
         }
     }
 
