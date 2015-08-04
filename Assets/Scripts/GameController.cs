@@ -4,6 +4,9 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
+using UnityEngine.SocialPlatforms;
 
 public class GameController : MonoBehaviour
 {
@@ -50,6 +53,12 @@ public class GameController : MonoBehaviour
     public GameObject ActivePet
     {
         get { return pet_; }
+    }
+
+   void Start()
+    {
+        PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder().EnableSavedGames().Build();
+        PlayGamesPlatform.InitializeInstance(config);
     }
 
 	void Awake ()
