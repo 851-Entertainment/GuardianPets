@@ -295,12 +295,12 @@ public class UIController : MonoBehaviour
                 activatePet_ = false;
             }
             //set the fear string once at the start of the game
-            if (setFearString_)
+            /*if (setFearString_)
             {
                 setFearString_ = !setFearString_;
                 m_FearIF.text = currPet_.GetComponent<Pet>().m_FearOne.ToString();
                 SetFearTitle();
-            }
+            }*/
             m_NicknameText.text = currPet_.GetComponent<Pet>().m_Nickname;
             m_EnergyText.text = "Energy: " + m_PlayerData.m_Energy.ToString() + "/" + maxEnergy_;
             m_ShieldsText.text = GuardianPetsAssets.SHIELD_CURRENCY.GetBalance().ToString();
