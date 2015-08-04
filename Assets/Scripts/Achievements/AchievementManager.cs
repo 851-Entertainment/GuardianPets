@@ -28,7 +28,7 @@ public class AchievementManager : MonoBehaviour
     public GameObject m_VisualAchievement;
 
     /// <summary>This dictionary contains all achievements</summary>
-    public Dictionary<string, Achievement> m_Achievements = new Dictionary<string, Achievement>();
+    public Dictionary<string, GPAchievement> m_Achievements = new Dictionary<string, GPAchievement>();
 
     /// <summary>This sprite is used for indicating if an achievement is unlocked</summary>
     public Sprite m_UnlockedSprite;
@@ -359,7 +359,7 @@ public class AchievementManager : MonoBehaviour
         GameObject achievement = (GameObject)Instantiate(m_AchievementPrefab);
 
         //Creates the achievement
-        Achievement newAchievement = new Achievement(title, description, points, spriteIndex, achievement, trophy);
+        GPAchievement newAchievement = new GPAchievement(title, description, points, spriteIndex, achievement, trophy);
 
         //Adds the achievement to our dictionary
         m_Achievements.Add(title, newAchievement);
@@ -371,7 +371,7 @@ public class AchievementManager : MonoBehaviour
         {
             foreach (string achievementTitle in dependencies) //Creates the dependencies
             {
-                Achievement dependency = m_Achievements[achievementTitle];
+                GPAchievement dependency = m_Achievements[achievementTitle];
                 dependency.Child = title;
                 newAchievement.AddDependency(dependency);
             }
