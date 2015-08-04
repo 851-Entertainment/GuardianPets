@@ -100,8 +100,11 @@ public class GameController : MonoBehaviour
 
     void OnApplicationQuit()
     {
-        PlayerPrefs.Save();
-        Save();
+        if(!m_FirstTimePlayer)
+        {
+            PlayerPrefs.Save();
+            Save();
+        }
     }
 
     void OnApplicationPause(bool paused)
