@@ -57,6 +57,7 @@ public class GameController : MonoBehaviour
 
    void Start()
     {
+        PlayGamesPlatform.Activate();
         PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder().EnableSavedGames().Build();
         PlayGamesPlatform.InitializeInstance(config);
     }

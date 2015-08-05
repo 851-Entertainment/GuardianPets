@@ -18,16 +18,7 @@ public class LoadingScreen : MonoBehaviour
 
     void Start()
     {
-        Social.localUser.Authenticate((bool success) => {
-            if(success)
-            {
-                successfulLogin = true;
-            }
-            else
-            {
-                Debug.Log("Failed login");
-            }
-        });
+        PlayGamesPlatform.Activate();
         SoomlaStore.Initialize(new GuardianPetsAssets());
         SoomlaStore.StartIabServiceInBg();
         SoomlaStore.StopIabServiceInBg();
@@ -37,6 +28,21 @@ public class LoadingScreen : MonoBehaviour
 
 	void Update () 
     {
+        if(!successfulLogin)
+        {
+            Social.localUser.Authenticate((bool success) =>
+            {
+                if (success)
+                {
+                    successfulLogin = true;
+                }
+                else
+                {
+                    Debug.Log("Failed login");
+                }
+            });
+        }
+
         StartCoroutine(DisplayLoadingScreen());
 
         if(async != null)
