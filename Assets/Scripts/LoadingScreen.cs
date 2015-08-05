@@ -2,6 +2,8 @@
 using UnityEngine.UI;
 using System.Collections;
 using Soomla.Store;
+using GooglePlayGames;
+using UnityEngine.SocialPlatforms;
 
 public class LoadingScreen : MonoBehaviour
 {
@@ -11,10 +13,21 @@ public class LoadingScreen : MonoBehaviour
     private int loadProgress_ = 0;
     private float timer_ = 0.0f;
     private bool loadDone_ = false;
+    private bool successfulLogin = false;
     AsyncOperation async = null;
 
     void Start()
     {
+        Social.localUser.Authenticate((bool success) => {
+            if(success)
+            {
+                successfulLogin = true;
+            }
+            else
+            {
+                Debug.Log("Failed login");
+            }
+        });
         SoomlaStore.Initialize(new GuardianPetsAssets());
         SoomlaStore.StartIabServiceInBg();
         SoomlaStore.StopIabServiceInBg();
@@ -38,10 +51,13 @@ public class LoadingScreen : MonoBehaviour
                 }
                 if (loadProgress_ >= 100.0f)
                 {
-                    timer_ += Time.deltaTime;
-                    if(timer_ >= 3.0f)
+                    if (successfulLogin)
                     {
-                        async.allowSceneActivation = true;
+                        timer_ += Time.deltaTime;
+                        if (timer_ >= 3.0f)
+                        {
+                            async.allowSceneActivation = true;
+                        }
                     }
                 }
             }

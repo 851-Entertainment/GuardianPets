@@ -3,6 +3,8 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using Soomla.Store;
+using GooglePlayGames;
+using UnityEngine.SocialPlatforms;
 
 public class UIController : MonoBehaviour
 {
@@ -1229,5 +1231,10 @@ public class UIController : MonoBehaviour
                 numToysActive++;
             }
         }
+    }
+
+    public void OpenGooglePlayAchievements()
+    {
+        Social.ShowAchievementsUI();
     }
 }
