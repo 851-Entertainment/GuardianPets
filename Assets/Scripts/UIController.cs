@@ -475,6 +475,7 @@ public class UIController : MonoBehaviour
             m_NewPlayerUI.SetActive(false);
             //Destroy(m_NewPlayerUI);
             m_GameUI.SetActive(true);
+            gc_.m_FirstTimePlayer = false;
             AudioSource.PlayClipAtPoint(m_ClickClip, transform.position);
            
         }
@@ -757,6 +758,7 @@ public class UIController : MonoBehaviour
             m_NewPlayerUI.SetActive(false);
            // Destroy(m_NewPlayerUI);
             m_GameUI.SetActive(true);
+            gc_.m_FirstTimePlayer = false;
         }
       
         AudioSource.PlayClipAtPoint(m_ClickClip, transform.position);
