@@ -914,6 +914,7 @@ public class UIController : MonoBehaviour
                 }
                 m_PlayerItems.Add(gc_.m_Items[i].name);
                 tempItemButton_.GetComponent<Button>().interactable = false;
+                m_ConfirmPurchasePanel.SetActive(false);
             }
         }
     }

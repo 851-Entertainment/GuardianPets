@@ -28,7 +28,7 @@ public class LoadingScreen : MonoBehaviour
 
 	void Update () 
     {
-        if(!successfulLogin)
+        if (!successfulLogin && Application.platform == RuntimePlatform.Android)
         {
             Social.localUser.Authenticate((bool success) =>
             {
@@ -57,7 +57,15 @@ public class LoadingScreen : MonoBehaviour
                 }
                 if (loadProgress_ >= 100.0f)
                 {
-                    if (successfulLogin)
+                    if (Application.platform == RuntimePlatform.Android && successfulLogin)
+                    {
+                        timer_ += Time.deltaTime;
+                        if (timer_ >= 3.0f)
+                        {
+                            async.allowSceneActivation = true;
+                        }
+                    }
+                    else
                     {
                         timer_ += Time.deltaTime;
                         if (timer_ >= 3.0f)
