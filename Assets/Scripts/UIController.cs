@@ -24,6 +24,7 @@ public class UIController : MonoBehaviour
     public GameObject m_InteractMenuBar;
     public GameObject m_PetMenuBar;
     public GameObject m_TrophyMenu;
+    public GameObject m_ConfirmPurchasePanel;
     public int m_ScannerCost = 1;
     public float EnergyTimer { get { return energyTimer_; } set { energyTimer_ = value; } }
     public bool UpdateEnergyTimer { get { return updateEnergyTimer_; } set { updateEnergyTimer_ = value; } }
@@ -186,6 +187,9 @@ public class UIController : MonoBehaviour
     /// <summary>Pet var that is assigned if the player is using the monkey</summary>
     private GameObject monkey_;
 
+    /// <summary>The item button pressed to confirm a purchase</summary>
+    private GameObject tempItemButton_;
+
     private string bttnName_;
     private int clickCounter_ = 0;
     private int energySliderIncrease_ = 0;
@@ -211,6 +215,8 @@ public class UIController : MonoBehaviour
     private string feedMessage_ = "I'm hungry!!!";
     private string playMessage_ = "Play with me!";
     private string cleanMessage_ = "I need a bath";
+    /// <summary>Temp string to show what item is being considered for purchase</summary>
+    private string confirmItem_;
     private List<string> petsOwned_;    //list of names of the players pet 
 
     private int timesPlayed_;
@@ -882,21 +888,42 @@ public class UIController : MonoBehaviour
             if (gc_.m_Items[i].m_ItemName == go.name)
             {
                 if (GuardianPetsAssets.SHIELD_CURRENCY.GetBalance() >= gc_.m_Items[i].m_Cost)
-                {       
-                    AudioSource.PlayClipAtPoint(m_UpgradeClip, transform.position);
-                    GuardianPetsAssets.SHIELD_CURRENCY.Take(gc_.m_Items[i].m_Cost);
-                    gc_.m_Items[i].gameObject.SetActive(true);
-                    if (gc_.m_Items[i].m_IsPlayerItem)
-                    {
-                        GameObject obj = GameObject.Find(gc_.m_Items[i].m_Names[gc_.m_Items[i].m_ItemSpot]);    //get the waypoint the item will be at
-                        gc_.m_Items[i].gameObject.transform.SetParent(obj.transform);
-                    }
-                    m_PlayerItems.Add(gc_.m_Items[i].name);  
-                    go.GetComponent<Button>().interactable = false;    
+                {
+                    m_ConfirmPurchasePanel.SetActive(true);
+                    tempItemButton_ = go;
+                    confirmItem_ = gc_.m_Items[i].m_ItemName;
                 }
             }
         }
     }
+
+    /// <param name="i">Confirm the item purchase for the player</param>
+    public void ConfirmItemPurchase()
+    {   
+        for (int i = 0; i < gc_.m_Items.Count; ++i)
+        {
+            if (gc_.m_Items[i].m_ItemName == confirmItem_)
+            {
+                AudioSource.PlayClipAtPoint(m_UpgradeClip, transform.position);
+                GuardianPetsAssets.SHIELD_CURRENCY.Take(gc_.m_Items[i].m_Cost);
+                gc_.m_Items[i].gameObject.SetActive(true);
+                if (gc_.m_Items[i].m_IsPlayerItem)
+                {
+                    GameObject obj = GameObject.Find(gc_.m_Items[i].m_Names[gc_.m_Items[i].m_ItemSpot]);    //get the waypoint the item will be at
+                    gc_.m_Items[i].gameObject.transform.SetParent(obj.transform);
+                }
+                m_PlayerItems.Add(gc_.m_Items[i].name);
+                tempItemButton_.GetComponent<Button>().interactable = false;
+            }
+        }
+    }
+
+    /// <param name="">Cancels the item purchase for the player</param>
+    public void CancelItemPurchase()
+    {
+        m_ConfirmPurchasePanel.SetActive(false);
+    }
+
 
     /// <param name="Unlock Item By Name">
     /// This function is used when the player loads a save to give the player their items
