@@ -7,6 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
 using UnityEngine.SocialPlatforms;
+using GooglePlayGames.BasicApi.SavedGame;
 
 public class GameController : MonoBehaviour
 {
@@ -61,6 +62,24 @@ public class GameController : MonoBehaviour
         PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder().EnableSavedGames().Build();
         PlayGamesPlatform.InitializeInstance(config);
     }
+
+   void OpenSavedGame(string filename)
+   {
+       ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
+       savedGameClient.OpenWithAutomaticConflictResolution(filename, DataSource.ReadCacheOrNetwork, ConflictResolutionStrategy.UseLongestPlaytime, OnSavedGameOpened);
+   }
+
+   public void OnSavedGameOpened(SavedGameRequestStatus status, ISavedGameMetadata game)
+   {
+       if (status == SavedGameRequestStatus.Success)
+       {
+           // handle reading or writing of saved game.
+       }
+       else
+       {
+           // handle error
+       }
+   }
 
 	void Awake ()
     {
@@ -367,7 +386,7 @@ public class GameController : MonoBehaviour
             }
         }
     }
-    /// <param name="">This is the function used to load the contents after a pause has occured so everything has been updated properly</param>
+    /// <summary>This is the function used to load the contents after a pause has occured so everything has been updated properly</summary>
     void LoadAfterPause()
     {
         if (File.Exists(Application.persistentDataPath + Path.DirectorySeparatorChar + "gpSaveData.dat"))

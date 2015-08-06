@@ -217,16 +217,6 @@ public class UIController : MonoBehaviour
     private string cleanMessage_ = "I need a bath";
     /// <summary>Temp string to show what item is being considered for purchase</summary>
     private string confirmItem_;
-    /// <summary>Feed VIII Achievement ID on Google Play Services</summary>
-    private string feedAchID_ = "CggI-Of8-WIQAhAB";
-    /// <summary>Play VIII Achievement ID on Google Play Services</summary>
-    private string playAchID_ = "CggI-Of8-WIQAhAC";
-    /// <summary>Wash VIII Achievement ID on Google Play Services</summary>
-    private string washAchID_ = " CggI-Of8-WIQAhAD";
-    /// <summary>Exercise VIII Achievement ID on Google Play Services</summary>
-    private string exerciseAchID_ = "CggI-Of8-WIQAhAE";
-    /// <summary>Fill Love V Achievement ID on Google Play Services</summary>
-    private string loveAchID_ = "CggI-Of8-WIQAhAF";
     private List<string> petsOwned_;    //list of names of the players pet 
 
     private int timesPlayed_;
@@ -293,7 +283,7 @@ public class UIController : MonoBehaviour
         if (m_LoveSlider.value == m_LoveSlider.maxValue && checkLove_)
         {
             timesLoved_++;
-            PlayGamesPlatform.Instance.IncrementAchievement(loveAchID_, 1, (bool success) =>
+            PlayGamesPlatform.Instance.IncrementAchievement(Constants.LOVE_ACHIEVEMENT_ID, 1, (bool success) =>
             {
                 // handle success or failure
             });
@@ -518,7 +508,7 @@ public class UIController : MonoBehaviour
             HealPet();
             currPet_.GetComponent<Pet>().m_Hunger -= Constants.STAT_DECREASE_VAL;
             timesFed_++;
-            PlayGamesPlatform.Instance.IncrementAchievement(feedAchID_, 1, (bool success) =>
+            PlayGamesPlatform.Instance.IncrementAchievement(Constants.FEED_ACHIEVEMENT_ID, 1, (bool success) =>
             {
                 // handle success or failure
             });
@@ -558,7 +548,7 @@ public class UIController : MonoBehaviour
             petData_.m_IsDancing = true;
             currPet_.GetComponent<Pet>().m_Bored -= Constants.STAT_DECREASE_VAL;
             timesPlayed_++;
-            PlayGamesPlatform.Instance.IncrementAchievement(playAchID_, 1, (bool success) =>
+            PlayGamesPlatform.Instance.IncrementAchievement(Constants.PLAY_ACHIEVEMENT_ID, 1, (bool success) =>
             {
                 // handle success or failure
             });
@@ -589,7 +579,7 @@ public class UIController : MonoBehaviour
             petData_.m_IsDancing = true;
             currPet_.GetComponent<Pet>().m_Cleanliness -= Constants.STAT_DECREASE_VAL;
             timesWashed_++;
-            PlayGamesPlatform.Instance.IncrementAchievement(washAchID_, 1, (bool success) =>
+            PlayGamesPlatform.Instance.IncrementAchievement(Constants.CLEAN_ACHIEVEMENT_ID, 1, (bool success) =>
             {
                 // handle success or failure
             });
@@ -753,7 +743,7 @@ public class UIController : MonoBehaviour
             petData_.m_Exercise++;
             currPet_.GetComponent<Pet>().m_Bored -= Constants.STAT_DECREASE_VAL;
             timesExercised_++;
-            PlayGamesPlatform.Instance.IncrementAchievement(exerciseAchID_, 1, (bool success) =>
+            PlayGamesPlatform.Instance.IncrementAchievement(Constants.EXERCISE_ACHIEVEMENT_ID, 1, (bool success) =>
             {
                 // handle success or failure
             });
