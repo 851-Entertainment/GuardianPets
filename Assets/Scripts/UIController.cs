@@ -1164,6 +1164,7 @@ public class UIController : MonoBehaviour
         else
         {
             m_ChangePetPanel.SetActive(false);
+            AudioSource.PlayClipAtPoint(m_ClickClip, transform.position);
         }
     }
 
@@ -1193,6 +1194,10 @@ public class UIController : MonoBehaviour
     /// <param name="obj">Sets whatever object you want to the opposite state it is in</param>
     public void OpenMenu(GameObject obj)
     {
+        if (obj.activeSelf)
+        {
+            AudioSource.PlayClipAtPoint(m_ClickClip, transform.position);
+        }
         obj.SetActive(!obj.activeSelf);
     }
 
@@ -1203,6 +1208,7 @@ public class UIController : MonoBehaviour
         m_GameUI.SetActive(true);
         m_PetMenuBar.SetActive(false);
         currPet_.SetActive(true);
+        AudioSource.PlayClipAtPoint(m_ClickClip, transform.position);
     }
 
     /// <param name="menuBar">///Turns on or off the menu bar based on if it is currently active or not and which bar is in use</param>
@@ -1223,6 +1229,10 @@ public class UIController : MonoBehaviour
     /// <param name="">Change the active state of the trophy menu</param>
     public void SetActiveTrophyMenu()
     {
+        if (m_TrophyMenu.activeSelf)
+        {
+            AudioSource.PlayClipAtPoint(m_ClickClip, transform.position);
+        }
         m_TrophyMenu.SetActive(!m_TrophyMenu.activeSelf);
     }
 
@@ -1230,6 +1240,7 @@ public class UIController : MonoBehaviour
     public void ChangePlayButtonImage(Button bttn)
     {
         m_PlayButton.GetComponent<Image>().sprite = bttn.image.sprite;
+        AudioSource.PlayClipAtPoint(m_PlayClip[2], transform.position, 0.3f);
     }
 
     /// <param name="">Loops through the toy array and the player item array and sees if what the player currently has matches an item in the toy array. If so set it active in the scene.</param>
@@ -1282,5 +1293,6 @@ public class UIController : MonoBehaviour
     public void OpenGooglePlayAchievements()
     {
         Social.ShowAchievementsUI();
+        AudioSource.PlayClipAtPoint(m_ClickClip, transform.position);
     }
 }
