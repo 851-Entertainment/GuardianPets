@@ -41,9 +41,24 @@ public class GameController : MonoBehaviour
     /// <summary>Pet game object</summary>
     private GameObject pet_;
 
+    /// <summary>Screenshot for Google Play Cloud Saves -- DO NOT USE EXCEPT FOR CLOUD</summary>
+    private Texture2D screenImage_;
+
+    /// <summary>Cache of Save Data for use in cloud saves</summary>
+    private SaveData sData_;
+
+    /// <summary>Keep track of saving or loading during callbacks</summary>
+    private bool saving_;
+
     public string CurrentPet
     {
         set { currPetName_ = value; }
+    }
+
+    /// <summary>Whether or not the player is logged into Google Play</summary>
+    public bool Authenticated
+    {
+        get { return Social.Active.localUser.authenticated; }
     }
 
     public void SetPet(GameObject value)
@@ -58,28 +73,21 @@ public class GameController : MonoBehaviour
 
    void Start()
     {
+        Authenticate();
+        
+    }
+
+    void Authenticate()
+    {
+        if(Authenticated)
+        {
+            Debug.LogWarning("Ignoring repeat call to Authenticate.");
+            return;
+        }
         PlayGamesPlatform.Activate();
         PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder().EnableSavedGames().Build();
         PlayGamesPlatform.InitializeInstance(config);
     }
-
-   void OpenSavedGame(string filename)
-   {
-       ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
-       savedGameClient.OpenWithAutomaticConflictResolution(filename, DataSource.ReadCacheOrNetwork, ConflictResolutionStrategy.UseLongestPlaytime, OnSavedGameOpened);
-   }
-
-   public void OnSavedGameOpened(SavedGameRequestStatus status, ISavedGameMetadata game)
-   {
-       if (status == SavedGameRequestStatus.Success)
-       {
-           // handle reading or writing of saved game.
-       }
-       else
-       {
-           // handle error
-       }
-   }
 
 	void Awake ()
     {
@@ -245,7 +253,7 @@ public class GameController : MonoBehaviour
     }
 
     /// <summary>Loads all variables from file</summary>
-    public void Load()
+    public SaveData Load()
     {
         if (File.Exists(Application.persistentDataPath + Path.DirectorySeparatorChar + "gpSaveData.dat"))
         {
@@ -345,8 +353,10 @@ public class GameController : MonoBehaviour
             {
                 pet_.GetComponent<Pet>().AddStats((int)minutesElapsed);
             }
-            SetUpGame(); 
+            SetUpGame();
+            sData.m_LoadedTime = DateTime.Now;
             file.Close();
+            return sData;
         }
         else
         {
@@ -354,6 +364,9 @@ public class GameController : MonoBehaviour
             m_FirstTimePlayer = true;
             m_PlayerData.m_Energy = Constants.DEFAULT_START_ENERGY;
             m_PlayerData.m_Shields = Constants.DEFAULT_START_SHIELDS;
+            SaveData sData = new SaveData();
+            sData.m_LoadedTime = DateTime.Now;
+            return sData;
         }
     }
 
@@ -387,7 +400,7 @@ public class GameController : MonoBehaviour
         }
     }
     /// <summary>This is the function used to load the contents after a pause has occured so everything has been updated properly</summary>
-    void LoadAfterPause()
+    SaveData LoadAfterPause()
     {
         if (File.Exists(Application.persistentDataPath + Path.DirectorySeparatorChar + "gpSaveData.dat"))
         {
@@ -408,7 +421,7 @@ public class GameController : MonoBehaviour
             ui_.EnergyTimer = sData.m_EnergyTimer - secondsElapsed;
             float timeLeft = 0.0f;
             //basically if the timer goes past zero when the game is off or minimized this will correct the timer so it doesn't start off at 5 minutes 
-            while(ui_.EnergyTimer < 0.0f)
+            while (ui_.EnergyTimer < 0.0f)
             {
                 timeLeft = ui_.EnergyTimer;
                 ui_.EnergyTimer = Constants.ENERGY_TIMER;
@@ -448,14 +461,188 @@ public class GameController : MonoBehaviour
             {
                 pet_.GetComponent<Pet>().AddStats((int)minutesElapsed);
             }
+            sData.m_LoadedTime = DateTime.Now;
             file.Close();
+            return sData;
+        }
+        else
+        {
+            SaveData sData = new SaveData();
+            sData.m_LoadedTime = DateTime.Now;
+            return sData;
         }
     }
+
+    #region Google Play Save/Load
+    void SaveToCloud(string filename)
+    {
+        if (Authenticated)
+        {
+            Debug.Log("Saving game to cloud...");
+            saving_ = true;
+            if (filename == null)
+            {
+                ((PlayGamesPlatform)Social.Active).SavedGame.ShowSelectSavedGameUI("GPSave", 1, true, true, SavedGameSelected);
+            }
+            else
+            {
+                ((PlayGamesPlatform)Social.Active).SavedGame.OpenWithAutomaticConflictResolution(filename, DataSource.ReadCacheOrNetwork, ConflictResolutionStrategy.UseLongestPlaytime, SavedGameOpened);
+            }
+        }
+    }
+
+    public void SavedGameOpened(SavedGameRequestStatus status, ISavedGameMetadata game)
+    {
+        if (status == SavedGameRequestStatus.Success)
+        {
+            if (saving_)
+            {
+                if (screenImage_ == null)
+                {
+                    CaptureScreenshot();
+                }
+                byte[] pngData = (screenImage_ != null) ? screenImage_.EncodeToPNG() : null;
+                Debug.Log("Saving to " + game);
+                byte[] data = sData_.ToBytes();
+                SavedGameMetadataUpdate.Builder builder = new SavedGameMetadataUpdate.Builder().WithUpdatedPlayedTime(sData_.TotalPlayingTime).WithUpdatedDescription("Saved game at " + DateTime.Now);
+
+                if (pngData != null)
+                {
+                    Debug.Log("Save image of len + " + pngData.Length);
+                    builder = builder.WithUpdatedPngCoverImage(pngData);
+                }
+                else
+                {
+                    Debug.Log("No image available!");
+                }
+                SavedGameMetadataUpdate updatedMetaData = builder.Build();
+                ((PlayGamesPlatform)Social.Active).SavedGame.CommitUpdate(game, updatedMetaData, data, SavedGameWritten);
+            }
+            else
+            {
+                ((PlayGamesPlatform)Social.Active).SavedGame.ReadBinaryData(game, SavedGameLoaded);
+            }
+        }
+    }
+
+    public void SavedGameSelected(SelectUIStatus status, ISavedGameMetadata game)
+    {
+        if (status == SelectUIStatus.SavedGameSelected)
+        {
+            string filename = game.Filename;
+            Debug.Log("Opening saved game: " + game);
+            if (saving_ && (filename == null || filename.Length == 0))
+            {
+                filename = "save" + DateTime.Now.ToBinary();
+            }
+
+            ((PlayGamesPlatform)Social.Active).SavedGame.OpenWithAutomaticConflictResolution(filename, DataSource.ReadCacheOrNetwork, ConflictResolutionStrategy.UseLongestPlaytime, SavedGameOpened);
+        }
+        else
+        {
+            Debug.LogWarning("Error selecting save game: " + status);
+        }
+    }
+
+    public void SavedGameLoaded(SavedGameRequestStatus status, byte[] data)
+    {
+        if (status == SavedGameRequestStatus.Success)
+        {
+            Debug.Log("SaveGameLoaded, success=" + status);
+            //ProcessCloudData(data);
+        }
+        else
+        {
+            Debug.LogWarning("Error reading game: " + status);
+        }
+    }
+
+    public void SavedGameWritten(SavedGameRequestStatus status, ISavedGameMetadata game)
+    {
+        if (status == SavedGameRequestStatus.Success)
+        {
+            Debug.Log("Game " + game.Description + " written");
+        }
+        else
+        {
+            Debug.LogWarning("Error saving game: " + status);
+        }
+    }
+
+    void LoadFromCloud()
+    {
+        Debug.Log("Loading game progress from the cloud.");
+        saving_ = false;
+        ((PlayGamesPlatform)Social.Active).SavedGame.ShowSelectSavedGameUI("Select saved game to load", 1, false, false, SavedGameSelected);
+    }
+
+    void ProcessCloudData(byte[] cloudData)
+    {
+        if (cloudData == null)
+        {
+            Debug.Log("No data saved to the cloud yet...");
+            return;
+        }
+        Debug.Log("Decoding cloud data from bytes.");
+        //SaveData sData = SaveData
+    }
+
+    public void CaptureScreenshot()
+    {
+        screenImage_ = new Texture2D(Screen.width, Screen.height);
+        screenImage_.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+        screenImage_.Apply();
+        Debug.Log("Captured screen: " + screenImage_);
+    }
+    #endregion
 }
 
 [Serializable]
 class SaveData
 {
+
+    public byte[] ToBytes()
+    {
+        return System.Text.ASCIIEncoding.Default.GetBytes(ToString());
+    }
+
+    public TimeSpan TotalPlayingTime
+    {
+        get
+        {
+            TimeSpan delta = DateTime.Now.Subtract(m_LoadedTime);
+            return m_PlayTime.Add(delta);
+        }
+    }
+
+    public override string ToString()
+    {
+        string s = "SDv3:";
+        //int i;
+        
+        return s;
+    }
+
+    public static SaveData FromBytes(byte[] b)
+    {
+        return SaveData.FromString(System.Text.ASCIIEncoding.Default.GetString(b));
+    }
+
+    public static SaveData FromString(string s)
+    {
+        SaveData sd = new SaveData();
+        string[] p = s.Split(new char[] { ':' });
+        if(!p[0].StartsWith("GPv"))
+        {
+            Debug.LogError("Failed to parse game progress from " + s);
+            return sd;
+        }
+
+        return sd;
+    }
+
+    public DateTime m_LoadedTime;
+    public TimeSpan m_PlayTime;
     /// <summary>List of the pets the player owns</summary>
     public List<PetData> m_Pets = new List<PetData>();
 
