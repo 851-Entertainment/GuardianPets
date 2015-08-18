@@ -73,8 +73,10 @@ public class GameController : MonoBehaviour
 
    void Start()
     {
-        Authenticate();
-        
+        //Authenticate();
+        PlayGamesPlatform.Activate();
+        PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder().EnableSavedGames().Build();
+        PlayGamesPlatform.InitializeInstance(config);
     }
 
     void Authenticate()
@@ -354,7 +356,7 @@ public class GameController : MonoBehaviour
                 pet_.GetComponent<Pet>().AddStats((int)minutesElapsed);
             }
             SetUpGame();
-            sData.m_LoadedTime = DateTime.Now;
+            //sData.m_LoadedTime = DateTime.Now;
             file.Close();
             //return sData;
         }
@@ -365,7 +367,7 @@ public class GameController : MonoBehaviour
             m_PlayerData.m_Energy = Constants.DEFAULT_START_ENERGY;
             m_PlayerData.m_Shields = Constants.DEFAULT_START_SHIELDS;
             SaveData sData = new SaveData();
-            sData.m_LoadedTime = DateTime.Now;
+            //sData.m_LoadedTime = DateTime.Now;
             //return sData;
         }
     }
@@ -400,7 +402,7 @@ public class GameController : MonoBehaviour
         }
     }
     /// <summary>This is the function used to load the contents after a pause has occured so everything has been updated properly</summary>
-    SaveData LoadAfterPause()
+    void LoadAfterPause()
     {
         if (File.Exists(Application.persistentDataPath + Path.DirectorySeparatorChar + "gpSaveData.dat"))
         {
@@ -461,20 +463,20 @@ public class GameController : MonoBehaviour
             {
                 pet_.GetComponent<Pet>().AddStats((int)minutesElapsed);
             }
-            sData.m_LoadedTime = DateTime.Now;
+            //sData.m_LoadedTime = DateTime.Now;
             file.Close();
-            return sData;
+            //return sData;
         }
         else
         {
             SaveData sData = new SaveData();
-            sData.m_LoadedTime = DateTime.Now;
-            return sData;
+            //sData.m_LoadedTime = DateTime.Now;
+            //return sData;
         }
     }
 
     #region Google Play Save/Load
-    void SaveToCloud(string filename)
+    /*void SaveToCloud(string filename)
     {
         if (Authenticated)
         {
@@ -593,7 +595,7 @@ public class GameController : MonoBehaviour
         screenImage_.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
         screenImage_.Apply();
         Debug.Log("Captured screen: " + screenImage_);
-    }
+    }*/
     #endregion
 }
 
@@ -601,7 +603,7 @@ public class GameController : MonoBehaviour
 class SaveData
 {
 
-    public byte[] ToBytes()
+    /*public byte[] ToBytes()
     {
         return System.Text.ASCIIEncoding.Default.GetBytes(ToString());
     }
@@ -639,10 +641,10 @@ class SaveData
         }
 
         return sd;
-    }
+    }*/
 
-    public DateTime m_LoadedTime;
-    public TimeSpan m_PlayTime;
+    //public DateTime m_LoadedTime;
+    //public TimeSpan m_PlayTime;
     /// <summary>List of the pets the player owns</summary>
     public List<PetData> m_Pets = new List<PetData>();
 
