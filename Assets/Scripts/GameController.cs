@@ -366,7 +366,7 @@ public class GameController : MonoBehaviour
             m_FirstTimePlayer = true;
             m_PlayerData.m_Energy = Constants.DEFAULT_START_ENERGY;
             m_PlayerData.m_Shields = Constants.DEFAULT_START_SHIELDS;
-            SaveData sData = new SaveData();
+            //SaveData sData = new SaveData();
             //sData.m_LoadedTime = DateTime.Now;
             //return sData;
         }
@@ -467,12 +467,12 @@ public class GameController : MonoBehaviour
             file.Close();
             //return sData;
         }
-        else
+        /*else
         {
             SaveData sData = new SaveData();
             //sData.m_LoadedTime = DateTime.Now;
             //return sData;
-        }
+        }*/
     }
 
     #region Google Play Save/Load
