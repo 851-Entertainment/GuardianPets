@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 95885ff097f55774a9ed53ece128c9e1
-timeCreated: 1436971331
+timeCreated: 1439918224
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -56,18 +56,18 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 69
-        height: 71
+        width: 139
+        height: 142
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Left-Right Buttons_1
       rect:
         serializedVersion: 2
-        x: 100
+        x: 199
         y: 0
-        width: 69
-        height: 71
+        width: 139
+        height: 142
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
