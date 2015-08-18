@@ -253,7 +253,7 @@ public class GameController : MonoBehaviour
     }
 
     /// <summary>Loads all variables from file</summary>
-    public SaveData Load()
+    public void Load()
     {
         if (File.Exists(Application.persistentDataPath + Path.DirectorySeparatorChar + "gpSaveData.dat"))
         {
@@ -356,7 +356,7 @@ public class GameController : MonoBehaviour
             SetUpGame();
             sData.m_LoadedTime = DateTime.Now;
             file.Close();
-            return sData;
+            //return sData;
         }
         else
         {
@@ -366,7 +366,7 @@ public class GameController : MonoBehaviour
             m_PlayerData.m_Shields = Constants.DEFAULT_START_SHIELDS;
             SaveData sData = new SaveData();
             sData.m_LoadedTime = DateTime.Now;
-            return sData;
+            //return sData;
         }
     }
 
