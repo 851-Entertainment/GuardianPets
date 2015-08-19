@@ -200,6 +200,8 @@ public class UIController : MonoBehaviour
     private bool setFearString_ = true;
     private bool playCloseSound_ = true;
     private bool resetTimerValue_ = true;
+    /// <summary>when you buy a toy increment the counter buy only do it once</summary>
+    private bool increaseToyCounter_ = true; 
     ///<summary>Can update the check toy function. False if all toys have been unlocked</summary>
     private bool checkToys_ = true;
     private bool updateEnergyTimer_ = true;
@@ -226,7 +228,7 @@ public class UIController : MonoBehaviour
     private int timesExercised_;
     private int toyIndex_ = 0;
     private int playerItemIndex_ = 0;
-    private int numToysActive = -1;
+    private int numToysActive = 0;
     #endregion
 
     #region Attributes
@@ -325,9 +327,13 @@ public class UIController : MonoBehaviour
         }
         m_CameraPlane.GetComponent<CameraAccess>().UpdateCamera();
         UpdateSpeech();
-        UpdateToys();
         m_ScannerText.text = m_PlayerData.m_Scans.ToString();
 	}
+
+    void FixedUpdate()
+    {
+        UpdateToys();
+    }
 
     void UpdateTimer()
     {
@@ -1255,6 +1261,7 @@ public class UIController : MonoBehaviour
                     if (m_Toys[toyIndex_].name == m_PlayerItems[playerItemIndex_] && m_Toys[toyIndex_].activeSelf != true)
                     {     
                         m_Toys[toyIndex_].SetActive(true);
+                        increaseToyCounter_ = true;
                         IncrementNumToys();
                     }
                 }
@@ -1283,9 +1290,10 @@ public class UIController : MonoBehaviour
         //if not all the toys are active in the scene reset the counters so we can check again
         foreach (GameObject obj in m_Toys)
         {
-            if (obj.activeSelf == true)
+            if (obj.activeSelf == true && increaseToyCounter_)
             {
                 numToysActive++;
+                increaseToyCounter_ = false;
             }
         }
     }
