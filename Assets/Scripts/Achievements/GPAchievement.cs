@@ -153,9 +153,12 @@ public class GPAchievement
         //Loads the status
         unlocked_ = PlayerPrefs.GetInt(name_) == 1 ? true : false;
 
-        if (unlocked_ && trophy_) //If the achievement is unlocked then we need to change the sprite and aquire the points
+        if (unlocked_) //If the achievement is unlocked then we need to change the sprite and aquire the points
         {
-            unlockedTrophy_ = true;
+            if(trophy_)
+            {
+                unlockedTrophy_ = true;
+            }
             AchievementManager.Instance.m_TextPoints.text = "Points: " + PlayerPrefs.GetInt("Points");
             achievementRef_.GetComponent<Image>().sprite = AchievementManager.Instance.m_UnlockedSprite;
         }

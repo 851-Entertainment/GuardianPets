@@ -12,7 +12,6 @@ public class LoadingScreen : MonoBehaviour
 
     private int loadProgress_ = 0;
     private float timer_ = 0.0f;
-    private bool loadDone_ = false;
     private bool successfulLogin = false;
     AsyncOperation async = null;
 
