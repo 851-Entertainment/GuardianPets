@@ -955,8 +955,8 @@ public class UIController : MonoBehaviour
         {
             if (gc_.m_Items[i].m_ItemName == go)
             {
-                if (GuardianPetsAssets.SHIELD_CURRENCY.GetBalance() >= gc_.m_Items[i].m_Cost)
-                {
+                //if (GuardianPetsAssets.SHIELD_CURRENCY.GetBalance() >= gc_.m_Items[i].m_Cost)
+               // {
                     gc_.m_Items[i].gameObject.SetActive(true);
                     if (gc_.m_Items[i].m_IsPlayerItem)
                     {
@@ -970,7 +970,7 @@ public class UIController : MonoBehaviour
                             m_StoreButtons[j].GetComponent<Button>().interactable = false;
                         }
                     }
-                }
+               // }
             }
         }
     }
