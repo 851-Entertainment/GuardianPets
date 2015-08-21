@@ -258,7 +258,7 @@ public class UIController : MonoBehaviour
         if (isNewPlayer_)
         {
             updateEnergyTimer_ = true;
-            m_PlayerData.m_Scans = Constants.START_SCANS;
+            GuardianPetsAssets.SCANNER_CURRENCY.Give(Constants.START_SCANS);
             m_GameUI.SetActive(false);
             m_NewPlayerUI.SetActive(true);
             energyTimer_ = Constants.ENERGY_TIMER;
@@ -327,7 +327,7 @@ public class UIController : MonoBehaviour
         }
         m_CameraPlane.GetComponent<CameraAccess>().UpdateCamera();
         UpdateSpeech();
-        m_ScannerText.text = m_PlayerData.m_Scans.ToString();
+        m_ScannerText.text = GuardianPetsAssets.SCANNER_CURRENCY.GetBalance().ToString();
 	}
 
     void FixedUpdate()
@@ -626,9 +626,10 @@ public class UIController : MonoBehaviour
 
     public void OpenScanner()
     {
-        if (m_PlayerData.m_Scans >= m_ScannerCost)
+        if (GuardianPetsAssets.SCANNER_CURRENCY.GetBalance() >= m_ScannerCost)
         {
-            m_PlayerData.m_Scans -= m_ScannerCost;
+            GuardianPetsAssets.SCANNER_CURRENCY.Take(m_ScannerCost);
+            //m_PlayerData.m_Scans -= m_ScannerCost;
             scannerActive_ = true;
             m_CameraPlane.GetComponent<CameraAccess>().m_DisableWebCam = false;
             m_GameUI.SetActive(false);
@@ -654,77 +655,10 @@ public class UIController : MonoBehaviour
         playCloseSound_ = true;
     }
 
-    #region Store/Micro transaction stuff
-    public void PopulateStore()
-    {
-        float buttonWidth = m_GoodsButtonPrefab.GetComponent<RectTransform>().sizeDelta.x * 3;
-        float buttonHeight = m_GoodsButtonPrefab.GetComponent<RectTransform>().sizeDelta.y * 1.25f;
-        float startXPos = 0.0f - (buttonWidth * 1.25f);
-        float startYPos = 0.0f + (buttonHeight * 1.25f);
-        int row = 0;
-        int col = 0;
-        int maxCol = 3;
-        int maxRow = 100;
-
-        m_UpgradePanel.SetActive(true);
-
-        foreach(Item item in gc_.m_Items)
-        {
-            GameObject go = (GameObject)Instantiate(m_GoodsButtonPrefab, new Vector3(startXPos, startYPos, 0.0f), Quaternion.identity);
-            go.gameObject.transform.SetParent(m_UpgradePanel.transform, false);
-            go.name = item.m_ItemName;
-            go.GetComponentInChildren<Image>().sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
-            go.GetComponentInChildren<Button>().onClick.AddListener(delegate { UnlockItem(go); });
-            go.GetComponentInChildren<Text>().text = item.m_Description + " This costs " + item.m_Cost + " shields.";
-            if (col < maxCol)
-            {
-                col++;
-                startXPos += buttonWidth;
-                if (col >= maxCol)
-                {
-                    if (row < maxRow)
-                    {
-                        col = 0;
-                        startXPos = 0.0f - (buttonWidth * 1.25f);
-                        row++;
-                        startYPos -= buttonHeight;
-                    }
-                }
-            }
-        }
-
-        foreach (VirtualCurrencyPack vcp in StoreInfo.CurrencyPacks)
-        {
-            string itemID = vcp.ItemId;
-            GameObject go = (GameObject)Instantiate(m_GoodsButtonPrefab, new Vector3(startXPos, startYPos, 0.0f), Quaternion.identity);
-            go.gameObject.transform.SetParent(m_UpgradePanel.transform, false);
-            go.GetComponentInChildren<Image>().sprite = m_ShieldSprite;
-            go.GetComponentInChildren<Button>().onClick.AddListener(delegate { StoreInventory.BuyItem(itemID); });
-            go.GetComponentInChildren<Text>().text = vcp.Description;
-
-            if (col < maxCol)
-            {
-                col++;
-                startXPos += buttonWidth;
-                if (col >= maxCol)
-                {
-                    if (row < maxRow)
-                    {
-                        col = 0;
-                        startXPos = 0.0f - (buttonWidth * 1.25f);
-                        row++;
-                        startYPos -= buttonHeight;
-                    }
-                }
-            }
-        }
-    }
-
     public void onMarketPurchaseStarted(PurchasableVirtualItem pvi)
     {
         //Implement stuff
     }
-    #endregion
 
     public void SwitchPage(bool page1)
     {
